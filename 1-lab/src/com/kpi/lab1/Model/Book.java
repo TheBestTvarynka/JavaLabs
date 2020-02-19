@@ -9,13 +9,14 @@ public class Book {
     int pageNumber;
     float price;
 
-    public Book(String bookIDNumber, String title, String author, String publishing, int pageNumber, float price) {
+    public Book(String bookIDNumber, String title, String author, String publishing, int pageNumber, float price, int year) {
         this.bookIDNumber = bookIDNumber;
         this.title = title;
         this.author = author;
         this.publishing = publishing;
         this.pageNumber = pageNumber;
         this.price = price;
+        this.year = year;
     }
     public void setYear(int year) {
         this.year = year;
@@ -54,6 +55,7 @@ public class Book {
                 ", publishing='" + publishing + '\'' +
                 ", pageNumber=" + pageNumber +
                 ", price=" + price +
+                ", year=" + year +
                 '}';
     }
 }

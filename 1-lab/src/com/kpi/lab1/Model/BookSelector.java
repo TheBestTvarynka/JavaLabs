@@ -19,19 +19,19 @@ public class BookSelector {
         }
         return resultBooks;
     }
-    public static Book[] selectByYear(Book[] books, int year) {
+    public static Book[] selectByPublishing(Book[] books, String publishing) {
         Book[] resultBooks;
         // count books we need to select
         int count = 0;
         for (Book book: books) {
-            if (year == book.getYear()) {
+            if (publishing.equals(book.getPublishing())) {
                 count++;
             }
         }
         resultBooks = new Book[count];
         count = 0;
         for (Book book: books) {
-            if (year == book.getYear()) {
+            if (publishing.equals(book.getPublishing())) {
                 resultBooks[count++] = book;
             }
         }
