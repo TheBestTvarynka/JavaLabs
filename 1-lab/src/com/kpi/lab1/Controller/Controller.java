@@ -12,36 +12,36 @@ public class Controller {
         menuViewer = new MenuViewer(System.in, System.out);
     }
     public void printAllData() {
-        menuViewer.printMessage(dataStore.toString());
+        menuViewer.printMessage(dataStore.toString(), "blue");
     }
     public void selectByAuthor() {
         String author = menuViewer.getAnswer("Enter author of the book:");
         Book[] books = BookSelector.selectByAuthor(dataStore.getData(), author);
         menuViewer.printMessage(DataStore.booksToString(
-                books));
+                books), "blue");
     }
     public void selectByPublishing() {
         String publishing = menuViewer.getAnswer("Enter publishing of the book:");
         Book[] books = BookSelector.selectByPublishing(dataStore.getData(), publishing);
-        menuViewer.printMessage(DataStore.booksToString(books));
+        menuViewer.printMessage(DataStore.booksToString(books), "blue");
     }
     public void selectByYearLater() {
         String year = menuViewer.getAnswer("Enter year:");
         if (!Validator.isNumber(year)) {
-            menuViewer.printMessage("Error: entered value is not int!");
+            menuViewer.printMessage("Error: entered value is not int!", "red");
             return;
         }
         Book[] books = BookSelector.selectByYearLater(dataStore.getData(), Integer.parseInt(year));
-        menuViewer.printMessage(DataStore.booksToString(books));
+        menuViewer.printMessage(DataStore.booksToString(books), "blue");
     }
     public void generateNewData() {
         String amount = menuViewer.getAnswer("Enter amount of the books:");
         if (!Validator.isNumber(amount)) {
-            menuViewer.printMessage("Error: entered value is not int!");
+            menuViewer.printMessage("Error: entered value is not int!", "red");
             return;
         }
         dataStore.setData(DataSource.generateRandomBooks(Integer.parseInt(amount)));
-        menuViewer.printMessage("Generated books:");
+        menuViewer.printMessage("Generated books:", "blue");
         printAllData();
     }
     public void perform(int action) {
@@ -56,7 +56,7 @@ public class Controller {
         } else if (action == 5) {
             selectByYearLater();
         } else {
-            menuViewer.printMessage("Wrong action! Action not found.");
+            menuViewer.printMessage("Wrong action! Action not found.", "red");
         }
     }
     public void run() {
@@ -65,7 +65,7 @@ public class Controller {
         while (true) {
             action = menuViewer.getActions();
             if (!Validator.isNumber(action)) {
-                menuViewer.printMessage("Error: entered value is not int!");
+                menuViewer.printMessage("Error: entered value is not int!", "red");
             } else if (action.equals("6")) {
                 break;
             } else {
