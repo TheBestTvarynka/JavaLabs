@@ -23,13 +23,10 @@ public class MenuViewer {
         printer.println("5 - select books by the year");
         printer.println("6 - Exit");
     }
-    public int getActions() {
+    public String getActions() {
         printMenu();
         String action = reader.nextLine();
-        if (!Validator.isNumber(action)) {
-            return -1;
-        }
-        return Integer.parseInt(action);
+        return action;
     }
     public void printMessage(String text) {
         printer.println(text);

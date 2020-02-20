@@ -48,14 +48,15 @@ public class Book {
     public float getPrice() { return price; }
     @Override
     public String toString() {
-        return "Book{" +
-                "bookIDNumber='" + bookIDNumber + '\'' +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", publishing='" + publishing + '\'' +
-                ", pageNumber=" + pageNumber +
-                ", price=" + price +
-                ", year=" + year +
-                '}';
+
+        return "======== Book ========\n" +
+                "bookIDNumber = " + bookIDNumber + '\n' +
+                "title='" + title + '\n' +
+                "author = " + author + '\n' +
+                "publishing = " + publishing + '\n' +
+                "pageNumber = " + pageNumber + '\n' +
+                "price = " + price + '\n' +
+                "year = " + year + '\n' +
+                "======================\n";
     }
 }

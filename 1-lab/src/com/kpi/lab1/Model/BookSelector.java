@@ -2,6 +2,9 @@ package com.kpi.lab1.Model;
 
 public class BookSelector {
     public static Book[] selectByAuthor(Book[] books, String author) {
+        if (books == null) {
+            return null;
+        }
         Book[] resultBooks;
         // count books which we need to select
         int count = 0;
@@ -20,6 +23,9 @@ public class BookSelector {
         return resultBooks;
     }
     public static Book[] selectByPublishing(Book[] books, String publishing) {
+        if (books == null) {
+            return null;
+        }
         Book[] resultBooks;
         // count books we need to select
         int count = 0;
@@ -38,6 +44,9 @@ public class BookSelector {
         return resultBooks;
     }
     public static Book[] selectByYearLater(Book[] books, int year) {
+        if (books == null) {
+            return null;
+        }
         Book[] resultBooks;
         // count books we need to select
         int count = 0;

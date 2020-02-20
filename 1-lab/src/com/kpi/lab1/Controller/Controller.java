@@ -1,14 +1,12 @@
 package com.kpi.lab1.Controller;
 
-import com.kpi.lab1.Model.Book;
-import com.kpi.lab1.Model.BookSelector;
-import com.kpi.lab1.Model.DataSource;
-import com.kpi.lab1.Model.DataStore;
+import com.kpi.lab1.Model.*;
 import com.kpi.lab1.View.MenuViewer;
 
 public class Controller {
     DataStore dataStore;
     MenuViewer menuViewer;
+
     public Controller() {
         dataStore = new DataStore();
         menuViewer = new MenuViewer(System.in, System.out);
@@ -19,7 +17,8 @@ public class Controller {
     public void selectByAuthor() {
         String author = menuViewer.getAnswer("Enter author of the book:");
         Book[] books = BookSelector.selectByAuthor(dataStore.getData(), author);
-        menuViewer.printMessage(DataStore.booksToString(books));
+        menuViewer.printMessage(DataStore.booksToString(
+                books));
     }
     public void selectByPublishing() {
         String publishing = menuViewer.getAnswer("Enter publishing of the book:");
@@ -28,11 +27,19 @@ public class Controller {
     }
     public void selectByYearLater() {
         String year = menuViewer.getAnswer("Enter year:");
+        if (!Validator.isNumber(year)) {
+            menuViewer.printMessage("Error: entered value is not int!");
+            return;
+        }
         Book[] books = BookSelector.selectByYearLater(dataStore.getData(), Integer.parseInt(year));
         menuViewer.printMessage(DataStore.booksToString(books));
     }
     public void generateNewData() {
         String amount = menuViewer.getAnswer("Enter amount of the books:");
+        if (!Validator.isNumber(amount)) {
+            menuViewer.printMessage("Error: entered value is not int!");
+            return;
+        }
         dataStore.setData(DataSource.generateRandomBooks(Integer.parseInt(amount)));
         menuViewer.printMessage("Generated books:");
         printAllData();
@@ -53,13 +60,17 @@ public class Controller {
         }
     }
     public void run() {
-        int action;
+        String action;
+        int actionInt;
         while (true) {
             action = menuViewer.getActions();
-            if (action == 6) {
+            if (!Validator.isNumber(action)) {
+                menuViewer.printMessage("Error: entered value is not int!");
+            } else if (action.equals("6")) {
                 break;
             } else {
-                perform(action);
+                actionInt = Integer.parseInt(action);
+                perform(actionInt);
             }
         }
     }

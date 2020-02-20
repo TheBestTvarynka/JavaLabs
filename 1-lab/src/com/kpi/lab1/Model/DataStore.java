@@ -16,6 +16,9 @@ public class DataStore {
     }
     public Book[] getData() { return this.data; }
     public static String booksToString(Book[] books) {
+        if (books == null) {
+            return "Books not found\n";
+        }
         StringBuilder result = new StringBuilder();
         for (Book book: books) {
             result.append(book.toString());
@@ -24,8 +27,13 @@ public class DataStore {
     }
     @Override
     public String toString() {
-        return "DataStore{" +
-                "data=" + Arrays.toString(data) +
-                '}';
+        if (data == null) {
+            return "Books:\nBooks not found\n";
+        }
+        StringBuilder dataString = new StringBuilder("Books:\n");
+        for (Book book: data) {
+            dataString.append(book.toString());
+        }
+        return dataString.toString();
     }
 }
