@@ -12,18 +12,17 @@ public class Controller {
         menuViewer = new MenuViewer(System.in, System.out);
     }
     public void printAllData() {
-        menuViewer.printMessage(dataStore.toString(), "blue");
+        menuViewer.printMessage(DataFormatter.formatData(dataStore.getData()), "blue");
     }
     public void selectByAuthor() {
         String author = menuViewer.getAnswer("Enter author of the book:");
         Book[] books = BookSelector.selectByAuthor(dataStore.getData(), author);
-        menuViewer.printMessage(DataStore.booksToString(
-                books), "blue");
+        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
     public void selectByPublishing() {
         String publishing = menuViewer.getAnswer("Enter publishing of the book:");
         Book[] books = BookSelector.selectByPublishing(dataStore.getData(), publishing);
-        menuViewer.printMessage(DataStore.booksToString(books), "blue");
+        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
     public void selectByYearLater() {
         String year = menuViewer.getAnswer("Enter year:");
@@ -32,7 +31,7 @@ public class Controller {
             return;
         }
         Book[] books = BookSelector.selectByYearLater(dataStore.getData(), Integer.parseInt(year));
-        menuViewer.printMessage(DataStore.booksToString(books), "blue");
+        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
     public void generateNewData() {
         String amount = menuViewer.getAnswer("Enter amount of the books:");
