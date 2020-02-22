@@ -1,7 +1,33 @@
 package com.kpi.lab1.Model;
 
+import javax.xml.crypto.Data;
+
 public class BookSelector {
-    public static Book[] selectByAuthor(Book[] books, String author) {
+    DataStore dataStore;
+    public BookSelector() {
+        this.dataStore = null;
+    }
+    public BookSelector(DataStore dataStore) {
+        this.dataStore = dataStore;
+    }
+    public void setDataStore(DataStore dataStore) {
+        this.dataStore = dataStore;
+    }
+    public void setDataStore(Book[] books) {
+        if (dataStore != null) {
+            dataStore.setData(books);
+        } else {
+            dataStore = new DataStore(books);
+        }
+    }
+    public Book[] selectAll() {
+        return dataStore.getData();
+    }
+    public Book[] selectByAuthor(String author) {
+        if (dataStore == null) {
+            return null;
+        }
+        Book[] books = dataStore.getData();
         if (books == null) {
             return null;
         }
@@ -22,7 +48,11 @@ public class BookSelector {
         }
         return resultBooks;
     }
-    public static Book[] selectByPublishing(Book[] books, String publishing) {
+    public Book[] selectByPublishing(String publishing) {
+        if (dataStore == null) {
+            return null;
+        }
+        Book[] books = dataStore.getData();
         if (books == null) {
             return null;
         }
@@ -43,7 +73,11 @@ public class BookSelector {
         }
         return resultBooks;
     }
-    public static Book[] selectByYearLater(Book[] books, int year) {
+    public Book[] selectByYearLater(int year) {
+        if (dataStore == null) {
+            return null;
+        }
+        Book[] books = dataStore.getData();
         if (books == null) {
             return null;
         }
