@@ -1,6 +1,4 @@
-package com.kpi.lab1.Model;
-
-import javax.xml.crypto.Data;
+package com.kpi.lab1.model;
 
 public class BookSelector {
     DataStore dataStore;

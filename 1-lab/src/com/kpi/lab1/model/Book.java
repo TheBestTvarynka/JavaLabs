@@ -1,4 +1,4 @@
-package com.kpi.lab1.Model;
+package com.kpi.lab1.model;
 
 public class Book {
     String bookIDNumber;

@@ -1,10 +1,7 @@
-package com.kpi.lab1.View;
-
-import com.kpi.lab1.Model.Validator;
+package com.kpi.lab1.view;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuViewer {

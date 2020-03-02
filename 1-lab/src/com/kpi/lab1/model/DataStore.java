@@ -1,7 +1,4 @@
-package com.kpi.lab1.Model;
-
-import java.io.PrintStream;
-import java.util.Arrays;
+package com.kpi.lab1.model;
 
 public class DataStore {
     Book[] data;

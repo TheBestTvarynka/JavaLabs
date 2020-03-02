@@ -1,7 +1,7 @@
-package com.kpi.lab1.Controller;
+package com.kpi.lab1.controller;
 
-import com.kpi.lab1.Model.*;
-import com.kpi.lab1.View.MenuViewer;
+import com.kpi.lab1.model.*;
+import com.kpi.lab1.view.MenuViewer;
 
 public class Controller {
     MenuViewer menuViewer;
