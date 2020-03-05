@@ -12,7 +12,7 @@ public class MenuViewer {
         printer = output;
     }
 
-    public String colorize(String color) {
+    private String colorize(String color) {
         if (color.equals("red")) {
             return (char)27 + "[31m";
         } else if (color.equals("blue")) {

@@ -18,34 +18,49 @@ public class Book {
         this.price = price;
         this.year = year;
     }
+
     public void setYear(int year) {
         this.year = year;
     }
+
     public void setBookIDNumber(String bookIDNumber) {
         this.bookIDNumber = bookIDNumber;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public void setAuthor(String author) {
         this.author = author;
     }
+
     public void setPublishing(String publishing) {
         this.publishing = publishing;
     }
+
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
+
     public void setPrice(float price) {
         this.price = price;
     }
+
     public String getBookIDNumber() { return bookIDNumber; }
+
     public String getTitle() { return title; }
+
     public String getAuthor() { return author; }
+
     public String getPublishing() { return publishing; }
+
     public int getYear() { return year; }
+
     public int getPageNumber() { return pageNumber; }
+
     public float getPrice() { return price; }
+
     @Override
     public String toString() {
 

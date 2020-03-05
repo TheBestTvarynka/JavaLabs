@@ -2,15 +2,19 @@ package com.kpi.lab1.model;
 
 public class BookSelector {
     DataStore dataStore;
+
     public BookSelector() {
         this.dataStore = null;
     }
+
     public BookSelector(DataStore dataStore) {
         this.dataStore = dataStore;
     }
+
     public void setDataStore(DataStore dataStore) {
         this.dataStore = dataStore;
     }
+
     public void setDataStore(Book[] books) {
         if (dataStore != null) {
             dataStore.setData(books);
@@ -18,9 +22,11 @@ public class BookSelector {
             dataStore = new DataStore(books);
         }
     }
+
     public Book[] selectAll() {
         return dataStore.getData();
     }
+
     public Book[] selectByAuthor(String author) {
         if (dataStore == null) {
             return null;
@@ -46,6 +52,7 @@ public class BookSelector {
         }
         return resultBooks;
     }
+
     public Book[] selectByPublishing(String publishing) {
         if (dataStore == null) {
             return null;
@@ -71,6 +78,7 @@ public class BookSelector {
         }
         return resultBooks;
     }
+
     public Book[] selectByYearLater(int year) {
         if (dataStore == null) {
             return null;

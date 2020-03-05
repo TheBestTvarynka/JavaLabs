@@ -6,24 +6,30 @@ import com.kpi.lab1.view.MenuViewer;
 public class Controller {
     MenuViewer menuViewer;
     BookSelector bookSelector;
+//    final String OUTPUT = "blue";
+//    final String ERROR = "red";
 
     public Controller() {
         menuViewer = new MenuViewer(System.in, System.out);
         bookSelector = new BookSelector(new DataStore());
     }
+
     public void printAllData() {
         menuViewer.printMessage(DataFormatter.formatData(bookSelector.selectAll()), "blue");
     }
+
     public void selectByAuthor() {
         String author = menuViewer.getAnswer("Enter author of the book:");
         Book[] books = bookSelector.selectByAuthor(author);
         menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
+
     public void selectByPublishing() {
         String publishing = menuViewer.getAnswer("Enter publishing of the book:");
         Book[] books = bookSelector.selectByPublishing(publishing);
         menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
+
     public void selectByYearLater() {
         String year = menuViewer.getAnswer("Enter year:");
         if (!Validator.isNumber(year)) {
@@ -33,6 +39,7 @@ public class Controller {
         Book[] books = bookSelector.selectByYearLater(Integer.parseInt(year));
         menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
+
     public void generateNewData() {
         String amount = menuViewer.getAnswer("Enter amount of the books:");
         if (!Validator.isNumber(amount)) {
@@ -43,6 +50,7 @@ public class Controller {
         menuViewer.printMessage("Generated books:", "blue");
         printAllData();
     }
+
     public void perform(int action) {
         if (action == 1) {
             printAllData();
@@ -58,6 +66,7 @@ public class Controller {
             menuViewer.printMessage("Wrong action! Action not found.", "red");
         }
     }
+
     public void run() {
         String action;
         int actionInt;
