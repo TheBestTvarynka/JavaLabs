@@ -31,10 +31,19 @@ public class Controller {
     }
 
     public void selectByYearLater() {
-        String year = menuViewer.getAnswer("Enter year:");
-        if (!Validator.isNumber(year)) {
-            menuViewer.printMessage("Error: entered value is not int!", "red");
-            return;
+        String year;
+        while (true) {
+            year = menuViewer.getAnswer("Enter year or 'cancel' for cancelling:");
+            if (year.equals("cancel")) {
+                return;
+            }
+            try {
+                Validator.isNumber(year);
+            } catch (NumberFormatException ex) {
+                menuViewer.printMessage("Error: entered value is not int!", "red");
+                continue;
+            }
+            break;
         }
         Book[] books = bookSelector.selectByYearLater(Integer.parseInt(year));
         menuViewer.printMessage(DataFormatter.formatData(books), "blue");

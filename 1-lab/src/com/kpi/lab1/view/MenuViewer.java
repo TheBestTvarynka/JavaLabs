@@ -52,10 +52,13 @@ public class MenuViewer {
         printer.println(colorize("white") + text);
     }
 
-    public String getAnswer(String text) {
-        printer.println(text);
-//        reader.nextLine();
+    public String getAnswer(String text, String color) {
+        printer.println(colorize(color) + text);
         String answer = reader.nextLine();
         return answer;
+    }
+
+    public String getAnswer(String text) {
+        return getAnswer(text, "white");
     }
 }
