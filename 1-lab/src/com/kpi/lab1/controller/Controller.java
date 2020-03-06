@@ -6,8 +6,6 @@ import com.kpi.lab1.view.MenuViewer;
 public class Controller {
     MenuViewer menuViewer;
     BookSelector bookSelector;
-//    final String OUTPUT = "blue";
-//    final String ERROR = "red";
 
     public Controller() {
         menuViewer = new MenuViewer(System.in, System.out);
@@ -56,12 +54,24 @@ public class Controller {
     }
 
     public void generateNewData() {
-        String amount = menuViewer.getAnswer("Enter amount of the books:");
-        if (!Validator.isNumber(amount)) {
-            menuViewer.printMessage("Error: entered value is not int!", "red");
-            return;
+        String amountStr;
+        int amount;
+        while (true) {
+            amountStr = menuViewer.getAnswer("Enter amount of the books:");
+            try {
+                Validator.isNumber(amountStr);
+                amount = Integer.parseInt(amountStr);
+                Validator.isAmount(amount);
+            } catch (NumberFormatException ex) {
+                menuViewer.printMessage(ex.getMessage(), "red");
+                continue;
+            } catch (NotAmountException ex) {
+                menuViewer.printMessage(ex.getMessage(), "red");
+                continue;
+            }
+            break;
         }
-        bookSelector.setDataStore(DataSource.generateRandomBooks(Integer.parseInt(amount)));
+        bookSelector.setDataStore(DataSource.generateRandomBooks(amount));
         menuViewer.printMessage("Generated books:", "blue");
         printAllData();
     }
@@ -87,9 +97,13 @@ public class Controller {
         int actionInt;
         while (true) {
             action = menuViewer.getActions();
-            if (!Validator.isNumber(action)) {
-                menuViewer.printMessage("Error: entered value is not int!", "red");
-            } else if (action.equals("6")) {
+            try {
+                Validator.isNumber(action);
+            } catch (NumberFormatException ex) {
+                menuViewer.printMessage(ex.getMessage(), "red");
+                continue;
+            }
+            if (action.equals("6")) {
                 break;
             } else {
                 actionInt = Integer.parseInt(action);
