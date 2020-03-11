@@ -13,19 +13,19 @@ public class Controller {
     }
 
     public void printAllData() {
-        menuViewer.printMessage(DataFormatter.formatData(bookSelector.selectAll()), "blue");
+        menuViewer.printMessage(DataFormatter.formatData(bookSelector.selectAll()), OutputColor.OUTPUT);
     }
 
     public void selectByAuthor() {
         String author = menuViewer.getAnswer("Enter author of the book:");
         Book[] books = bookSelector.selectByAuthor(author);
-        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
+        menuViewer.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
     }
 
     public void selectByPublishing() {
         String publishing = menuViewer.getAnswer("Enter publishing of the book:");
         Book[] books = bookSelector.selectByPublishing(publishing);
-        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
+        menuViewer.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
     }
 
     public void selectByYearLater() {
@@ -41,16 +41,16 @@ public class Controller {
                 year = Integer.parseInt(yearStr);
                 Validator.isYear(year);
             } catch (NumberFormatException ex) {
-                menuViewer.printMessage(ex.getMessage(), "red");
+                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
                 continue;
             } catch (NotYearException ex) {
-                menuViewer.printMessage(ex.getMessage(), "red");
+                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
                 continue;
             }
             break;
         }
         Book[] books = bookSelector.selectByYearLater(year);
-        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
+        menuViewer.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
     }
 
     public void generateNewData() {
@@ -63,16 +63,16 @@ public class Controller {
                 amount = Integer.parseInt(amountStr);
                 Validator.isAmount(amount);
             } catch (NumberFormatException ex) {
-                menuViewer.printMessage(ex.getMessage(), "red");
+                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
                 continue;
             } catch (NotAmountException ex) {
-                menuViewer.printMessage(ex.getMessage(), "red");
+                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
                 continue;
             }
             break;
         }
         bookSelector.setDataStore(DataSource.generateRandomBooks(amount));
-        menuViewer.printMessage("Generated books:", "blue");
+        menuViewer.printMessage("Generated books:", OutputColor.OUTPUT);
         printAllData();
     }
 
@@ -88,7 +88,7 @@ public class Controller {
         } else if (action == 5) {
             selectByYearLater();
         } else {
-            menuViewer.printMessage("Wrong action! Action not found.", "red");
+            menuViewer.printMessage("Wrong action! Action not found.", OutputColor.ERROR);
         }
     }
 
@@ -100,7 +100,7 @@ public class Controller {
             try {
                 Validator.isNumber(action);
             } catch (NumberFormatException ex) {
-                menuViewer.printMessage(ex.getMessage(), "red");
+                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
                 continue;
             }
             if (action.equals("6")) {
