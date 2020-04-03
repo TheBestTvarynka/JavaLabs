@@ -97,6 +97,8 @@ public class Controller {
         int actionInt;
         while (true) {
             action = menuViewer.getActions();
+            // this exception is unchecked
+            // it means we can erase try-catch block and program still work but may throw exception in runtime
             try {
                 Validator.isNumber(action);
             } catch (NumberFormatException ex) {
