@@ -3,9 +3,32 @@ package com.kpi.lab1.controller;
 import com.kpi.lab1.model.*;
 import com.kpi.lab1.view.MenuViewer;
 
+import java.util.concurrent.CancellationException;
+import java.util.function.Function;
+
 public class Controller {
     MenuViewer menuViewer;
     BookSelector bookSelector;
+
+    private int getNumber (String message, Function<String, Void> validateFn) {
+        String answer;
+        int result;
+        while (true) {
+            answer = menuViewer.getAnswer(message);
+            if (answer.equals("cancel")) {
+                throw new CancellationException();
+            }
+            try {
+                validateFn.apply(answer);
+                result = Integer.parseInt(answer);
+            } catch (RuntimeException ex) {
+                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
+                continue;
+            }
+            break;
+        }
+        return result;
+    }
 
     public Controller() {
         menuViewer = new MenuViewer(System.in, System.out);
@@ -29,51 +52,20 @@ public class Controller {
     }
 
     public void selectByYearLater() {
-        String yearStr;
-        int year;
-        while (true) {
-            yearStr = menuViewer.getAnswer("Enter year or 'cancel' for cancelling:");
-            if (yearStr.equals("cancel")) {
-                return;
-            }
-            try {
-                Validator.isNumber(yearStr);
-                year = Integer.parseInt(yearStr);
-                Validator.isYear(year);
-            } catch (NumberFormatException ex) {
-                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
-                continue;
-            } catch (NotYearException ex) {
-                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
-                continue;
-            }
-            break;
-        }
-        Book[] books = bookSelector.selectByYearLater(year);
-        menuViewer.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
+        try {
+            int year = getNumber("Enter year ('cancel' for cancelling):", Validator::isYear);
+            Book[] books = bookSelector.selectByYearLater(year);
+            menuViewer.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
+        } catch (CancellationException ex) {}
     }
 
     public void generateNewData() {
-        String amountStr;
-        int amount;
-        while (true) {
-            amountStr = menuViewer.getAnswer("Enter amount of the books:");
-            try {
-                Validator.isNumber(amountStr);
-                amount = Integer.parseInt(amountStr);
-                Validator.isAmount(amount);
-            } catch (NumberFormatException ex) {
-                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
-                continue;
-            } catch (NotAmountException ex) {
-                menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
-                continue;
-            }
-            break;
-        }
-        bookSelector.setDataStore(DataSource.generateRandomBooks(amount));
-        menuViewer.printMessage("Generated books:", OutputColor.OUTPUT);
-        printAllData();
+        try {
+            int amount = getNumber("Enter amount of the books ('cancel' for cancelling):", Validator::isAmount);
+            bookSelector.setDataStore(DataSource.generateRandomBooks(amount));
+            menuViewer.printMessage("Generated books:", OutputColor.OUTPUT);
+            printAllData();
+        } catch (CancellationException ex) {}
     }
 
     public void perform(int action) {
@@ -97,8 +89,6 @@ public class Controller {
         int actionInt;
         while (true) {
             action = menuViewer.getActions();
-            // this exception is unchecked
-            // it means we can erase try-catch block and program still work but may throw exception in runtime
             try {
                 Validator.isNumber(action);
             } catch (NumberFormatException ex) {
