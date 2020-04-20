@@ -10,5 +10,5 @@ Content:
 
 ## Meta
 
-Pavlo Myroniyk – (@TheBestTvarynka)[https://github.com/TheBestTvarynka], [pspos.developqkation@gmail.com](mailto:pspos.developqkation@gmail.com)
+Pavlo Myroniyk – [@TheBestTvarynka](https://github.com/TheBestTvarynka), [pspos.developqkation@gmail.com](mailto:pspos.developqkation@gmail.com)
 
