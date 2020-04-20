@@ -35,7 +35,9 @@ public class MenuViewer {
         printer.println("3 - select books by the author");
         printer.println("4 - select books by the publishing");
         printer.println("5 - select books by the year");
-        printer.println("6 - Exit");
+        printer.println("6 - write books in the file");
+        printer.println("7 - read books from the file");
+        printer.println("8 - exit");
     }
 
     public String getActions() {

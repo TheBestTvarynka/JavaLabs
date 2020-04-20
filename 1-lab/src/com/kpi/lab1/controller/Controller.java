@@ -3,6 +3,7 @@ package com.kpi.lab1.controller;
 import com.kpi.lab1.model.*;
 import com.kpi.lab1.view.MenuViewer;
 
+import java.io.IOException;
 import java.util.concurrent.CancellationException;
 import java.util.function.Function;
 
@@ -68,6 +69,24 @@ public class Controller {
         } catch (CancellationException ex) {}
     }
 
+    public void writeBooksInFile() {
+        String filename = menuViewer.getAnswer("Enter name of the file:");
+        try {
+            DataSource.writeBooksInFile(bookSelector.selectAll(), filename);
+        } catch (IOException ex) {
+            menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
+        }
+    }
+
+    public void readBooksFromFile() {
+        String filename = menuViewer.getAnswer("Enter name of the file:");
+        try {
+            bookSelector.setDataStore(DataSource.readBooksFromFile(filename));
+        } catch (IOException ex) {
+            menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
+        }
+    }
+
     public void perform(int action) {
         if (action == 1) {
             printAllData();
@@ -79,6 +98,10 @@ public class Controller {
             selectByPublishing();
         } else if (action == 5) {
             selectByYearLater();
+        } else if (action == 6) {
+            writeBooksInFile();
+        } else if (action == 7) {
+            readBooksFromFile();
         } else {
             menuViewer.printMessage("Wrong action! Action not found.", OutputColor.ERROR);
         }
@@ -95,7 +118,7 @@ public class Controller {
                 menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
                 continue;
             }
-            if (action.equals("6")) {
+            if (action.equals("8")) {
                 break;
             } else {
                 actionInt = Integer.parseInt(action);

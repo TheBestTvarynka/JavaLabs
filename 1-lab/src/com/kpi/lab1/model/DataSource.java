@@ -1,6 +1,14 @@
 package com.kpi.lab1.model;
 
+import com.google.gson.Gson;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Random;
+import java.util.Arrays;
 
 public class DataSource {
     public static Book[] generateRandomBooks(int amount) {
@@ -18,5 +26,24 @@ public class DataSource {
             books[i] = new Book(IDs[n], titles[n], author[n], publishing[n], pageNumber[n], price[n], year[n]);
         }
         return books;
+    }
+    public static Book[] readBooksFromFile (String filename) throws IOException {
+        Gson gson = new Gson();
+        FileInputStream input = new FileInputStream(filename);
+        StringBuilder booksStr = new StringBuilder("");
+        byte byteData;
+        while ((byteData = (byte)input.read()) != -1) {
+            booksStr.append((char)byteData);
+        }
+        Book[] books = gson.fromJson(booksStr.toString(), Book[].class);
+        input.close();
+        return books;
+    }
+    public static void writeBooksInFile (Book[] books, String filename) throws IOException {
+        Gson gson = new Gson();
+        FileOutputStream output = new FileOutputStream(filename);
+        String booksStr = gson.toJson(books);
+        output.write(booksStr.getBytes());
+        output.close();
     }
 }
