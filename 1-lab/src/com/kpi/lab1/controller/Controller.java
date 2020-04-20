@@ -69,10 +69,10 @@ public class Controller {
         } catch (CancellationException ex) {}
     }
 
-    public void writeBooksInFile() {
+    public void writeBooksToFile() {
         String filename = menuViewer.getAnswer("Enter name of the file:");
         try {
-            DataSource.writeBooksInFile(bookSelector.selectAll(), filename);
+            FileIO.writeBooksToFile(bookSelector.selectAll(), filename);
         } catch (IOException ex) {
             menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
         }
@@ -81,7 +81,8 @@ public class Controller {
     public void readBooksFromFile() {
         String filename = menuViewer.getAnswer("Enter name of the file:");
         try {
-            bookSelector.setDataStore(DataSource.readBooksFromFile(filename));
+            bookSelector.setDataStore(FileIO.readBooksFromFile(filename));
+            printAllData();
         } catch (IOException ex) {
             menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
         }
@@ -99,7 +100,7 @@ public class Controller {
         } else if (action == 5) {
             selectByYearLater();
         } else if (action == 6) {
-            writeBooksInFile();
+            writeBooksToFile();
         } else if (action == 7) {
             readBooksFromFile();
         } else {
