@@ -31,9 +31,27 @@ public class Controller {
         return result;
     }
 
+    private void loadBooks (String filename) {
+        try {
+            bookSelector.setDataStore(FileIO.readBooksFromFile(filename));
+            printAllData();
+        } catch (IOException ex) {
+            menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
+        }
+    }
+
+    private void writeBooks (String filename) {
+        try {
+            FileIO.writeBooksToFile(bookSelector.selectAll(), filename);
+        } catch (IOException ex) {
+            menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
+        }
+    }
+
     public Controller() {
         menuViewer = new MenuViewer(System.in, System.out);
         bookSelector = new BookSelector(new DataStore());
+        loadBooks("datafiles/saved.json");
     }
 
     public void printAllData() {
@@ -71,21 +89,12 @@ public class Controller {
 
     public void writeBooksToFile() {
         String filename = menuViewer.getAnswer("Enter name of the file:");
-        try {
-            FileIO.writeBooksToFile(bookSelector.selectAll(), filename);
-        } catch (IOException ex) {
-            menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
-        }
+        writeBooks(filename);
     }
 
     public void readBooksFromFile() {
         String filename = menuViewer.getAnswer("Enter name of the file:");
-        try {
-            bookSelector.setDataStore(FileIO.readBooksFromFile(filename));
-            printAllData();
-        } catch (IOException ex) {
-            menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
-        }
+        loadBooks(filename);
     }
 
     public void perform(int action) {
@@ -120,6 +129,7 @@ public class Controller {
                 continue;
             }
             if (action.equals("8")) {
+                writeBooks("datafiles/saved.json");
                 break;
             } else {
                 actionInt = Integer.parseInt(action);
