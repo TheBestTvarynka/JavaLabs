@@ -1,6 +1,4 @@
-package com.kpi.lab1;
-
-import com.kpi.lab1.controller.Controller;
+import controller.Controller;
 
 public class Main {
     public static void main(String[] args) {

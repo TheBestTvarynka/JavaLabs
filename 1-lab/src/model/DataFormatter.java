@@ -1,4 +1,4 @@
-package com.kpi.lab1.model;
+package model;
 
 public class DataFormatter {
     public static String formatData(Book[] books) {

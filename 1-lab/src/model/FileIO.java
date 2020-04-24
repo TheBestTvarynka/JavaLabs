@@ -1,4 +1,4 @@
-package com.kpi.lab1.model;
+package model;
 
 import com.google.gson.Gson;
 
@@ -16,7 +16,6 @@ public class FileIO {
             booksStr.append((char)byteData);
         }
         Book[] books = gson.fromJson(booksStr.toString(), Book[].class);
-        input.close();
         return books;
     }
     public static void writeBooksToFile (Book[] books, String filename) throws IOException {

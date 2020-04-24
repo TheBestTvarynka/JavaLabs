@@ -1,6 +1,7 @@
-package com.kpi.lab1.model;
+package utils;
 
 import java.util.Random;
+import model.Book;
 
 public class DataSource {
     public static Book[] generateRandomBooks(int amount) {

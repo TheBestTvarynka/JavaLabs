@@ -1,10 +1,10 @@
-package com.kpi.lab1.model;
+package utils.exceptions;
 
 public class NotAmountException extends RuntimeException {
     NotAmountException() {
         super("Entered amount is not valid!");
     }
-    NotAmountException(String message) {
+    public NotAmountException(String message) {
         super(message);
     }
 }

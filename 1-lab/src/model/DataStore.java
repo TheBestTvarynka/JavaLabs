@@ -1,4 +1,4 @@
-package com.kpi.lab1.model;
+package model;
 
 public class DataStore {
     Book[] data;

@@ -1,4 +1,4 @@
-package com.kpi.lab1.view;
+package view;
 
 import java.io.InputStream;
 import java.io.PrintStream;

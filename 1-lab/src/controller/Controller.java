@@ -1,7 +1,8 @@
-package com.kpi.lab1.controller;
+package controller;
 
-import com.kpi.lab1.model.*;
-import com.kpi.lab1.view.MenuViewer;
+import model.*;
+import view.*;
+import utils.DataSource;
 
 import java.io.IOException;
 import java.util.concurrent.CancellationException;
@@ -34,7 +35,6 @@ public class Controller {
     private void loadBooks (String filename) {
         try {
             bookSelector.setDataStore(FileIO.readBooksFromFile(filename));
-            printAllData();
         } catch (IOException ex) {
             menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
         }
@@ -43,6 +43,7 @@ public class Controller {
     private void writeBooks (String filename) {
         try {
             FileIO.writeBooksToFile(bookSelector.selectAll(), filename);
+
         } catch (IOException ex) {
             menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
         }
@@ -95,6 +96,7 @@ public class Controller {
     public void readBooksFromFile() {
         String filename = menuViewer.getAnswer("Enter name of the file:");
         loadBooks(filename);
+        printAllData();
     }
 
     public void perform(int action) {

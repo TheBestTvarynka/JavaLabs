@@ -1,6 +1,8 @@
-package com.kpi.lab1.model;
+package controller;
 
 import java.util.Calendar;
+import utils.exceptions.NotAmountException;
+import utils.exceptions.NotYearException;
 
 public class Validator {
     public static void isNumber(String str) throws NumberFormatException {

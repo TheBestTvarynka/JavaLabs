@@ -1,4 +1,4 @@
-package com.kpi.lab1.model;
+package controller;
 
 public class OutputColor {
     public static final String OUTPUT = "blue";
