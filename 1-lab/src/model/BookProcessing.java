@@ -1,13 +1,16 @@
 package model;
 
-public class BookSelector {
+import java.io.File;
+import java.io.IOException;
+
+public class BookProcessing {
     DataStore dataStore;
 
-    public BookSelector() {
+    public BookProcessing() {
         this.dataStore = null;
     }
 
-    public BookSelector(DataStore dataStore) {
+    public BookProcessing(DataStore dataStore) {
         this.dataStore = dataStore;
     }
 
@@ -21,6 +24,24 @@ public class BookSelector {
         } else {
             dataStore = new DataStore(books);
         }
+    }
+
+    public String writeBooksInFile(String filename) {
+        try {
+            FileIO.writeBooksToFile(dataStore.getData(), filename);
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+        return "All books successfully written!";
+    }
+
+    public String readBooksFromFile(String filename) {
+        try {
+            dataStore.setData(FileIO.readBooksFromFile(filename));
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+        return "All books read successfully!";
     }
 
     public Book[] selectAll() {

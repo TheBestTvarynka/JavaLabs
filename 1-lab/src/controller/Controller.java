@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 public class Controller {
     MenuViewer menuViewer;
-    BookSelector bookSelector;
+    BookProcessing bookProcessing;
 
     private int getNumber (String message, Function<String, Void> validateFn) {
         String answer;
@@ -32,49 +32,32 @@ public class Controller {
         return result;
     }
 
-    private void loadBooks (String filename) {
-        try {
-            bookSelector.setDataStore(FileIO.readBooksFromFile(filename));
-        } catch (IOException ex) {
-            menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
-        }
-    }
-
-    private void writeBooks (String filename) {
-        try {
-            FileIO.writeBooksToFile(bookSelector.selectAll(), filename);
-
-        } catch (IOException ex) {
-            menuViewer.printMessage(ex.getMessage(), OutputColor.ERROR);
-        }
-    }
-
     public Controller() {
         menuViewer = new MenuViewer(System.in, System.out);
-        bookSelector = new BookSelector(new DataStore());
-        loadBooks("datafiles/saved.json");
+        bookProcessing = new BookProcessing(new DataStore());
+        bookProcessing.readBooksFromFile("datafiles/saved.json");
     }
 
     public void printAllData() {
-        menuViewer.printMessage(DataFormatter.formatData(bookSelector.selectAll()), OutputColor.OUTPUT);
+        menuViewer.printMessage(DataFormatter.formatData(bookProcessing.selectAll()), OutputColor.OUTPUT);
     }
 
     public void selectByAuthor() {
         String author = menuViewer.getAnswer("Enter author of the book:");
-        Book[] books = bookSelector.selectByAuthor(author);
+        Book[] books = bookProcessing.selectByAuthor(author);
         menuViewer.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
     }
 
     public void selectByPublishing() {
         String publishing = menuViewer.getAnswer("Enter publishing of the book:");
-        Book[] books = bookSelector.selectByPublishing(publishing);
+        Book[] books = bookProcessing.selectByPublishing(publishing);
         menuViewer.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
     }
 
     public void selectByYearLater() {
         try {
             int year = getNumber("Enter year ('cancel' for cancelling):", Validator::isYear);
-            Book[] books = bookSelector.selectByYearLater(year);
+            Book[] books = bookProcessing.selectByYearLater(year);
             menuViewer.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
         } catch (CancellationException ex) {}
     }
@@ -82,7 +65,7 @@ public class Controller {
     public void generateNewData() {
         try {
             int amount = getNumber("Enter amount of the books ('cancel' for cancelling):", Validator::isAmount);
-            bookSelector.setDataStore(DataSource.generateRandomBooks(amount));
+            bookProcessing.setDataStore(DataSource.generateRandomBooks(amount));
             menuViewer.printMessage("Generated books:", OutputColor.OUTPUT);
             printAllData();
         } catch (CancellationException ex) {}
@@ -90,13 +73,14 @@ public class Controller {
 
     public void writeBooksToFile() {
         String filename = menuViewer.getAnswer("Enter name of the file:");
-        writeBooks(filename);
+        String res = bookProcessing.writeBooksInFile(filename);
+        menuViewer.printMessage(res);
     }
 
     public void readBooksFromFile() {
         String filename = menuViewer.getAnswer("Enter name of the file:");
-        loadBooks(filename);
-        printAllData();
+        String res = bookProcessing.readBooksFromFile(filename);
+        menuViewer.printMessage(res);
     }
 
     public void perform(int action) {
@@ -131,7 +115,7 @@ public class Controller {
                 continue;
             }
             if (action.equals("8")) {
-                writeBooks("datafiles/saved.json");
+                bookProcessing.writeBooksInFile("datafiles/saved.json");
                 break;
             } else {
                 actionInt = Integer.parseInt(action);
