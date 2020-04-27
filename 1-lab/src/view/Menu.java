@@ -4,10 +4,10 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class MenuViewer {
+public class Menu {
     Scanner reader;
     PrintStream printer;
-    public MenuViewer(InputStream input, PrintStream output) {
+    public Menu(InputStream input, PrintStream output) {
         reader = new Scanner(input);
         printer = output;
     }
@@ -29,7 +29,7 @@ public class MenuViewer {
 
     public void printMenu() {
         printer.println(colorize("white"));
-        printer.println("Enter number [1 - 6]:");
+        printer.println("Enter number [1 - 8]:");
         printer.println("1 - print all books");
         printer.println("2 - generate new books");
         printer.println("3 - select books by the author");
