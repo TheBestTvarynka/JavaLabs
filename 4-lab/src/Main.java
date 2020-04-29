@@ -1,21 +1,25 @@
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        LinkedList<Integer> list = generateList();
-        printList(list);
+        List<Integer> list = null;
+        try {
+            list = manualCreation();
+        } catch (IOException e) {
+            System.out.println("Unable to create a list.");
+        }
+        // list = generateList();
+        // printList(list);
+        System.out.println("Please, enter the value:");
         int number = new Scanner(System.in).nextInt();
         int result = findClosestByValue(list, number);
         System.out.print(result);
     }
 
-    public static LinkedList<Integer> generateList() {
+    public static List<Integer> generateList() {
         int size = new Scanner(System.in).nextInt();
-        LinkedList<Integer> list = new LinkedList<>();
+        List<Integer> list = new LinkedList<>();
         Random objGenerator = new Random();
         for (int i = 0; i < size; i++) {
             list.add(objGenerator.nextInt(100));
@@ -23,19 +27,19 @@ public class Main {
         return list;
     }
 
-    public static LinkedList<Integer> manualCreation() throws IOException {
+    public static List<Integer> manualCreation() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        int size = System.in.read();
-        LinkedList<Integer> list = new LinkedList<>();
+        int size = scanner.nextInt();
+        List<Integer> list = new LinkedList<>();
         for (int i = 0; i < size; i++) {
             list.add(scanner.nextInt());
         }
         return list;
     }
 
-    public static int findClosestByValue(LinkedList<Integer> list, int value) {
+    public static int findClosestByValue(List<Integer> list, int value) {
         Iterator<Integer> it = list.iterator();
-        int result = list.element();
+        int result = list.get(0);
         int current;
         while (it.hasNext()) {
             current = it.next();
@@ -46,7 +50,7 @@ public class Main {
         return result;
     }
 
-    public static void printList(LinkedList<Integer> list) {
+    public static void printList(List<Integer> list) {
         for (Integer number : list) {
             System.out.println(number);
         }
