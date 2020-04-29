@@ -3,23 +3,19 @@ package model;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileIO {
     public static Book[] readBooksFromFile (String filename) throws IOException {
         Gson gson = new Gson();
-        StringBuilder booksStr = new StringBuilder("");
         Book[] books = null;
         try {
-            FileInputStream input = new FileInputStream(filename);
-            byte byteData;
-            while ((byteData = (byte)input.read()) != -1) {
-                booksStr.append((char)byteData);
-            }
-            books = gson.fromJson(booksStr.toString(), Book[].class);
+            Path path = Paths.get(filename);
+            books = gson.fromJson(Files.readString(path), Book[].class);
         } catch (FileNotFoundException e) {
             throw new IOException("Error: file not found!");
         } catch (IOException e) {
@@ -32,9 +28,9 @@ public class FileIO {
     public static void writeBooksToFile (Book[] books, String filename) throws IOException {
         Gson gson = new Gson();
         try {
-            FileOutputStream output = new FileOutputStream(filename);
+            Path path = Paths.get(filename);
             String booksStr = gson.toJson(books);
-            output.write(booksStr.getBytes());
+            Files.write(path, booksStr.getBytes());
         } catch (FileNotFoundException ex) {
             throw new IOException("Error: file not found!");
         } catch (IOException e) {
