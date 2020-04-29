@@ -1,4 +1,4 @@
-package controller;
+package utils;
 
 public class OutputColor {
     public static final String OUTPUT = "blue";
