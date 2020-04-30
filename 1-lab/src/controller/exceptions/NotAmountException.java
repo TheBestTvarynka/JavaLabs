@@ -1,4 +1,4 @@
-package utils.exceptions;
+package controller.exceptions;
 
 public class NotAmountException extends RuntimeException {
     NotAmountException() {

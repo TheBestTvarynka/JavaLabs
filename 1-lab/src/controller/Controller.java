@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import utils.DataFormatter;
 import view.*;
 import utils.DataSource;
 import utils.OutputColor;
@@ -35,7 +36,7 @@ public class Controller {
     public Controller() {
         menu = new Menu(System.in, System.out);
         bookProcessing = new BookProcessing(new DataStore());
-        System.out.println(bookProcessing.readBooksFromFile("datafiles/saved.json"));
+        menu.printMessage(bookProcessing.readBooksFromFile());
     }
 
     public void printAllData() {
@@ -115,7 +116,7 @@ public class Controller {
                 continue;
             }
             if (action.equals("8")) {
-                System.out.println(bookProcessing.writeBooksInFile("datafiles/saved.json"));
+                menu.printMessage(bookProcessing.writeBooksInFile());
                 break;
             } else {
                 actionInt = Integer.parseInt(action);

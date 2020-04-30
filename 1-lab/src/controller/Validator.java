@@ -1,8 +1,8 @@
 package controller;
 
 import java.util.Calendar;
-import utils.exceptions.NotAmountException;
-import utils.exceptions.NotYearException;
+import controller.exceptions.NotAmountException;
+import controller.exceptions.NotYearException;
 
 public class Validator {
     public static void isNumber(String str) throws NumberFormatException {

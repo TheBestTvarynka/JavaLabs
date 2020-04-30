@@ -1,9 +1,9 @@
 package model;
 
-import java.io.File;
 import java.io.IOException;
 
 public class BookProcessing {
+    public static String standartFile = "datafiles/saved.json";
     DataStore dataStore;
 
     public BookProcessing() {
@@ -35,6 +35,10 @@ public class BookProcessing {
         return "All books successfully written!";
     }
 
+    public String writeBooksInFile() {
+        return writeBooksInFile(standartFile);
+    }
+
     public String readBooksFromFile(String filename) {
         try {
             dataStore.setData(FileIO.readBooksFromFile(filename));
@@ -42,6 +46,10 @@ public class BookProcessing {
             return e.getMessage();
         }
         return "All books read successfully!";
+    }
+
+    public String readBooksFromFile() {
+        return readBooksFromFile(standartFile);
     }
 
     public Book[] selectAll() {

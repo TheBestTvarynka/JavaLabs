@@ -1,4 +1,6 @@
-package model;
+package utils;
+
+import model.Book;
 
 public class DataFormatter {
     public static String formatData(Book[] books) {
