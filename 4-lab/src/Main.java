@@ -4,13 +4,15 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         List<Integer> list = null;
-        try {
-            list = manualCreation();
-        } catch (IOException e) {
-            System.out.println("Unable to create a list.");
-        }
-        // list = generateList();
-        // printList(list);
+//        try {
+//            list = manualCreation();
+//        } catch (IOException e) {
+//            System.out.println("Unable to create a list.");
+//            list = generateList();
+//            printList(list);
+//        }
+        list = generateList();
+        printList(list);
         System.out.println("Please, enter the value:");
         int number = new Scanner(System.in).nextInt();
         int result = findClosestByValue(list, number);
@@ -39,7 +41,7 @@ public class Main {
 
     public static int findClosestByValue(List<Integer> list, int value) {
         Iterator<Integer> it = list.iterator();
-        int result = list.get(0);
+        int result = it.next();
         int current;
         while (it.hasNext()) {
             current = it.next();

@@ -1,87 +1,54 @@
-package controller;
+package com.kpi.lab1.controller;
 
-import model.*;
-import utils.DataFormatter;
-import view.*;
-import utils.DataSource;
-import utils.OutputColor;
-
-import java.util.concurrent.CancellationException;
-import java.util.function.Function;
+import com.kpi.lab1.model.*;
+import com.kpi.lab1.view.MenuViewer;
 
 public class Controller {
-    Menu menu;
-    BookProcessing bookProcessing;
-
-    private int getNumber (String message, Function<String, Void> validateFn) {
-        String answer;
-        int result;
-        while (true) {
-            answer = menu.getAnswer(message);
-            if (answer.equals("cancel")) {
-                throw new CancellationException();
-            }
-            try {
-                validateFn.apply(answer);
-                result = Integer.parseInt(answer);
-            } catch (RuntimeException ex) {
-                menu.printMessage(ex.getMessage(), OutputColor.ERROR);
-                continue;
-            }
-            break;
-        }
-        return result;
-    }
+    MenuViewer menuViewer;
+    BookSelector bookSelector;
+//    final String OUTPUT = "blue";
+//    final String ERROR = "red";
 
     public Controller() {
-        menu = new Menu(System.in, System.out);
-        bookProcessing = new BookProcessing(new DataStore());
-        menu.printMessage(bookProcessing.readBooksFromFile());
+        menuViewer = new MenuViewer(System.in, System.out);
+        bookSelector = new BookSelector(new DataStore());
     }
 
     public void printAllData() {
-        menu.printMessage(DataFormatter.formatData(bookProcessing.selectAll()), OutputColor.OUTPUT);
+        menuViewer.printMessage(DataFormatter.formatData(bookSelector.selectAll()), "blue");
     }
 
     public void selectByAuthor() {
-        String author = menu.getAnswer("Enter author of the book:");
-        Book[] books = bookProcessing.selectByAuthor(author);
-        menu.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
+        String author = menuViewer.getAnswer("Enter author of the book:");
+        Book[] books = bookSelector.selectByAuthor(author);
+        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
 
     public void selectByPublishing() {
-        String publishing = menu.getAnswer("Enter publishing of the book:");
-        Book[] books = bookProcessing.selectByPublishing(publishing);
-        menu.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
+        String publishing = menuViewer.getAnswer("Enter publishing of the book:");
+        Book[] books = bookSelector.selectByPublishing(publishing);
+        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
 
     public void selectByYearLater() {
-        try {
-            int year = getNumber("Enter year ('cancel' for cancelling):", Validator::isYear);
-            Book[] books = bookProcessing.selectByYearLater(year);
-            menu.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
-        } catch (CancellationException ex) {}
+        String year = menuViewer.getAnswer("Enter year:");
+        if (!Validator.isNumber(year)) {
+            menuViewer.printMessage("Error: entered value is not int!", "red");
+            return;
+        }
+        Book[] books = bookSelector.selectByYearLater(Integer.parseInt(year));
+        menuViewer.printMessage(DataFormatter.formatData(books), "blue");
     }
 
     public void generateNewData() {
-        try {
-            int amount = getNumber("Enter amount of the books ('cancel' for cancelling):", Validator::isAmount);
-            bookProcessing.setDataStore(DataSource.generateRandomBooks(amount));
-            menu.printMessage("Generated books:", OutputColor.OUTPUT);
-            printAllData();
-        } catch (CancellationException ex) {}
-    }
-
-    public void writeBooksToFile() {
-        String filename = menu.getAnswer("Enter name of the file:");
-        String res = bookProcessing.writeBooksInFile(filename);
-        menu.printMessage(res);
-    }
-
-    public void readBooksFromFile() {
-        String filename = menu.getAnswer("Enter name of the file:");
-        String res = bookProcessing.readBooksFromFile(filename);
-        menu.printMessage(res);
+        String amount = menuViewer.getAnswer("Enter amount of the books:");
+        if (!Validator.isNumber(amount)) {
+            menuViewer.printMessage("Error: entered value is not int!", "red");
+            return;
+        }
+        bookSelector.setDataStore(DataSource.generateRandomBooks(Integer.parseInt(amount)));
+        menuViewer.printMessage("Generated books:", "blue");
+        printAllData();
     }
 
     public void perform(int action) {
@@ -95,12 +62,8 @@ public class Controller {
             selectByPublishing();
         } else if (action == 5) {
             selectByYearLater();
-        } else if (action == 6) {
-            writeBooksToFile();
-        } else if (action == 7) {
-            readBooksFromFile();
         } else {
-            menu.printMessage("Wrong action! Action not found.", OutputColor.ERROR);
+            menuViewer.printMessage("Wrong action! Action not found.", "red");
         }
     }
 
@@ -108,15 +71,10 @@ public class Controller {
         String action;
         int actionInt;
         while (true) {
-            action = menu.getActions();
-            try {
-                Validator.isNumber(action);
-            } catch (NumberFormatException ex) {
-                menu.printMessage(ex.getMessage(), OutputColor.ERROR);
-                continue;
-            }
-            if (action.equals("8")) {
-                menu.printMessage(bookProcessing.writeBooksInFile());
+            action = menuViewer.getActions();
+            if (!Validator.isNumber(action)) {
+                menuViewer.printMessage("Error: entered value is not int!", "red");
+            } else if (action.equals("6")) {
                 break;
             } else {
                 actionInt = Integer.parseInt(action);
