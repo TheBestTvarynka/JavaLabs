@@ -4,7 +4,7 @@ Content:
 * [Lab 1](https://github.com/TheBestTvarynka/JavaLabs/tree/master/1-lab/src)
 * [Lab 2](https://github.com/TheBestTvarynka/JavaLabs/tree/master/2-lab/src)
 * [Lab 3](https://github.com/TheBestTvarynka/JavaLabs/tree/master/3-lab/src)
-* Lab 4
+* [Lab 4](https://github.com/TheBestTvarynka/JavaLabs/tree/master/4-lab/src)
 * Lab 5
 
 ## Meta
