@@ -14,6 +14,14 @@ public class Point {
         this.y = y;
     }
 
+    public double getY() {
+        return y;
+    }
+
+    public double getX() {
+        return x;
+    }
+
     @Override
     public int hashCode() {
         int result = 17;
@@ -31,5 +39,10 @@ public class Point {
         Point point = (Point) o;
         return Double.compare(point.x, x) == 0 &&
                 Double.compare(point.y, y) == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ')';
     }
 }
