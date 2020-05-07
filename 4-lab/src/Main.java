@@ -11,6 +11,7 @@ public class Main {
         System.out.println(line);
 
         Pair<Point, Point> max_min = findMaxMin(set, line);
+        System.out.println("Max = Min");
         System.out.println(max_min);
     }
 
@@ -33,9 +34,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter koeficients of the line:");
         ArrayList<Double> line = new ArrayList<>();
-        line.add(scanner.nextDouble());
-        line.add(scanner.nextDouble());
-        line.add(scanner.nextDouble());
+        while (true) {
+            line.add(scanner.nextDouble());
+            line.add(scanner.nextDouble());
+            line.add(scanner.nextDouble());
+            if (Double.compare(line.get(0), 0) == 0 && Double.compare(line.get(1), 0) == 0) {
+                System.out.println("Entered line is incorrect. Please, try again");
+                line.clear();
+            } else {
+                break;
+            }
+        }
         return line;
     }
 
