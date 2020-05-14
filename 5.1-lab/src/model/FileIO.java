@@ -18,11 +18,11 @@ public class FileIO {
             String fileData = Files.readString(path);
             books = gson.fromJson(fileData, Book[].class);
         } catch (FileNotFoundException e) {
-            throw new IOException("Error: file not found!");
+            throw new IOException("Error: file not found: " + filename);
         } catch (IOException e) {
-            throw new IOException("Error: unable to read from file!");
+            throw new IOException("Error: unable to read from file: " + filename);
         } catch (JsonSyntaxException e) {
-            throw new IOException("Error: input file has broken syntax!");
+            throw new IOException("Error: input file has broken syntax: " + filename);
         }
         return books;
     }
@@ -33,9 +33,9 @@ public class FileIO {
             String booksStr = gson.toJson(books);
             Files.write(path, booksStr.getBytes());
         } catch (FileNotFoundException ex) {
-            throw new IOException("Error: file not found!");
+            throw new IOException("Error: file not found: " + filename);
         } catch (IOException e) {
-            throw new IOException("Error: unable to write in file!");
+            throw new IOException("Error: unable to write in file: " + filename);
         }
     }
 }

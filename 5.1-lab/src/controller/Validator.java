@@ -13,7 +13,7 @@ public class Validator {
                 continue;
             }
             if (asciiCode < 48 || asciiCode > 57) {
-                throw new NumberFormatException("Entered value is not number!");
+                throw new NumberFormatException("Entered value " + str + " is not number!");
             }
         }
     }
@@ -23,10 +23,10 @@ public class Validator {
             int year = Integer.parseInt(yearStr);
             final int currentYear = Calendar.getInstance().get(Calendar.YEAR);
             if (year < 0 || year > currentYear) {
-                throw new NotYearException("Entered year is not valid!");
+                throw new NotYearException("Entered year " + yearStr + " is not valid!");
             }
         } catch (NumberFormatException ex) {
-            throw new NotYearException("Entered year is not a number!");
+            throw new NotYearException("Entered year " + yearStr + " is not a number!");
         }
         return null;
     }
@@ -35,10 +35,10 @@ public class Validator {
             Validator.isNumber(amountStr);
             int amount = Integer.parseInt(amountStr);
             if (amount < 1) {
-                throw new NotAmountException("Entered amount is not valid!");
+                throw new NotAmountException("Entered amount " + amountStr + " is not valid!");
             }
         } catch (NumberFormatException ex) {
-            throw new NotAmountException("Entered amount is not a number!");
+            throw new NotAmountException("Entered amount " + amountStr + " is not a number!");
         }
         return null;
     }
