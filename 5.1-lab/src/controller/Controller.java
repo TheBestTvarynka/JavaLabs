@@ -1,6 +1,8 @@
 package controller;
 
 import model.*;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import utils.DataFormatter;
 import view.*;
 import utils.DataSource;
@@ -10,6 +12,10 @@ import java.util.concurrent.CancellationException;
 import java.util.function.Function;
 
 public class Controller {
+    public static Logger logger = Logger.getLogger(Controller.class);
+    static {
+        logger.setLevel(Level.DEBUG);
+    }
     Menu menu;
     BookProcessing bookProcessing;
 
@@ -25,6 +31,7 @@ public class Controller {
                 validateFn.apply(answer);
                 result = Integer.parseInt(answer);
             } catch (RuntimeException ex) {
+                logger.debug(ex);
                 menu.printMessage(ex.getMessage(), OutputColor.ERROR);
                 continue;
             }
