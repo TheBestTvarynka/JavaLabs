@@ -31,7 +31,7 @@ public class Controller {
                 validateFn.apply(answer);
                 result = Integer.parseInt(answer);
             } catch (RuntimeException ex) {
-                logger.debug(ex);
+                logger.error(ex);
                 menu.printMessage(ex.getMessage(), OutputColor.ERROR);
                 continue;
             }
