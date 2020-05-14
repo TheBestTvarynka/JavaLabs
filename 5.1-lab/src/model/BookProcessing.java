@@ -1,9 +1,16 @@
 package model;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 
 public class BookProcessing {
     public static String standartFile = "datafiles/saved.json";
+    public static Logger logger = Logger.getLogger(BookProcessing.class);
+    static {
+        logger.setLevel(Level.DEBUG);
+    }
     DataStore dataStore;
 
     public BookProcessing() {
@@ -30,8 +37,10 @@ public class BookProcessing {
         try {
             FileIO.writeBooksToFile(dataStore.getData(), filename);
         } catch (IOException e) {
+            logger.error(e);
             return e.getMessage();
         }
+        logger.info("All books successfully written in " + filename);
         return "All books successfully written!";
     }
 
@@ -43,8 +52,10 @@ public class BookProcessing {
         try {
             dataStore.setData(FileIO.readBooksFromFile(filename));
         } catch (IOException e) {
+            logger.error(e);
             return e.getMessage();
         }
+        logger.info("All books successfully read from " + filename);
         return "All books read successfully!";
     }
 
