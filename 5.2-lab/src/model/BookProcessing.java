@@ -41,7 +41,7 @@ public class BookProcessing {
             return e.getMessage();
         }
         logger.info("All books successfully written in " + filename);
-        return "All books successfully written!";
+        return "successfully_writing";
     }
 
     public String writeBooksInFile() {
@@ -56,7 +56,7 @@ public class BookProcessing {
             return e.getMessage();
         }
         logger.info("All books successfully read from " + filename);
-        return "All books read successfully!";
+        return "successfully_reading";
     }
 
     public String readBooksFromFile() {
@@ -76,7 +76,6 @@ public class BookProcessing {
             return null;
         }
         Book[] resultBooks;
-        // count books which we need to select
         int count = 0;
         for (Book book: books) {
             if (author.equals(book.getAuthor())) {
@@ -102,7 +101,6 @@ public class BookProcessing {
             return null;
         }
         Book[] resultBooks;
-        // count books we need to select
         int count = 0;
         for (Book book: books) {
             if (publishing.equals(book.getPublishing())) {
@@ -128,7 +126,6 @@ public class BookProcessing {
             return null;
         }
         Book[] resultBooks;
-        // count books we need to select
         int count = 0;
         for (Book book: books) {
             if (year < book.getYear()) {

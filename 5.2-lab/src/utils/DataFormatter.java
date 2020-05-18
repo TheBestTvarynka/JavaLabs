@@ -4,10 +4,10 @@ import model.Book;
 
 public class DataFormatter {
     public static String formatData(Book[] books) {
-        StringBuilder result = new StringBuilder("Books:");
+        StringBuilder result = new StringBuilder("");
         if (books != null) {
             for (Book book : books) {
-                result.append('\n' + "-----------------------" + '\n'
+                result.append("-----------------------" + '\n'
                         + "BookID" + book.getBookIDNumber() + '\n'
                         + "Title: " + book.getTitle() + '\n'
                         + "Author: " + book.getAuthor() + '\n'
@@ -17,9 +17,6 @@ public class DataFormatter {
                         + "Price: " + book.getPrice() + '\n'
                         + "-----------------------");
             }
-        }
-        else {
-            result.append("\nBooks not found!");
         }
         return result.toString();
     }

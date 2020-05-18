@@ -47,46 +47,46 @@ public class Controller {
     }
 
     public void printAllData() {
-        menu.printMessage(DataFormatter.formatData(bookProcessing.selectAll()), OutputColor.OUTPUT);
+        menu.printData(DataFormatter.formatData(bookProcessing.selectAll()), OutputColor.OUTPUT);
     }
 
     public void selectByAuthor() {
-        String author = menu.getAnswer("Enter author of the book:");
+        String author = menu.getAnswer("author_promt");
         Book[] books = bookProcessing.selectByAuthor(author);
-        menu.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
+        menu.printData(DataFormatter.formatData(books), OutputColor.OUTPUT);
     }
 
     public void selectByPublishing() {
-        String publishing = menu.getAnswer("Enter publishing of the book:");
+        String publishing = menu.getAnswer("publishing_promt");
         Book[] books = bookProcessing.selectByPublishing(publishing);
-        menu.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
+        menu.printData(DataFormatter.formatData(books), OutputColor.OUTPUT);
     }
 
     public void selectByYearLater() {
         try {
-            int year = getNumber("Enter year ('cancel' for cancelling):", Validator::isYear);
+            int year = getNumber("year_promt", Validator::isYear);
             Book[] books = bookProcessing.selectByYearLater(year);
-            menu.printMessage(DataFormatter.formatData(books), OutputColor.OUTPUT);
+            menu.printData(DataFormatter.formatData(books), OutputColor.OUTPUT);
         } catch (CancellationException ex) {}
     }
 
     public void generateNewData() {
         try {
-            int amount = getNumber("Enter amount of the books ('cancel' for cancelling):", Validator::isAmount);
+            int amount = getNumber("amount_promt", Validator::isAmount);
             bookProcessing.setDataStore(DataSource.generateRandomBooks(amount));
-            menu.printMessage("Generated books:", OutputColor.OUTPUT);
+            menu.printMessage("generated_books", OutputColor.OUTPUT);
             printAllData();
         } catch (CancellationException ex) {}
     }
 
     public void writeBooksToFile() {
-        String filename = menu.getAnswer("Enter name of the file:");
+        String filename = menu.getAnswer("filename_promt");
         String res = bookProcessing.writeBooksInFile(filename);
         menu.printMessage(res);
     }
 
     public void readBooksFromFile() {
-        String filename = menu.getAnswer("Enter name of the file:");
+        String filename = menu.getAnswer("filename_promt");
         String res = bookProcessing.readBooksFromFile(filename);
         menu.printMessage(res);
     }
@@ -107,7 +107,7 @@ public class Controller {
         } else if (action == 7) {
             readBooksFromFile();
         } else {
-            menu.printMessage("Wrong action! Action not found.", OutputColor.ERROR);
+            menu.printMessage("wrong_action", OutputColor.ERROR);
         }
     }
 
