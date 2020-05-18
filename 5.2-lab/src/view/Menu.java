@@ -2,6 +2,7 @@ package view;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -69,5 +70,17 @@ public class Menu {
 
     public String getAnswer(String text) {
         return getAnswer(text, "white");
+    }
+
+    public void changeLanguage(String newLanguage) {
+        if (newLanguage.equals("uk")) {
+            languageManager.changeLanguage(new Locale("uk", "UA"));
+        } else if (newLanguage.equals("en")) {
+            languageManager.changeLanguage(Locale.getDefault());
+        } else {
+            printMessage("wrong_language", "red");
+            return;
+        }
+        printMessage("successfully_changed_language");
     }
 }

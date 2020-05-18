@@ -91,6 +91,11 @@ public class Controller {
         menu.printMessage(res);
     }
 
+    public void changeLanguage() {
+        String newLanguage = menu.getAnswer("language_promt");
+        menu.changeLanguage(newLanguage);
+    }
+
     public void perform(int action) {
         if (action == 1) {
             printAllData();
@@ -106,6 +111,8 @@ public class Controller {
             writeBooksToFile();
         } else if (action == 7) {
             readBooksFromFile();
+        } else if (action == 9) {
+            changeLanguage();
         } else {
             menu.printMessage("wrong_action", OutputColor.ERROR);
         }
