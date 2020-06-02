@@ -43,6 +43,7 @@ public class Controller {
     public Controller() {
         menu = new Menu(System.in, System.out);
         bookProcessing = new BookProcessing(new DataStore());
+        changeLanguage();
         menu.printMessage(bookProcessing.readBooksFromFile());
     }
 
