@@ -1,3 +1,5 @@
+package com.kpi.javatrack;
+
 import com.kpi.javatrack.controller.Controller;
 
 public class Main {

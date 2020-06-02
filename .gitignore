@@ -16,3 +16,6 @@ tasks/
 5.2-lab/out/
 5.2-lab/logs/
 5.2-lab/datafiles/
+CourseWork/target/
+CourseWork/logs/
+CourseWork/datafiles/

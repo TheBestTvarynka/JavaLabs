@@ -3,10 +3,10 @@ package com.kpi.javatrack.controller;
 import com.kpi.javatrack.model.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import utils.DataFormatter;
+import com.kpi.javatrack.utils.DataFormatter;
 import com.kpi.javatrack.view.*;
-import utils.DataSource;
-import utils.OutputColor;
+import com.kpi.javatrack.utils.DataSource;
+import com.kpi.javatrack.utils.OutputColor;
 
 import java.util.concurrent.CancellationException;
 import java.util.function.Function;
