@@ -12,6 +12,18 @@ public class BookProcessing {
         logger.setLevel(Level.DEBUG);
     }
     DataStore dataStore;
+    Book[] lastResult;
+
+    private String writeInFile(String filename, Book[] books) {
+        try {
+            FileIO.writeBooksToFile(books, filename);
+        } catch (IOException e) {
+            logger.error(e);
+            return e.getMessage();
+        }
+        logger.info("All books successfully written in " + filename);
+        return "successfully_writing";
+    }
 
     public BookProcessing() {
         this.dataStore = null;
@@ -34,18 +46,15 @@ public class BookProcessing {
     }
 
     public String writeBooksInFile(String filename) {
-        try {
-            FileIO.writeBooksToFile(dataStore.getData(), filename);
-        } catch (IOException e) {
-            logger.error(e);
-            return e.getMessage();
-        }
-        logger.info("All books successfully written in " + filename);
-        return "successfully_writing";
+        return writeInFile(filename, dataStore.getData());
     }
 
     public String writeBooksInFile() {
         return writeBooksInFile(standartFile);
+    }
+
+    public String writeLastResultBooksInFile(String filename) {
+        return writeInFile(filename, lastResult);
     }
 
     public String readBooksFromFile(String filename) {
@@ -89,6 +98,7 @@ public class BookProcessing {
                 resultBooks[count++] = book;
             }
         }
+        lastResult = resultBooks;
         return resultBooks;
     }
 
@@ -114,6 +124,7 @@ public class BookProcessing {
                 resultBooks[count++] = book;
             }
         }
+        lastResult = resultBooks;
         return resultBooks;
     }
 
@@ -139,6 +150,7 @@ public class BookProcessing {
                 resultBooks[count++] = book;
             }
         }
+        lastResult = resultBooks;
         return resultBooks;
     }
 }

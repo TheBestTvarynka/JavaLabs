@@ -42,6 +42,7 @@ public class Menu {
         printer.println(languageManager.getLabel("menu7"));
         printer.println(languageManager.getLabel("menu8"));
         printer.println(languageManager.getLabel("menu9"));
+        printer.println(languageManager.getLabel("menu10"));
     }
 
     public String getActions() {

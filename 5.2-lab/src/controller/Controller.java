@@ -96,6 +96,12 @@ public class Controller {
         menu.changeLanguage(newLanguage);
     }
 
+    public void saveLastResult() {
+        String filename = menu.getAnswer("filename_promt");
+        String res = bookProcessing.writeLastResultBooksInFile(filename);
+        menu.printMessage(res);
+    }
+
     public void perform(int action) {
         if (action == 1) {
             printAllData();
@@ -113,7 +119,9 @@ public class Controller {
             readBooksFromFile();
         } else if (action == 9) {
             changeLanguage();
-        } else {
+        } else if (action == 10) {
+            saveLastResult();
+        }else {
             menu.printMessage("wrong_action", OutputColor.ERROR);
         }
     }
