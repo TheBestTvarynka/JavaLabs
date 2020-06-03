@@ -7,6 +7,7 @@ Content:
 * [Lab 4](https://github.com/TheBestTvarynka/JavaLabs/tree/master/4-lab/src)
 * [Lab 5](https://github.com/TheBestTvarynka/JavaLabs/tree/master/5.1-lab)
 * [Lab 5.2](https://github.com/TheBestTvarynka/JavaLabs/tree/master/5.2-lab) (with internationalization)
+* [CourseWork](https://github.com/TheBestTvarynka/JavaLabs/tree/master/CourseWork)
 
 ## Meta
 
