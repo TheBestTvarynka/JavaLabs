@@ -54,7 +54,7 @@ public class BookProcessing {
     }
 
     public String writeLastResultBooksInFile(String filename) {
-        return writeInFile(filename, lastResult);
+        return writeInFile(filename, lastResult == null ? dataStore.getData() : lastResult);
     }
 
     public String readBooksFromFile(String filename) {
