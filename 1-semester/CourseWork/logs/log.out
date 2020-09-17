@@ -1,0 +1,8 @@
+2020-06-03 01:35:06,253 - ERROR - java.io.IOException: unable_to_read
+2020-06-03 01:35:10,602 -  INFO - All books successfully written in datafiles/saved.json
+2020-06-03 01:37:54,133 -  INFO - All books successfully read from datafiles/saved.json
+2020-06-03 01:38:02,729 -  INFO - All books successfully written in datafiles/saved.json
+2020-06-03 11:13:43,141 -  INFO - All books successfully read from datafiles/saved.json
+2020-06-03 11:13:47,395 -  INFO - All books successfully written in datafiles/saved.json
+2020-06-04 10:47:56,461 -  INFO - All books successfully read from datafiles/saved.json
+2020-06-04 10:48:24,092 -  INFO - All books successfully written in datafiles/saved.json

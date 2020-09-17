@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cbf1d3b0-e571-4a0e-9ea4-9f3e4d55eecc" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Y1wDtM7kORi0AbzB1NQFbwrlbs" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="GoToKeyword.includeLibraries" value="false" />
+    <property name="GoToNamespace.includeLibraries" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../5-lab" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="1-lab" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kpi.lab1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <setting name="replType" value="NREPL" />
+      <setting name="execution" value="LEININGEN" />
+      <module name="" />
+      <setting name="jvmArgs" value="" />
+      <setting name="parameters" value="" />
+      <setting name="workingDir" value="" />
+      <setting name="profiles" value="" />
+      <setting name="aliases" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cbf1d3b0-e571-4a0e-9ea4-9f3e4d55eecc" name="Default Changelist" comment="" />
+      <created>1582123298157</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582123298157</updated>
+      <workItem from="1582123319805" duration="4453000" />
+      <workItem from="1582135800856" duration="8441000" />
+      <workItem from="1582180742064" duration="4404000" />
+      <workItem from="1582232669646" duration="9000" />
+      <workItem from="1582396642919" duration="2158000" />
+      <workItem from="1583171355350" duration="967000" />
+      <workItem from="1583389501069" duration="3298000" />
+      <workItem from="1583513054207" duration="149000" />
+      <workItem from="1583522428750" duration="4370000" />
+      <workItem from="1583872904824" duration="1098000" />
+      <workItem from="1583933090708" duration="948000" />
+      <workItem from="1585945160418" duration="382000" />
+      <workItem from="1586410094795" duration="1830000" />
+      <workItem from="1587372129683" duration="10332000" />
+      <workItem from="1587395156334" duration="418000" />
+      <workItem from="1587410347857" duration="1415000" />
+      <workItem from="1587586966925" duration="1563000" />
+      <workItem from="1587619371850" duration="9255000" />
+      <workItem from="1587756426108" duration="2567000" />
+      <workItem from="1588016088356" duration="3947000" />
+      <workItem from="1588186356792" duration="2361000" />
+      <workItem from="1588223932258" duration="4891000" />
+      <workItem from="1588830235250" duration="1875000" />
+      <workItem from="1589318148037" duration="238000" />
+      <workItem from="1589349989338" duration="1202000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="304" y="46" key="#Notifications" timestamp="1587756454833">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="304" y="46" key="#Notifications/50.0.1316.768@50.0.1316.768" timestamp="1587756454833" />
+    <state x="167" y="42" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587758977866">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="167" y="42" key="#com.intellij.execution.impl.EditConfigurationsDialog/50.0.1316.768@50.0.1316.768" timestamp="1587758977866" />
+    <state x="460" y="88" key="#com.intellij.ide.util.MemberChooser" timestamp="1582138152396">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="460" y="88" key="#com.intellij.ide.util.MemberChooser/50.0.1316.768@50.0.1316.768" timestamp="1582138152396" />
+    <state x="328" y="54" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1589318299097">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="328" y="54" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/50.0.1316.768@50.0.1316.768" timestamp="1589318299097" />
+    <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588019413617">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/50.0.1316.768@50.0.1316.768" timestamp="1588019413617" />
+    <state x="46" y="-4" width="1324" height="776" key="FileChooserDialogImpl" timestamp="1589351254395">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="46" y="-4" width="1324" height="776" key="FileChooserDialogImpl/50.0.1316.768@50.0.1316.768" timestamp="1589351254395" />
+    <state width="1270" height="444" key="GridCell.Tab.0.bottom" timestamp="1589351269556">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state width="1270" height="444" key="GridCell.Tab.0.bottom/50.0.1316.768@50.0.1316.768" timestamp="1589351269556" />
+    <state width="1270" height="444" key="GridCell.Tab.0.center" timestamp="1589351269555">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state width="1270" height="444" key="GridCell.Tab.0.center/50.0.1316.768@50.0.1316.768" timestamp="1589351269555" />
+    <state width="1270" height="444" key="GridCell.Tab.0.left" timestamp="1589351269553">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state width="1270" height="444" key="GridCell.Tab.0.left/50.0.1316.768@50.0.1316.768" timestamp="1589351269553" />
+    <state width="1270" height="444" key="GridCell.Tab.0.right" timestamp="1589351269556">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state width="1270" height="444" key="GridCell.Tab.0.right/50.0.1316.768@50.0.1316.768" timestamp="1589351269556" />
+    <state x="50" y="0" width="1316" height="768" key="SettingsEditor" timestamp="1587378581610">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="50" y="0" width="1316" height="768" key="SettingsEditor/50.0.1316.768@50.0.1316.768" timestamp="1587378581610" />
+    <state x="389" y="212" key="com.intellij.ide.util.TipDialog" timestamp="1589350062154">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="389" y="212" key="com.intellij.ide.util.TipDialog/50.0.1316.768@50.0.1316.768" timestamp="1589350062154" />
+    <state x="50" y="0" width="1316" height="768" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1587378513417">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="50" y="0" width="1316" height="768" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/50.0.1316.768@50.0.1316.768" timestamp="1587378513417" />
+    <state x="362" y="2" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582126771397">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="362" y="2" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/50.0.1316.768@50.0.1316.768" timestamp="1582126771397" />
+    <state x="84" y="0" key="new project wizard" timestamp="1587395585591">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="84" y="0" key="new project wizard/50.0.1316.768@50.0.1316.768" timestamp="1587395585591" />
+    <state x="372" y="171" key="run.anything.popup" timestamp="1587374323305">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="372" y="171" key="run.anything.popup/50.0.1316.768@50.0.1316.768" timestamp="1587374323305" />
+    <state x="333" y="89" width="747" height="678" key="search.everywhere.popup" timestamp="1583524712902">
+      <screen x="50" y="0" width="1316" height="768" />
+    </state>
+    <state x="333" y="89" width="747" height="678" key="search.everywhere.popup/50.0.1316.768@50.0.1316.768" timestamp="1583524712902" />
+  </component>
+</project>

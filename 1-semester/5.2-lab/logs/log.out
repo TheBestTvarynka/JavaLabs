@@ -1,0 +1,120 @@
+start reading from the file: datafiles/saved.json
+datafiles/saved.json
+start writing to the file: datafiles/saved.json
+datafiles/saved.json
+start reading from the file: datafiles/saved.json
+datafiles/saved.json
+start writing to the file: datafiles/saved.json
+datafiles/saved.json
+start reading from the file: datafiles/saved.json
+datafiles/saved.json
+start writing to the file: datafiles/saved.json
+datafiles/saved.json
+start reading from the file: datafiles/saved.json
+datafiles/saved.json
+start reading from the file: datafiles/saved.json
+datafiles/saved.json
+start writing to the file: datafiles/saved.json
+datafiles/saved.json
+start reading from the file: datafiles/saved.json
+Error: unable to read from file!
+start writing to the file: datafiles/saved.json
+Error: unable to write in file!
+start reading from the file: datafiles/saved.json
+Error: unable to read from file!
+start writing to the file: datafiles/saved.json
+Error: unable to write in file!
+start reading from the file: datafiles/saved.json
+Error: unable to read from file!
+start reading from the file: tgt4gt4
+Error: unable to read from file!
+start reading from the file: erfr
+Error: unable to read from file!
+start writing to the file: seaved1.book
+successful write data to the file seaved1.book
+start writing to the file: datafiles/saved.json
+successful write data to the file datafiles/saved.json
+------------------------------------------------------
+start reading from the file: datafiles/saved.json
+successful read data from the file datafiles/saved.json
+start writing to the file: datafiles/saved.json
+successful write data to the file datafiles/saved.json
+2020-05-13 11:32:33,097 -  start reading from the file: datafiles/saved.json
+2020-05-13 11:32:33,784 -  successful read data from the file datafiles/saved.json
+2020-05-13 11:32:39,349 -  start writing to the file: datafiles/saved.json
+2020-05-13 11:32:39,469 -  successful write data to the file datafiles/saved.json
+2020-05-13 11:45:39,475 -  start reading from the file: datafiles/saved.json
+2020-05-13 11:45:40,300 -  successful read data from the file datafiles/saved.json
+2020-05-13 11:45:47,567 -  Entered value er is not number!
+2020-05-13 11:45:47,568 -  Entered year er is not a number!
+2020-05-13 11:45:55,761 -  Entered amount -34 is not valid!
+2020-05-13 11:46:04,735 -  Entered value ever is not number!
+2020-05-13 11:46:04,737 -  Entered year ever is not a number!
+2020-05-13 11:46:06,974 -  Entered year -34 is not valid!
+2020-05-13 11:46:08,974 -  Entered year 343434 is not valid!
+2020-05-13 11:46:14,023 -  start writing to the file: datafiles/saved.json
+2020-05-13 11:46:14,064 -  successful write data to the file datafiles/saved.json
+------------------------------------------------------
+2020-05-14 10:32:39,286 -  All books successfully read from datafiles/saved.json
+2020-05-14 10:32:58,052 -  controller.exceptions.NotAmountException: Entered amount is not a number!
+2020-05-14 10:32:59,546 -  controller.exceptions.NotAmountException: Entered amount is not valid!
+2020-05-14 10:33:09,901 -  java.io.IOException: Error: unable to read from file!
+2020-05-14 10:33:15,949 -  All books successfully written in datafiles/saved.json
+------------------------------------------------------
+2020-05-14 10:43:20,754 -  All books successfully read from datafiles/saved.json
+2020-05-14 10:43:26,830 -  controller.exceptions.NotAmountException: Entered amount -3434 is not valid!
+2020-05-14 10:43:29,141 -  controller.exceptions.NotAmountException: Entered amount rkovmfkv is not a number!
+2020-05-14 10:43:38,830 -  java.io.IOException: Error: unable to read from file: irevionr
+2020-05-14 10:43:42,358 -  All books successfully written in datafiles/saved.json
+2020-05-14 11:01:48,670 - model.BookProcessing.readBooksFromFile(BookProcessing.java:58)evel - All books successfully read from datafiles/saved.json
+2020-05-14 11:02:07,194 - model.BookProcessing.readBooksFromFile(BookProcessing.java:58)evel - All books successfully read from datafiles/saved.json
+2020-05-14 11:02:14,714 - controller.Controller.getNumber(Controller.java:34)evel - controller.exceptions.NotAmountException: Entered amount -34594 is not valid!
+2020-05-14 11:02:16,843 - controller.Controller.getNumber(Controller.java:34)evel - controller.exceptions.NotAmountException: Entered amount fenivj is not a number!
+2020-05-14 11:02:24,553 - model.BookProcessing.readBooksFromFile(BookProcessing.java:55)evel - java.io.IOException: Error: unable to read from file: ofirjijr
+2020-05-14 11:02:26,346 - model.BookProcessing.writeBooksInFile(BookProcessing.java:43)evel - All books successfully written in datafiles/saved.json
+2020-05-14 11:03:55,174 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-14 11:03:58,173 - DEBUG - controller.exceptions.NotAmountException: Entered amount regg is not a number!
+2020-05-14 11:03:59,724 - DEBUG - controller.exceptions.NotAmountException: Entered amount -24534 is not valid!
+2020-05-14 11:04:05,272 - ERROR - java.io.IOException: Error: unable to read from file: oeivoie
+2020-05-14 11:04:07,358 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-18 16:54:24,347 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 16:54:33,026 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-18 22:52:21,405 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 22:52:42,187 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-18 23:05:53,417 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:11:29,258 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:12:24,764 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:14:20,533 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:15:36,877 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:16:01,424 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-18 23:17:02,617 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:17:07,202 - ERROR - java.io.IOException: Error: unable to read from file: 651651
+2020-05-18 23:33:26,843 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:34:01,055 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:34:21,551 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-18 23:35:20,955 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:36:10,703 -  INFO - All books successfully written in temp_file.book
+2020-05-18 23:36:21,828 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-18 23:39:52,021 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:40:28,945 - ERROR - controller.exceptions.NotYearException: year_is_not_number
+2020-05-18 23:40:31,425 - ERROR - controller.exceptions.NotYearException: year_is_not_number
+2020-05-18 23:40:37,987 - ERROR - controller.exceptions.NotYearException: year_is_not_valid
+2020-05-18 23:40:46,985 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-18 23:52:19,770 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-18 23:52:24,618 - ERROR - java.io.IOException: unable_to_read
+2020-05-18 23:52:33,645 - ERROR - java.io.IOException: unable_to_read
+2020-05-18 23:53:32,697 - ERROR - java.io.IOException: broken_syntax
+2020-05-18 23:53:36,963 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-21 08:33:53,618 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-21 08:35:57,030 -  INFO - All books successfully written in datafiles/saved.json
+2020-05-21 08:36:31,115 -  INFO - All books successfully read from datafiles/saved.json
+2020-05-21 08:36:47,352 - ERROR - java.io.IOException: unable_to_read
+2020-05-21 08:36:56,573 -  INFO - All books successfully written in datafiles/saved.json
+2020-06-02 23:39:26,042 -  INFO - All books successfully read from datafiles/saved.json
+2020-06-02 23:41:12,590 -  INFO - All books successfully written in temp.json
+2020-06-02 23:41:47,068 -  INFO - All books successfully written in pub.json
+2020-06-02 23:42:10,938 -  INFO - All books successfully written in datafiles/saved.json
+2020-06-02 23:45:41,386 -  INFO - All books successfully read from datafiles/saved.json
+2020-06-02 23:45:51,912 -  INFO - All books successfully written in datafiles/saved.json
+2020-06-02 23:49:00,194 -  INFO - All books successfully read from datafiles/saved.json
+2020-06-02 23:49:10,833 -  INFO - All books successfully written in datafiles/saved.json
