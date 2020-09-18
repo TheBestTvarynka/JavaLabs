@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 public class DirectoryScanner {
     String dir;
-    ExecutorService executor = Executors.newFixedThreadPool(100);
+    ExecutorService executor = Executors.newFixedThreadPool(30);
 
     DirectoryScanner(String dir) {
         this.dir = dir;
@@ -25,7 +25,7 @@ public class DirectoryScanner {
                             int startIndex = str.indexOf("for");
                             while (startIndex != -1) {
                                 forCount++;
-                                startIndex = str.indexOf("for", startIndex + 1);
+                                startIndex = str.indexOf("for", startIndex + 3);
                             }
                             return forCount;
                         })

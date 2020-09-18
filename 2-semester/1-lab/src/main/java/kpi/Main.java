@@ -16,6 +16,10 @@ public class Main {
             System.out.println("Entered directory does not exist!");
             System.exit(1);
         }
+        if (!Files.isDirectory(directory)) {
+            System.out.println("Entered path is not a directory!");
+            System.exit(1);
+        }
 
         new DirectoryScanner(dir).scan();
     }
