@@ -18,25 +18,21 @@ public class DirectoryScanner {
 
     Runnable countForOperators(File file) {
         return () -> {
-            System.out.println("FILENAME: " + file.getPath());
-            String fileName = file.getName();
-            if (fileName.endsWith(".c") || fileName.endsWith(".h")) {
-                try {
-                    int fors = Files.lines(Paths.get(file.getPath()))
-                            .mapToInt(str -> {
-                                int forCount = 0;
-                                int startIndex = str.indexOf("for");
-                                while (startIndex != -1) {
-                                    forCount++;
-                                    startIndex = str.indexOf("for", startIndex + 1);
-                                }
-                                return forCount;
-                            })
-                            .sum();
-                    System.out.println(file.getPath() + " -> " + fors);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            try {
+                int fors = Files.lines(Paths.get(file.getPath()))
+                        .mapToInt(str -> {
+                            int forCount = 0;
+                            int startIndex = str.indexOf("for");
+                            while (startIndex != -1) {
+                                forCount++;
+                                startIndex = str.indexOf("for", startIndex + 1);
+                            }
+                            return forCount;
+                        })
+                        .sum();
+                System.out.println(file.getPath() + " -> " + fors);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         };
     }
@@ -51,7 +47,10 @@ public class DirectoryScanner {
                           if (file.isDirectory()) {
                               executor.submit(scanSubdir(file.getAbsolutePath()));
                           } else {
-                              executor.submit(countForOperators(file));
+                              String fileName = file.getName();
+                              if (fileName.endsWith(".c") || fileName.endsWith(".h")) {
+                                  executor.submit(countForOperators(file));
+                              }
                           }
                       });
             } catch (IOException e) {
