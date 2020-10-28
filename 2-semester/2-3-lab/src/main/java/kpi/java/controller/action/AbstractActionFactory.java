@@ -1,19 +1,20 @@
 package kpi.java.controller.action;
 
+import kpi.java.controller.useractions.ActionType;
 import kpi.java.exception.UnsupportedActionException;
 
 public class AbstractActionFactory {
-    public static Action getActionByNumber(String number) throws UnsupportedActionException {
-        int action;
+    public static Action getActionByNumber(String action) throws UnsupportedActionException {
+        ActionType actionType;
         try {
-            action = Integer.parseInt(number);
-        } catch (NumberFormatException e) {
+            actionType = ActionType.valueOf(action);
+        } catch (IllegalArgumentException e) {
             throw new UnsupportedActionException();
         }
-        switch (action) {
-            case 0:
+        switch (actionType) {
+            case LOGIN:
                 return LoginAction.getAction();
-            case 1: //
+            case REGISTER: //
                 break;
             default:
                 throw new UnsupportedActionException();

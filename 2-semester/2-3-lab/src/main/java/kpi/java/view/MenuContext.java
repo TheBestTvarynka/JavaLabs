@@ -1,24 +1,21 @@
 package kpi.java.view;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class MenuContext implements Menu {
     Scanner input;
-    OutputStream output;
+    PrintStream output;
 
-    public MenuContext(Scanner input, OutputStream output) {
-        this.input = input;
-        this.output = output;
+    public MenuContext(InputStream input, OutputStream output) {
+        this.input = new Scanner(input);
+        this.output = new PrintStream(output);
     }
 
     public void print(String data) {
-        try {
-            output.write(data.getBytes());
-        } catch(IOException e) {
-            // log with logger this error
-        }
+        output.println(data);
     }
 
     public String read() {
@@ -26,12 +23,7 @@ public class MenuContext implements Menu {
     }
 
     public String getAnswer(String data) {
-        try {
-            output.write(data.getBytes());
-            return input.nextLine();
-        } catch(IOException e) {
-            // log with logger this error
-        }
-        return "";
+        output.println(data);
+        return input.nextLine();
     }
 }

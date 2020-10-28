@@ -1,8 +1,8 @@
 package kpi.java.dto;
 
 public class LoginDto {
-    String username;
-    String password;
+    public String username;
+    public String password;
 
     public LoginDto(String username, String password) {
         this.username = username;
