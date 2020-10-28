@@ -1,7 +1,7 @@
 package kpi.java.controller.action;
 
-import kpi.java.view.Menu;
+import kpi.java.view.View;
 
 public interface Action {
-    void execute(Menu menu);
+    void execute(View view);
 }

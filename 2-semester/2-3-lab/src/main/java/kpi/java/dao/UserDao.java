@@ -1,41 +1,76 @@
 package kpi.java.dao;
 
+import kpi.java.entity.User;
+
 import java.sql.*;
+import java.util.Optional;
+import java.util.UUID;
 
 public class UserDao {
-    String findByUsername = "select * from users where username=?";
+    final String findByUsername = "select * from users where username=?";
+    final String addNewUser = "insert into users (id, username, password, full_name, email) values (?, ?, ?, ?, ?)";
+    final String updateUser = "update users set id=?, username=?, password=?, full_name=?, email=? where id=?";
 
-    public void save() {
+    private Connection connection;
 
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
-    public void findByUsername(String username) {
+    public Connection releaseConnection() {
+        Connection connection = this.connection;
+        this.connection = null;
+        return connection;
+    }
+
+    public Optional<User> findByUsername(String username) {
+        User user = null;
         try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Where is your PostgreSQL JDBC Driver? "
-                    + "Include in your library path!");
-            e.printStackTrace();
-            return;
-        }
-        Connection connection;
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:postgresql://127.0.0.1:5432/java_lab", "postgres",
-                    "postgres");
             PreparedStatement pstmt = connection.prepareStatement(findByUsername);
             pstmt.setString(1, username);
             ResultSet res = pstmt.executeQuery();
-            System.out.println("result:");
             while (res.next()) {
-                System.out.println(res.getString("id"));
-                System.out.println(res.getString("username"));
-                System.out.println(res.getString("password"));
-                System.out.println(res.getString("email"));
-                System.out.println(res.getString("full_name"));
+                user = User.builder()
+                        .id(UUID.fromString(res.getString("id")))
+                        .email(res.getString("email"))
+                        .username(res.getString("username"))
+                        .password(res.getString("password"))
+                        .fullName(res.getString("full_name"))
+                        .build();
             }
         } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+        }
+        return user == null ? Optional.empty() : Optional.of(user);
+    }
+
+    public void save(User user) {
+        PreparedStatement pstmt = null;
+        if (user.getId() == null) {
+            // create
+            user.setId(UUID.randomUUID());
+            try {
+                pstmt = connection.prepareStatement(addNewUser);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // update
+            try {
+                pstmt = connection.prepareStatement(updateUser);
+                pstmt.setString(6, user.getId().toString());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            pstmt.setObject(1, user.getId(), java.sql.Types.OTHER);
+            pstmt.setString(2, user.getUsername());
+            pstmt.setString(3, user.getPassword());
+            pstmt.setString(4, user.getFullName());
+            pstmt.setString(5, user.getEmail());
+            pstmt.execute();
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
     }

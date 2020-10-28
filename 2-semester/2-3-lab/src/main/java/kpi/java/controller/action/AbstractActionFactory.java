@@ -14,11 +14,10 @@ public class AbstractActionFactory {
         switch (actionType) {
             case LOGIN:
                 return LoginAction.getAction();
-            case REGISTER: //
-                break;
+            case REGISTER:
+                return RegisterAction.getAction();
             default:
                 throw new UnsupportedActionException();
         }
-        return LoginAction.getAction();
     }
 }

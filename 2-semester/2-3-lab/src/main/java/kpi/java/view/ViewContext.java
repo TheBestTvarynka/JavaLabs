@@ -5,11 +5,11 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class MenuContext implements Menu {
+public class ViewContext implements View {
     Scanner input;
     PrintStream output;
 
-    public MenuContext(InputStream input, OutputStream output) {
+    public ViewContext(InputStream input, OutputStream output) {
         this.input = new Scanner(input);
         this.output = new PrintStream(output);
     }

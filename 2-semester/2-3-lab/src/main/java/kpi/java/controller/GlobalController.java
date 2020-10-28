@@ -5,16 +5,16 @@ import kpi.java.controller.action.Action;
 import kpi.java.controller.useractions.ActionType;
 import kpi.java.controller.useractions.UserActions;
 import kpi.java.exception.UnsupportedActionException;
-import kpi.java.view.Menu;
-import kpi.java.view.MenuContext;
+import kpi.java.view.View;
+import kpi.java.view.ViewContext;
 
 import java.util.Map;
 
 public class GlobalController {
-    Menu menu;
+    View view;
 
     public GlobalController() {
-        this.menu = new MenuContext(System.in, System.out);
+        this.view = new ViewContext(System.in, System.out);
     }
 
     public void run() {
@@ -24,18 +24,18 @@ public class GlobalController {
             user = UserAuthData.getAuthData();
             Map<ActionType, String> actions = UserActions.getActions(user.getRole());
             actions.forEach((key, value) -> {
-                menu.print(key.toString().toLowerCase() + " - " + value);
+                view.print(key.toString().toLowerCase() + " - " + value);
             });
-            String actionId = menu.getAnswer(user.getUsername() + "> ");
+            String actionId = view.getAnswer(user.getUsername() + "> ");
             if (actionId.equals("exit")) {
                 return;
             }
             try {
                 action = AbstractActionFactory.getActionByNumber(actionId.toUpperCase());
-                action.execute(menu);
+                action.execute(view);
             } catch (UnsupportedActionException e) {
-                menu.print(e.getMessage());
-                menu.print("Please, try again");
+                view.print(e.getMessage());
+                view.print("Please, try again");
             }
         }
     }
