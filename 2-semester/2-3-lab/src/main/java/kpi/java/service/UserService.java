@@ -1,6 +1,8 @@
 package kpi.java.service;
 
 import kpi.java.controller.UserAuthData;
+import kpi.java.exception.BadCredentialsException;
+import kpi.java.exception.UnavailableException;
 import kpi.java.utils.SimpleConnectionPool;
 import kpi.java.dao.UserDao;
 import kpi.java.dto.LoginDto;
@@ -20,14 +22,14 @@ public class UserService {
         repository = new UserDao();
     }
 
-    public String login(LoginDto credentials) {
+    public String login(LoginDto credentials) throws BadCredentialsException, UnavailableException {
         Optional<User> user;
         try {
             repository.setConnection(SimpleConnectionPool.getPool().getConnection());
             user = repository.findByUsername(credentials.username);
             SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
         } catch(SQLException e) {
-            return "Sorry, we are temporary unavailable. Please, try later.";
+            throw new UnavailableException();
         }
         if (user.isPresent()) {
             User userData = user.get();
@@ -35,12 +37,12 @@ public class UserService {
                 UserAuthData.setAuthData(userData.getId(), userData.getUsername(), userData.getUserType());
                 return "Login success!";
             }
-            return "Incorrect username or password";
+            throw new BadCredentialsException();
         }
-        return "Incorrect username or password";
+        throw new BadCredentialsException();
     }
 
-    public String register(RegisterDto registerData) throws UserAlreadyExistException {
+    public String register(RegisterDto registerData) throws UserAlreadyExistException, UnavailableException {
         try {
             repository.setConnection(SimpleConnectionPool.getPool().getConnection());
             if (repository.findByUsername(registerData.username).isPresent()) {
@@ -49,7 +51,7 @@ public class UserService {
             repository.save(User.fromRegisterData(registerData));
             SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
         } catch(SQLException e) {
-            return "Sorry, we are temporary unavailable. Please, try later.";
+            throw new UnavailableException();
         }
         return "Register success!";
     }

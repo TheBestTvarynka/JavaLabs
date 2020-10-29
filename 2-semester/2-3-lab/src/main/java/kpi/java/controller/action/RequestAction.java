@@ -32,14 +32,14 @@ public class RequestAction implements Action {
                         new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom),
                         new SimpleDateFormat("dd/MM/yyyy").parse(dateTo)
                 ));
-                view.print(res);
+                view.print(res, "green");
                 break;
             } catch(SQLException e) {
-                view.print(e.getMessage());
+                view.error(e.getMessage());
             } catch(IllegalArgumentException e) {
-                view.print("Wrong room type! Please, try again.");
+                view.error("Wrong room type! Please, try again.");
             } catch(ParseException e) {
-                view.print("Wrong date format! Please, try again.");
+                view.error("Wrong date format! Please, try again.");
             }
         }
     }

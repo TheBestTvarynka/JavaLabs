@@ -34,7 +34,7 @@ public class GlobalController {
                 action = AbstractActionFactory.getActionByNumber(actionId.toUpperCase());
                 action.execute(view);
             } catch (UnsupportedActionException e) {
-                view.print(e.getMessage());
+                view.error(e.getMessage());
                 view.print("Please, try again");
             }
         }

@@ -29,12 +29,12 @@ public class OrderAction implements Action {
                         new SimpleDateFormat("dd/MM/yyyy").parse(dateTo),
                         roomNumber
                 ));
-                view.print(res);
+                view.print(res, "green");
                 break;
             } catch (SQLException | IllegalArgumentException e) {
-                view.print(e.getMessage());
+                view.error(e.getMessage());
             } catch(ParseException e) {
-                view.print("Wrong date format! Please, try again.");
+                view.error("Wrong date format! Please, try again.");
             }
         }
     }

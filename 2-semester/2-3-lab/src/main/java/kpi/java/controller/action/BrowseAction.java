@@ -29,21 +29,21 @@ public class BrowseAction implements Action {
                     param = view.getAnswer("Set order for " + option + ": [asc, desc, none]");
                     options.setOrder(option, param);
                 } catch (IllegalArgumentException e) {
-                    view.print(e.getMessage());
+                    view.error(e.getMessage());
                 }
             } else if (option.equals("status")) {
                 param = view.getAnswer("Set status filter: [available, booked, repair]");
                 try {
                     options.setStatus(param);
                 } catch (IllegalArgumentException e) {
-                    view.print(e.getMessage());
+                    view.error(e.getMessage());
                 }
             } else if (option.equals("type")) {
                 param = view.getAnswer("Set type filter: [room, vip, lux, president]");
                 try {
                     options.setType(param);
                 } catch (IllegalArgumentException e) {
-                    view.print(e.getMessage());
+                    view.error(e.getMessage());
                 }
             } else if (option.equals("done")) {
                 try {
@@ -53,14 +53,14 @@ public class BrowseAction implements Action {
                         System.out.println(room);
                     }
                 } catch (SQLException e) {
-                    view.print(e.getMessage());
+                    view.error(e.getMessage());
                 }
                 String ans = view.getAnswer("Continue browsing? [con/exit]");
                 if (ans.equals("exit")) {
                     break;
                 }
             } else {
-                view.print("Wrong option! Please, try again.");
+                view.error("Wrong option! Please, try again.");
             }
         }
     }

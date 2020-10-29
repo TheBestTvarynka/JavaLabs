@@ -14,16 +14,47 @@ public class ViewContext implements View {
         this.output = new PrintStream(output);
     }
 
-    public void print(String data) {
-        output.println(data);
+    private String colorize(String color) {
+        switch (color) {
+            case "red":
+                return (char) 27 + "[31m";
+            case "blue":
+                return (char) 27 + "[34m";
+//            case "black":
+//                return (char) 27 + "[30m";
+            case "white":
+                return (char) 27 + "[30m";
+            case "yellow":
+                return (char) 27 + "[33m";
+            case "green":
+                return (char) 27 + "[36m";
+        }
+        return (char)27 + "[37m";
     }
 
+    @Override
+    public void print(String data) {
+        output.println(colorize("white") + data);
+    }
+
+    @Override
+    public void print(String data, String color) {
+        output.println(colorize(color) + data);
+    }
+
+    @Override
+    public void error(String error) {
+        output.println(colorize("red") + error);
+    }
+
+    @Override
     public String read() {
         return input.nextLine();
     }
 
+    @Override
     public String getAnswer(String data) {
-        output.println(data);
+        output.println(colorize("white") + data);
         return input.nextLine();
     }
 }

@@ -3,6 +3,7 @@ package kpi.java.controller.action;
 import kpi.java.dto.RegisterDto;
 import kpi.java.exception.BadEmailException;
 import kpi.java.exception.BadUsernameException;
+import kpi.java.exception.UnavailableException;
 import kpi.java.exception.UserAlreadyExistException;
 import kpi.java.service.UserService;
 import kpi.java.utils.Validator;
@@ -36,7 +37,7 @@ public class RegisterAction implements Action {
                     Validator.validateUsername(username);
                     break;
                 } catch (BadUsernameException e) {
-                    view.print(e.getMessage());
+                    view.error(e.getMessage());
                 }
             }
             fullName = view.getAnswer("Type your full name:");
@@ -49,7 +50,7 @@ public class RegisterAction implements Action {
                     Validator.validateEmail(email);
                     break;
                 } catch (BadEmailException e) {
-                    view.print(e.getMessage());
+                    view.error(e.getMessage());
                 }
             }
             while (true) {
@@ -58,14 +59,14 @@ public class RegisterAction implements Action {
                 if (password.equals(repeatPassword)) {
                     break;
                 }
-                view.print("Passwords are not equal");
+                view.error("Passwords are not equal");
             }
             try {
                 result = userService.register(new RegisterDto(username, email, fullName, password));
-                view.print(result);
+                view.print(result, "green");
                 break;
-            } catch (UserAlreadyExistException e) {
-                view.print(e.getMessage());
+            } catch (UserAlreadyExistException | UnavailableException e) {
+                view.error(e.getMessage());
             }
         }
     }
