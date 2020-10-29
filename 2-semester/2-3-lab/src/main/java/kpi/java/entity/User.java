@@ -1,6 +1,7 @@
 package kpi.java.entity;
 
 import kpi.java.dto.RegisterDto;
+import kpi.java.enums.UserType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class User {
     private String password;
     private String fullName;
     private String email;
+    private UserType userType;
 
     public static User fromRegisterData(RegisterDto data) {
         return User.builder()
@@ -22,6 +24,7 @@ public class User {
                 .password(data.password)
                 .fullName(data.fullName)
                 .email(data.email)
+                .userType(UserType.USER)
                 .build();
     }
 }

@@ -1,5 +1,5 @@
 package kpi.java.controller.useractions;
 
 public enum ActionType {
-    LOGIN, LOG_OUT, REGISTER, EXIT, BROWSE
+    LOGIN, LOG_OUT, REGISTER, EXIT, BROWSE, REQUEST
 }

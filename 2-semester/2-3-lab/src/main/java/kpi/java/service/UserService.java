@@ -5,7 +5,6 @@ import kpi.java.dao.SimpleConnectionPool;
 import kpi.java.dao.UserDao;
 import kpi.java.dto.LoginDto;
 import kpi.java.dto.RegisterDto;
-import kpi.java.emun.UserType;
 import kpi.java.entity.User;
 import kpi.java.exception.UserAlreadyExistException;
 
@@ -33,7 +32,7 @@ public class UserService {
         if (user.isPresent()) {
             User userData = user.get();
             if (userData.getPassword().equals(credentials.password)) {
-                UserAuthData.setAuthData(userData.getId(), userData.getUsername(), UserType.USER);
+                UserAuthData.setAuthData(userData.getId(), userData.getUsername(), userData.getUserType());
                 return "Login success!";
             }
             return "Incorrect username or password";

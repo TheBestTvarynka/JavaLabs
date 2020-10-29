@@ -1,6 +1,6 @@
 package kpi.java.controller;
 
-import kpi.java.emun.UserType;
+import kpi.java.enums.UserType;
 
 import java.util.UUID;
 

@@ -16,6 +16,8 @@ public class AbstractActionFactory {
                 return LoginAction.getAction();
             case REGISTER:
                 return RegisterAction.getAction();
+            case REQUEST:
+                return RequestAction.getAction();
             default:
                 throw new UnsupportedActionException();
         }

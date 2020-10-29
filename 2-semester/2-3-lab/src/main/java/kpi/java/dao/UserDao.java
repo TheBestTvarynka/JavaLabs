@@ -1,29 +1,19 @@
 package kpi.java.dao;
 
+import kpi.java.enums.UserType;
 import kpi.java.entity.User;
 
 import java.sql.*;
 import java.util.Optional;
 import java.util.UUID;
 
-public class UserDao {
+public class UserDao extends GeneralDao {
     final String findByUsername = "select * from users where username=?";
     final String addNewUser = "insert into users (id, username, password, full_name, email) values (?, ?, ?, ?, ?)";
     final String updateUser = "update users set id=?, username=?, password=?, full_name=?, email=? where id=?";
 
-    private Connection connection;
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
-    public Connection releaseConnection() {
-        Connection connection = this.connection;
-        this.connection = null;
-        return connection;
-    }
-
     public Optional<User> findByUsername(String username) {
+        Connection connection = getConnection();
         User user = null;
         try {
             PreparedStatement pstmt = connection.prepareStatement(findByUsername);
@@ -36,6 +26,7 @@ public class UserDao {
                         .username(res.getString("username"))
                         .password(res.getString("password"))
                         .fullName(res.getString("full_name"))
+                        .userType(UserType.valueOf(res.getString("role")))
                         .build();
             }
         } catch (SQLException e) {
@@ -45,6 +36,7 @@ public class UserDao {
     }
 
     public void save(User user) {
+        Connection connection = getConnection();
         PreparedStatement pstmt = null;
         if (user.getId() == null) {
             // create

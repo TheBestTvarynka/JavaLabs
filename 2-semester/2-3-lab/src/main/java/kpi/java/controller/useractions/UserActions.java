@@ -1,6 +1,6 @@
 package kpi.java.controller.useractions;
 
-import kpi.java.emun.UserType;
+import kpi.java.enums.UserType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,7 @@ public class UserActions {
         switch (userType) {
             case USER:
                 actions.put(ActionType.LOG_OUT, "log out from your account");
+                actions.put(ActionType.REQUEST, "make a request for rooms");
                 break;
 //            case MANAGER:
 //                break;
@@ -20,7 +21,6 @@ public class UserActions {
             default:
                 actions.put(ActionType.LOGIN, "login into system");
                 actions.put(ActionType.REGISTER, "create new account");
-                actions.put(ActionType.BROWSE, "search for rooms");
                 break;
         }
         return actions;
