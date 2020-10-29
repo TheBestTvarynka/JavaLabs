@@ -18,6 +18,10 @@ public class AbstractActionFactory {
                 return RegisterAction.getAction();
             case REQUEST:
                 return RequestAction.getAction();
+            case ORDER:
+                return OrderAction.getAction();
+            case BROWSE:
+                return BrowseAction.getAction();
             default:
                 throw new UnsupportedActionException();
         }

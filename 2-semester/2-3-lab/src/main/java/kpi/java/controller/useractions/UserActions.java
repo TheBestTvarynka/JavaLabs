@@ -13,6 +13,8 @@ public class UserActions {
             case USER:
                 actions.put(ActionType.LOG_OUT, "log out from your account");
                 actions.put(ActionType.REQUEST, "make a request for rooms");
+                actions.put(ActionType.ORDER, "book the room");
+                actions.put(ActionType.BROWSE, "browse all rooms in our hotel");
                 break;
 //            case MANAGER:
 //                break;
