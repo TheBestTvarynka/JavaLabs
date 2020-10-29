@@ -1,7 +1,13 @@
 package kpi.java.controller.action;
 
+import kpi.java.dto.CreateRequestDto;
+import kpi.java.enums.RoomType;
 import kpi.java.service.RequestService;
 import kpi.java.view.View;
+
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class RequestAction implements Action {
     private static Action action;
@@ -14,7 +20,28 @@ public class RequestAction implements Action {
 
     @Override
     public void execute(View view) {
-
+        while (true) {
+            String roomType = view.getAnswer("Enter room type: [room, vip, lux, president]");
+            String seatNumber = view.getAnswer("Enter seat number:");
+            String dateFrom = view.getAnswer("Enter date from: [dd/MM/yyyy]");
+            String dateTo = view.getAnswer("Enter date to: [dd/MM/yyyy]");
+            try {
+                String res = requestService.createRequest(new CreateRequestDto(
+                        Integer.parseInt(seatNumber),
+                        RoomType.valueOf(roomType.toUpperCase()),
+                        new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom),
+                        new SimpleDateFormat("dd/MM/yyyy").parse(dateTo)
+                ));
+                view.print(res);
+                break;
+            } catch(SQLException e) {
+                view.print(e.getMessage());
+            } catch(IllegalArgumentException e) {
+                view.print("Wrong room type! Please, try again.");
+            } catch(ParseException e) {
+                view.print("Wrong date format! Please, try again.");
+            }
+        }
     }
 
     public static Action getAction() {

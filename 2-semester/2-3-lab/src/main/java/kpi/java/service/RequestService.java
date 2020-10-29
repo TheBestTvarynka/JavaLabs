@@ -3,6 +3,7 @@ package kpi.java.service;
 import kpi.java.dao.RequestDao;
 import kpi.java.dao.RoomDao;
 import kpi.java.dto.CreateOrderDto;
+import kpi.java.dto.CreateRequestDto;
 import kpi.java.utils.SimpleConnectionPool;
 import kpi.java.entity.Room;
 import kpi.java.utils.SelectRoomOptions;
@@ -32,6 +33,17 @@ public class RequestService {
             throw new SQLException("Sorry, we are temporary unavailable. Please, try later.");
         }
         return rooms;
+    }
+
+    public String createRequest(CreateRequestDto createDto) throws SQLException {
+        try {
+            requestRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
+            requestRepository.createRequest(createDto);
+            SimpleConnectionPool.getPool().releaseConnection(requestRepository.releaseConnection());
+        } catch (SQLException e) {
+            throw new SQLException("Sorry, we are temporary unavailable. Please, try later.");
+        }
+        return "All success. Our manager will choose the most suitable room for you.";
     }
 
     public static RequestService getInstance() {
