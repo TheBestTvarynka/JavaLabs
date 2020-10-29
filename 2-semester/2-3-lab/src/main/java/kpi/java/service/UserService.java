@@ -1,7 +1,7 @@
 package kpi.java.service;
 
 import kpi.java.controller.UserAuthData;
-import kpi.java.dao.SimpleConnectionPool;
+import kpi.java.utils.SimpleConnectionPool;
 import kpi.java.dao.UserDao;
 import kpi.java.dto.LoginDto;
 import kpi.java.dto.RegisterDto;
