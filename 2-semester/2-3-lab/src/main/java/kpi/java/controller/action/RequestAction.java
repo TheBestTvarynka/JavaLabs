@@ -2,6 +2,7 @@ package kpi.java.controller.action;
 
 import kpi.java.dto.CreateRequestDto;
 import kpi.java.enums.RoomType;
+import kpi.java.exception.UnavailableException;
 import kpi.java.service.RequestService;
 import kpi.java.view.View;
 
@@ -21,6 +22,7 @@ public class RequestAction implements Action {
     @Override
     public void execute(View view) {
         while (true) {
+            String phone = view.getAnswer("Enter your phone number:");
             String roomType = view.getAnswer("Enter room type: [room, vip, lux, president]");
             String seatNumber = view.getAnswer("Enter seat number:");
             String dateFrom = view.getAnswer("Enter date from: [dd/MM/yyyy]");
@@ -29,12 +31,13 @@ public class RequestAction implements Action {
                 String res = requestService.createRequest(new CreateRequestDto(
                         Integer.parseInt(seatNumber),
                         RoomType.valueOf(roomType.toUpperCase()),
+                        phone,
                         new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom),
                         new SimpleDateFormat("dd/MM/yyyy").parse(dateTo)
                 ));
                 view.print(res, "green");
                 break;
-            } catch(SQLException e) {
+            } catch(UnavailableException e) {
                 view.error(e.getMessage());
             } catch(IllegalArgumentException e) {
                 view.error("Wrong room type! Please, try again.");

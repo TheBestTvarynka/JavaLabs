@@ -4,6 +4,9 @@ import kpi.java.dao.OrderDao;
 import kpi.java.dao.RoomDao;
 import kpi.java.dto.CreateOrderDto;
 import kpi.java.entity.Room;
+import kpi.java.enums.RoomStatus;
+import kpi.java.exception.BookNotFoundException;
+import kpi.java.exception.UnavailableException;
 import kpi.java.utils.SimpleConnectionPool;
 
 import java.sql.SQLException;
@@ -20,22 +23,25 @@ public class OrderService {
         this.roomRepository = new RoomDao();
     }
 
-    public String bookRoom(CreateOrderDto createDto) throws SQLException {
+    public String bookRoom(CreateOrderDto createDto) throws UnavailableException, BookNotFoundException {
         Optional<Room> room;
         try {
             roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
             room = roomRepository.findByRoomNumber(createDto.roomNumber);
+            if (room.isPresent()) {
+                roomRepository.updateStatus(room.get().getId(), RoomStatus.BOOKED);
+            }
             SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
         } catch(SQLException e) {
-            throw new SQLException("Sorry, we are temporary unavailable. Please, try later.");
+            throw new UnavailableException();
         }
-        createDto.room = room.orElseThrow(() -> new SQLException("Wrong room number! Room not found."));
+        createDto.room = room.orElseThrow(BookNotFoundException::new);
         try {
             orderRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
             orderRepository.createOrder(createDto);
             SimpleConnectionPool.getPool().releaseConnection(orderRepository.releaseConnection());
         } catch(SQLException | IllegalArgumentException e) {
-            throw new SQLException("Sorry, we are temporary unavailable. Please, try later.");
+            throw new UnavailableException();
         }
         return "All success! You have two days to pay for the order.";
     }

@@ -1,11 +1,11 @@
 package kpi.java.controller.action;
 
 import kpi.java.entity.Room;
+import kpi.java.exception.UnavailableException;
 import kpi.java.service.RequestService;
 import kpi.java.utils.SelectRoomOptions;
 import kpi.java.view.View;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class BrowseAction implements Action {
@@ -52,7 +52,7 @@ public class BrowseAction implements Action {
                     for (Room room : rooms) {
                         System.out.println(room);
                     }
-                } catch (SQLException e) {
+                } catch (UnavailableException e) {
                     view.error(e.getMessage());
                 }
                 String ans = view.getAnswer("Continue browsing? [con/exit]");

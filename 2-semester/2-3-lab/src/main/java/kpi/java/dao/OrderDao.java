@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class OrderDao extends GeneralDao {
-    private final String addNewOrder = "insert into orders values (?, ?, ?, ?, ?, ?, ?)";
+    private final String addNewOrder = "insert into orders values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public void createOrder(CreateOrderDto createDto) throws SQLException {
         Connection connection = getConnection();
@@ -21,6 +21,8 @@ public class OrderDao extends GeneralDao {
         pstmt.setString(5, createDto.room.getType().name());
         pstmt.setDate(6, new Date(createDto.dateFrom.getTime()));
         pstmt.setDate(7, new Date(createDto.dateTo.getTime()));
+        pstmt.setString(8, createDto.phone);
+        pstmt.setBoolean(9, false);
         pstmt.execute();
     }
 }

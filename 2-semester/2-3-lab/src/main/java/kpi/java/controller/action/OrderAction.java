@@ -1,6 +1,8 @@
 package kpi.java.controller.action;
 
 import kpi.java.dto.CreateOrderDto;
+import kpi.java.exception.BookNotFoundException;
+import kpi.java.exception.UnavailableException;
 import kpi.java.service.OrderService;
 import kpi.java.view.View;
 
@@ -20,6 +22,7 @@ public class OrderAction implements Action {
     @Override
     public void execute(View view) {
         while (true) {
+            String phone = view.getAnswer("Enter your phone number:");
             String roomNumber = view.getAnswer("Enter room number:");
             String dateFrom = view.getAnswer("Enter date from: [dd/MM/yyyy]");
             String dateTo = view.getAnswer("Enter date to: [dd/MM/yyyy]");
@@ -27,11 +30,12 @@ public class OrderAction implements Action {
                 String res = orderService.bookRoom(new CreateOrderDto(
                         new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom),
                         new SimpleDateFormat("dd/MM/yyyy").parse(dateTo),
-                        roomNumber
+                        roomNumber,
+                        phone
                 ));
                 view.print(res, "green");
                 break;
-            } catch (SQLException | IllegalArgumentException e) {
+            } catch (BookNotFoundException | IllegalArgumentException | UnavailableException e) {
                 view.error(e.getMessage());
             } catch(ParseException e) {
                 view.error("Wrong date format! Please, try again.");

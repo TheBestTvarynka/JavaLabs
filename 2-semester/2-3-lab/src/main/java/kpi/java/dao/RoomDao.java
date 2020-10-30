@@ -10,6 +10,7 @@ import java.util.*;
 
 public class RoomDao extends GeneralDao {
     private final String findByNumber = "select * from rooms where number=?";
+    private final String updateStatus = "update rooms set status=? where id=?";
 
     public List<Room> selectRooms(SelectRoomOptions options) throws SQLException {
         StringBuilder queryBuilder = new StringBuilder("select * from rooms");
@@ -81,5 +82,13 @@ public class RoomDao extends GeneralDao {
             );
         }
         return room == null ? Optional.empty() : Optional.of(room);
+    }
+
+    public void updateStatus(UUID roomId, RoomStatus status) throws SQLException {
+        Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement(updateStatus);
+        statement.setString(1, status.name());
+        statement.setObject(2, roomId, Types.OTHER);
+        statement.executeUpdate();
     }
 }

@@ -9,6 +9,7 @@ import java.util.Date;
 public class CreateRequestDto {
     public int seatNumber;
     public RoomType type;
+    public String phone;
     public Date dateFrom;
     public Date dateTo;
 }

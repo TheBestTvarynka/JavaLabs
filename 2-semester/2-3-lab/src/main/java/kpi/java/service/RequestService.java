@@ -2,15 +2,14 @@ package kpi.java.service;
 
 import kpi.java.dao.RequestDao;
 import kpi.java.dao.RoomDao;
-import kpi.java.dto.CreateOrderDto;
 import kpi.java.dto.CreateRequestDto;
+import kpi.java.exception.UnavailableException;
 import kpi.java.utils.SimpleConnectionPool;
 import kpi.java.entity.Room;
 import kpi.java.utils.SelectRoomOptions;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class RequestService {
     private static RequestService requestService;
@@ -23,25 +22,25 @@ public class RequestService {
         roomRepository = new RoomDao();
     }
 
-    public List<Room> selectRooms(SelectRoomOptions options) throws SQLException {
+    public List<Room> selectRooms(SelectRoomOptions options) throws UnavailableException {
         List<Room> rooms;
         try {
             roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
             rooms = roomRepository.selectRooms(options);
             SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
         } catch(SQLException | IllegalArgumentException e) {
-            throw new SQLException("Sorry, we are temporary unavailable. Please, try later.");
+            throw new UnavailableException();
         }
         return rooms;
     }
 
-    public String createRequest(CreateRequestDto createDto) throws SQLException {
+    public String createRequest(CreateRequestDto createDto) throws UnavailableException {
         try {
             requestRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
             requestRepository.createRequest(createDto);
             SimpleConnectionPool.getPool().releaseConnection(requestRepository.releaseConnection());
         } catch (SQLException e) {
-            throw new SQLException("Sorry, we are temporary unavailable. Please, try later.");
+            throw new UnavailableException();
         }
         return "All success. Our manager will choose the most suitable room for you.";
     }

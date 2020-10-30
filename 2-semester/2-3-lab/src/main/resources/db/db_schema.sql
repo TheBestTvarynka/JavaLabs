@@ -24,3 +24,7 @@ create table orders (
     date_from     timestamp not null,
     date_to       timestamp not null
 );
+
+alter table requests add column phone varchar(10);
+alter table orders add column phone varchar(10);
+alter table orders add column paid boolean;
