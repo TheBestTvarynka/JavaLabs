@@ -16,8 +16,9 @@ public class UserActions {
                 actions.put(ActionType.ORDER, "book the room");
                 actions.put(ActionType.BROWSE, "browse all rooms in our hotel");
                 break;
-//            case MANAGER:
-//                break;
+            case MANAGER:
+                actions.put(ActionType.RESOLVE_REQUEST, "choose suitable rooms for requests");
+                break;
 //            case ADMIN:
 //                break;
             default:

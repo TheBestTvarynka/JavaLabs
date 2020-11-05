@@ -22,6 +22,8 @@ public class AbstractActionFactory {
                 return OrderAction.getAction();
             case BROWSE:
                 return BrowseAction.getAction();
+            case RESOLVE_REQUEST:
+                return ResolveRequestAction.getAction();
             default:
                 throw new UnsupportedActionException();
         }

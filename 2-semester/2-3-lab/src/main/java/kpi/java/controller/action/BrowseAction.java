@@ -47,7 +47,7 @@ public class BrowseAction implements Action {
                 }
             } else if (option.equals("done")) {
                 try {
-                    // need to print as table or other pretty view
+                    // need to print as table
                     List<Room> rooms = requestService.selectRooms(options);
                     for (Room room : rooms) {
                         System.out.println(room);

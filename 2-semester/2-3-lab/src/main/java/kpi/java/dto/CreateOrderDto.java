@@ -1,9 +1,11 @@
 package kpi.java.dto;
 
 import kpi.java.entity.Room;
+import lombok.AllArgsConstructor;
 
 import java.util.Date;
 
+@AllArgsConstructor
 public class CreateOrderDto {
     public Date dateFrom;
     public Date dateTo;
