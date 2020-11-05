@@ -3,6 +3,7 @@ package kpi.java.controller.action;
 import kpi.java.entity.Request;
 import kpi.java.exception.NotFoundException;
 import kpi.java.service.RequestService;
+import kpi.java.utils.Formatter;
 import kpi.java.view.View;
 
 import java.sql.SQLException;
@@ -23,23 +24,34 @@ public class ResolveRequestAction implements Action {
             try {
                  requests = requestService.getAllRequests();
             } catch (SQLException | IllegalArgumentException ignored) {
-                view.print("Service temporary unavailable. Please, ");
+                view.print("Service temporary unavailable.");
                 return;
             }
-            for (Request request : requests) {
-                view.print(request.toString());
+            view.print(Formatter.formatRequests(requests));
+            int rId;
+            while (true) {
+                String requestId = view.getAnswer("Enter request id:");
+                try {
+                    rId = Integer.parseInt(requestId);
+                    if (rId >= 0 && rId < requests.size()) {
+                        break;
+                    } else {
+                        view.error("Bad range for id. Please, enter correct id.");
+                    }
+                } catch (NumberFormatException e) {
+                    view.error("id is number. Please, enter correct id.");
+                }
             }
-            String requestId = view.getAnswer("Enter request id:");
             view.print("Now you can browse all rooms. Search for more suitable)");
             BrowseAction.getAction().execute(view);
             String roomNumber = view.getAnswer("Enter room number:");
             try {
-                view.print(requestService.resolveRequest(requestId, roomNumber));
+                view.print(requestService.resolveRequest(requests.get(rId).getId(), roomNumber), "green");
             } catch (SQLException ignored) {
-                view.print("Service temporary unavailable. Please, ");
+                view.error("Service temporary unavailable. Please, ");
                 return;
             } catch (NotFoundException e) {
-                view.print(e.getMessage());
+                view.error(e.getMessage());
             }
             String ans = view.getAnswer("Continue resolving? [y/n]");
             if (ans.equals("n")) break;

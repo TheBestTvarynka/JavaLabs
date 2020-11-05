@@ -60,16 +60,16 @@ public class RequestService {
         return requests;
     }
 
-    public String resolveRequest(String id, String roomNumber) throws SQLException, NotFoundException {
+    public String resolveRequest(UUID id, String roomNumber) throws SQLException, NotFoundException {
         requestRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
         orderRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
         roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
 
-        Optional<Request> request = requestRepository.getById(UUID.fromString(id));
+        Optional<Request> request = requestRepository.getById(id);
         Optional<Room> room = roomRepository.findByRoomNumber(roomNumber);
         if (request.isEmpty()) throw new NotFoundException("Request not found!");
         if (room.isEmpty()) throw new NotFoundException("Room not found!");
-        requestRepository.deleteRequest(UUID.fromString(id));
+        requestRepository.deleteRequest(id);
         Request requestData = request.get();
         Room roomData = room.get();
         orderRepository.createOrder(new CreateOrderDto(

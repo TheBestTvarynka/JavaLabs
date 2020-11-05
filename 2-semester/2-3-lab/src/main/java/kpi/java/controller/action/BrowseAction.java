@@ -3,6 +3,7 @@ package kpi.java.controller.action;
 import kpi.java.entity.Room;
 import kpi.java.exception.UnavailableException;
 import kpi.java.service.RequestService;
+import kpi.java.utils.Formatter;
 import kpi.java.utils.SelectRoomOptions;
 import kpi.java.view.View;
 
@@ -47,11 +48,8 @@ public class BrowseAction implements Action {
                 }
             } else if (option.equals("done")) {
                 try {
-                    // need to print as table
                     List<Room> rooms = requestService.selectRooms(options);
-                    for (Room room : rooms) {
-                        System.out.println(room);
-                    }
+                    view.print(Formatter.formatRooms(rooms));
                 } catch (UnavailableException e) {
                     view.error(e.getMessage());
                 }
