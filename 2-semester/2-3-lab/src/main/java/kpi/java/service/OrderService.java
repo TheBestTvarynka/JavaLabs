@@ -5,8 +5,8 @@ import kpi.java.dao.RoomDao;
 import kpi.java.dto.CreateOrderDto;
 import kpi.java.entity.Room;
 import kpi.java.enums.RoomStatus;
+import kpi.java.exception.AlreadyBookedException;
 import kpi.java.exception.BookNotFoundException;
-import kpi.java.exception.UnavailableException;
 import kpi.java.utils.SimpleConnectionPool;
 
 import java.sql.SQLException;
@@ -24,10 +24,13 @@ public class OrderService {
     }
 
     public String bookRoom(CreateOrderDto createDto)
-            throws SQLException, IllegalArgumentException, BookNotFoundException {
+            throws SQLException, IllegalArgumentException, BookNotFoundException, AlreadyBookedException {
         roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
         Optional<Room> room = roomRepository.findByRoomNumber(createDto.roomNumber);
         if (room.isPresent()) {
+            if (!room.get().getStatus().equals(RoomStatus.AVAILABLE)) {
+                throw new AlreadyBookedException();
+            }
             roomRepository.updateStatus(room.get().getId(), RoomStatus.BOOKED);
         }
         SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());

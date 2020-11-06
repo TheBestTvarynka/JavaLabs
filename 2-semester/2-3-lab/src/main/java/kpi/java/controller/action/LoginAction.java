@@ -2,7 +2,6 @@ package kpi.java.controller.action;
 
 import kpi.java.dto.LoginDto;
 import kpi.java.exception.BadCredentialsException;
-import kpi.java.exception.UnavailableException;
 import kpi.java.service.UserService;
 import kpi.java.view.View;
 

@@ -1,7 +1,6 @@
 package kpi.java.controller.action;
 
 import kpi.java.entity.Room;
-import kpi.java.exception.UnavailableException;
 import kpi.java.service.RequestService;
 import kpi.java.utils.Formatter;
 import kpi.java.utils.SelectRoomOptions;

@@ -6,7 +6,6 @@ import kpi.java.exception.UnavailableException;
 import kpi.java.service.RequestService;
 import kpi.java.view.View;
 
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

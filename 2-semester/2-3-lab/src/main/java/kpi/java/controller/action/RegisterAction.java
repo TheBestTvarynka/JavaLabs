@@ -3,7 +3,6 @@ package kpi.java.controller.action;
 import kpi.java.dto.RegisterDto;
 import kpi.java.exception.BadEmailException;
 import kpi.java.exception.BadUsernameException;
-import kpi.java.exception.UnavailableException;
 import kpi.java.exception.UserAlreadyExistException;
 import kpi.java.service.UserService;
 import kpi.java.utils.Validator;

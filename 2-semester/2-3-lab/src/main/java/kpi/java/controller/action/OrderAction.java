@@ -1,8 +1,8 @@
 package kpi.java.controller.action;
 
 import kpi.java.dto.CreateOrderDto;
+import kpi.java.exception.AlreadyBookedException;
 import kpi.java.exception.BookNotFoundException;
-import kpi.java.exception.UnavailableException;
 import kpi.java.service.OrderService;
 import kpi.java.view.View;
 
@@ -35,7 +35,7 @@ public class OrderAction implements Action {
                 ));
                 view.print(res, "green");
                 break;
-            } catch (BookNotFoundException e) {
+            } catch (BookNotFoundException | AlreadyBookedException e) {
                 view.error(e.getMessage());
             } catch(ParseException e) {
                 view.error("Wrong date format! Please, try again.");
