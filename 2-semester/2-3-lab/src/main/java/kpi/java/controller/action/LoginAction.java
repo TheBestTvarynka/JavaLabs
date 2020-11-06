@@ -6,6 +6,8 @@ import kpi.java.exception.UnavailableException;
 import kpi.java.service.UserService;
 import kpi.java.view.View;
 
+import java.sql.SQLException;
+
 public class LoginAction implements Action {
     private static Action action;
 
@@ -21,8 +23,10 @@ public class LoginAction implements Action {
         String password = view.getAnswer("Type a password:");
         try {
             view.print(userService.login(new LoginDto(username, password)), "green");
-        } catch (BadCredentialsException | UnavailableException e) {
+        } catch (BadCredentialsException e) {
             view.error(e.getMessage());
+        } catch (SQLException ignored) {
+            view.error("Sorry, we are temporary unavailable. Please, try later.");
         }
     }
 

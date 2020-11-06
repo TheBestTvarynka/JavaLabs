@@ -35,10 +35,12 @@ public class OrderAction implements Action {
                 ));
                 view.print(res, "green");
                 break;
-            } catch (BookNotFoundException | IllegalArgumentException | UnavailableException e) {
+            } catch (BookNotFoundException e) {
                 view.error(e.getMessage());
             } catch(ParseException e) {
                 view.error("Wrong date format! Please, try again.");
+            } catch(SQLException | IllegalArgumentException ignored) {
+                view.error("Sorry, we are temporary unavailable. Please, try later.");
             }
         }
     }

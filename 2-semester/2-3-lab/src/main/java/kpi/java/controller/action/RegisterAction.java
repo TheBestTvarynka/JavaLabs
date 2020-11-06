@@ -9,6 +9,8 @@ import kpi.java.service.UserService;
 import kpi.java.utils.Validator;
 import kpi.java.view.View;
 
+import java.sql.SQLException;
+
 public class RegisterAction implements Action {
     private static Action action;
 
@@ -65,8 +67,10 @@ public class RegisterAction implements Action {
                 result = userService.register(new RegisterDto(username, email, fullName, password));
                 view.print(result, "green");
                 break;
-            } catch (UserAlreadyExistException | UnavailableException e) {
+            } catch (UserAlreadyExistException e) {
                 view.error(e.getMessage());
+            } catch (SQLException ignored) {
+                view.error("Sorry, we are temporary unavailable. Please, try later.");
             }
         }
     }

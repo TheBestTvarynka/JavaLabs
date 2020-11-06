@@ -23,26 +23,18 @@ public class OrderService {
         this.roomRepository = new RoomDao();
     }
 
-    public String bookRoom(CreateOrderDto createDto) throws UnavailableException, BookNotFoundException {
-        Optional<Room> room;
-        try {
-            roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-            room = roomRepository.findByRoomNumber(createDto.roomNumber);
-            if (room.isPresent()) {
-                roomRepository.updateStatus(room.get().getId(), RoomStatus.BOOKED);
-            }
-            SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
-        } catch(SQLException e) {
-            throw new UnavailableException();
+    public String bookRoom(CreateOrderDto createDto)
+            throws SQLException, IllegalArgumentException, BookNotFoundException {
+        roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
+        Optional<Room> room = roomRepository.findByRoomNumber(createDto.roomNumber);
+        if (room.isPresent()) {
+            roomRepository.updateStatus(room.get().getId(), RoomStatus.BOOKED);
         }
+        SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
         createDto.room = room.orElseThrow(BookNotFoundException::new);
-        try {
-            orderRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-            orderRepository.createOrder(createDto);
-            SimpleConnectionPool.getPool().releaseConnection(orderRepository.releaseConnection());
-        } catch(SQLException | IllegalArgumentException e) {
-            throw new UnavailableException();
-        }
+        orderRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
+        orderRepository.createOrder(createDto);
+        SimpleConnectionPool.getPool().releaseConnection(orderRepository.releaseConnection());
         return "All success! You have two days to pay for the order.";
     }
 

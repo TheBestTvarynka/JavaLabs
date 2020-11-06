@@ -22,15 +22,11 @@ public class UserService {
         repository = new UserDao();
     }
 
-    public String login(LoginDto credentials) throws BadCredentialsException, UnavailableException {
-        Optional<User> user;
-        try {
-            repository.setConnection(SimpleConnectionPool.getPool().getConnection());
-            user = repository.findByUsername(credentials.username);
-            SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
-        } catch(SQLException e) {
-            throw new UnavailableException();
-        }
+    public String login(LoginDto credentials) throws BadCredentialsException, SQLException {
+        repository.setConnection(SimpleConnectionPool.getPool().getConnection());
+        Optional<User> user = repository.findByUsername(credentials.username);
+        SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
+
         if (user.isPresent()) {
             User userData = user.get();
             if (userData.getPassword().equals(credentials.password)) {
@@ -42,17 +38,13 @@ public class UserService {
         throw new BadCredentialsException();
     }
 
-    public String register(RegisterDto registerData) throws UserAlreadyExistException, UnavailableException {
-        try {
-            repository.setConnection(SimpleConnectionPool.getPool().getConnection());
-            if (repository.findByUsername(registerData.username).isPresent()) {
-                throw new UserAlreadyExistException();
-            }
-            repository.save(User.fromRegisterData(registerData));
-            SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
-        } catch(SQLException e) {
-            throw new UnavailableException();
+    public String register(RegisterDto registerData) throws SQLException, UnavailableException {
+        repository.setConnection(SimpleConnectionPool.getPool().getConnection());
+        if (repository.findByUsername(registerData.username).isPresent()) {
+            throw new UserAlreadyExistException();
         }
+        repository.save(User.fromRegisterData(registerData));
+        SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
         return "Register success!";
     }
 

@@ -7,6 +7,7 @@ import kpi.java.utils.Formatter;
 import kpi.java.utils.SelectRoomOptions;
 import kpi.java.view.View;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class BrowseAction implements Action {
@@ -50,8 +51,8 @@ public class BrowseAction implements Action {
                 try {
                     List<Room> rooms = requestService.selectRooms(options);
                     view.print(Formatter.formatRooms(rooms));
-                } catch (UnavailableException e) {
-                    view.error(e.getMessage());
+                } catch (SQLException | IllegalArgumentException e) {
+                    view.error("Sorry, we are temporary unavailable. Please, try later.");
                 }
                 String ans = view.getAnswer("Continue browsing? [con/exit]");
                 if (ans.equals("exit")) {
