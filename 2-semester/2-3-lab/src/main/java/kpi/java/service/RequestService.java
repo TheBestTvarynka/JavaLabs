@@ -41,7 +41,7 @@ public class RequestService {
     public String createRequest(CreateRequestDto createDto) throws UnavailableException {
         try {
             requestRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-            requestRepository.createRequest(createDto);
+            requestRepository.save(createDto);
             SimpleConnectionPool.getPool().releaseConnection(requestRepository.releaseConnection());
         } catch (SQLException e) {
             throw new UnavailableException();

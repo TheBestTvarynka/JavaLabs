@@ -24,12 +24,12 @@ public class UserService {
 
     public String login(LoginDto credentials) throws BadCredentialsException, SQLException {
         repository.setConnection(SimpleConnectionPool.getPool().getConnection());
-        Optional<User> user = repository.findByUsername(credentials.username);
+        Optional<User> user = repository.findByUsername(credentials.getUsername());
         SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
 
         if (user.isPresent()) {
             User userData = user.get();
-            if (userData.getPassword().equals(credentials.password)) {
+            if (userData.getPassword().equals(credentials.getPassword())) {
                 UserAuthData.setAuthData(userData.getId(), userData.getUsername(), userData.getUserType());
                 return "Login success!";
             }
@@ -40,7 +40,7 @@ public class UserService {
 
     public String register(RegisterDto registerData) throws SQLException, UnavailableException {
         repository.setConnection(SimpleConnectionPool.getPool().getConnection());
-        if (repository.findByUsername(registerData.username).isPresent()) {
+        if (repository.findByUsername(registerData.getUsername()).isPresent()) {
             throw new UserAlreadyExistException();
         }
         repository.save(User.fromRegisterData(registerData));

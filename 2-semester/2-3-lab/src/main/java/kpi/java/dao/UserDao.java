@@ -8,11 +8,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class UserDao extends GeneralDao {
-    final String findByUsername = "select * from users where username=?";
-    final String addNewUser = "insert into users (id, username, password, full_name, email) values (?, ?, ?, ?, ?)";
-    final String updateUser = "update users set id=?, username=?, password=?, full_name=?, email=? where id=?";
-
     public Optional<User> findByUsername(String username) {
+        final String findByUsername = "select * from users where username=?";
         Connection connection = getConnection();
         User user = null;
         try {
@@ -20,14 +17,14 @@ public class UserDao extends GeneralDao {
             pstmt.setString(1, username);
             ResultSet res = pstmt.executeQuery();
             while (res.next()) {
-                user = User.builder()
-                        .id(UUID.fromString(res.getString("id")))
-                        .email(res.getString("email"))
-                        .username(res.getString("username"))
-                        .password(res.getString("password"))
-                        .fullName(res.getString("full_name"))
-                        .userType(UserType.valueOf(res.getString("role")))
-                        .build();
+                user = new User(
+                        UUID.fromString(res.getString("id")),
+                        res.getString("username"),
+                        res.getString("password"),
+                        res.getString("full_name"),
+                        res.getString("email"),
+                        UserType.valueOf(res.getString("role"))
+                );
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,6 +33,8 @@ public class UserDao extends GeneralDao {
     }
 
     public void save(User user) {
+        final String addNewUser = "insert into users (id, username, password, full_name, email) values (?, ?, ?, ?, ?)";
+        final String updateUser = "update users set id=?, username=?, password=?, full_name=?, email=? where id=?";
         Connection connection = getConnection();
         PreparedStatement pstmt = null;
         if (user.getId() == null) {

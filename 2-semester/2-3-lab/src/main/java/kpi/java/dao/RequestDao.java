@@ -11,12 +11,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class RequestDao extends GeneralDao {
-    private final String addNewRequest = "insert into requests values (?, ?, ?, ?, ?, ?)";
-    private final String selectAllRequests = "select * from requests";
-    private final String selectRequestById = "select * from requests where id=?";
-    private final String deleteRequest = "delete from requests where id=?";
-
-    public void createRequest(CreateRequestDto createDto) throws SQLException {
+    public void save(CreateRequestDto createDto) throws SQLException {
+        final String addNewRequest = "insert into requests values (?, ?, ?, ?, ?, ?)";
         Connection connection = getConnection();
         PreparedStatement statement = connection.prepareStatement(addNewRequest);
         statement.setObject(1, UUID.randomUUID(), java.sql.Types.OTHER);
@@ -29,6 +25,7 @@ public class RequestDao extends GeneralDao {
     }
 
     public List<Request> getAll() throws SQLException, IllegalArgumentException {
+        final String selectAllRequests = "select * from requests";
         List<Request> requests = new ArrayList<>();
         Statement statement = getConnection().createStatement();
         ResultSet res = statement.executeQuery(selectAllRequests);
@@ -46,6 +43,7 @@ public class RequestDao extends GeneralDao {
     }
 
     public Optional<Request> getById(UUID id) throws SQLException {
+        final String selectRequestById = "select * from requests where id=?";
         PreparedStatement statement = getConnection().prepareStatement(selectRequestById);
         statement.setObject(1, id, java.sql.Types.OTHER);
         ResultSet res = statement.executeQuery();
@@ -64,6 +62,7 @@ public class RequestDao extends GeneralDao {
     }
 
     public void deleteRequest(UUID id) throws SQLException {
+        final String deleteRequest = "delete from requests where id=?";
         PreparedStatement statement = getConnection().prepareStatement(deleteRequest);
         statement.setObject(1, id, java.sql.Types.OTHER);
         statement.execute();

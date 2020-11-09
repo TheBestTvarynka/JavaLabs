@@ -9,9 +9,8 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class OrderDao extends GeneralDao {
-    private final String addNewOrder = "insert into orders values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
     public void createOrder(CreateOrderDto createDto) throws SQLException {
+        final String addNewOrder = "insert into orders values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = getConnection();
         PreparedStatement pstmt = connection.prepareStatement(addNewOrder);
         pstmt.setObject(1, UUID.randomUUID(), java.sql.Types.OTHER);

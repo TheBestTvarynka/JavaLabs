@@ -2,13 +2,9 @@ package kpi.java.entity;
 
 import kpi.java.dto.RegisterDto;
 import kpi.java.enums.UserType;
-import lombok.Builder;
-import lombok.Data;
 
 import java.util.UUID;
 
-@Data
-@Builder
 public class User {
     private UUID id;
     private String username;
@@ -17,14 +13,51 @@ public class User {
     private String email;
     private UserType userType;
 
+    public User(UUID id, String username, String password, String fullName, String email, UserType userType) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+        this.userType = userType;
+    }
+
     public static User fromRegisterData(RegisterDto data) {
-        return User.builder()
-                .id(data.id)
-                .username(data.username)
-                .password(data.password)
-                .fullName(data.fullName)
-                .email(data.email)
-                .userType(UserType.USER)
-                .build();
+        return new User(
+                data.getId(),
+                data.getUsername(),
+                data.getPassword(),
+                data.getFullName(),
+                data.getEmail(),
+                UserType.USER
+        );
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserType getUserType() {
+        return userType;
     }
 }

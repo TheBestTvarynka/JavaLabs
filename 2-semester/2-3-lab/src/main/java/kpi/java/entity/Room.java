@@ -2,15 +2,9 @@ package kpi.java.entity;
 
 import kpi.java.enums.RoomStatus;
 import kpi.java.enums.RoomType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
 
 import java.util.UUID;
 
-@Data
-@ToString
-@AllArgsConstructor
 public class Room {
     private UUID id;
     private String number;
@@ -18,4 +12,37 @@ public class Room {
     private RoomType type;
     private RoomStatus status;
     private float price;
+
+    public Room(UUID id, String number, int seatNumber, RoomType type, RoomStatus status, float price) {
+        this.id = id;
+        this.number = number;
+        this.seatNumber = seatNumber;
+        this.type = type;
+        this.status = status;
+        this.price = price;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public RoomType getType() {
+        return type;
+    }
+
+    public RoomStatus getStatus() {
+        return status;
+    }
+
+    public float getPrice() {
+        return price;
+    }
 }
