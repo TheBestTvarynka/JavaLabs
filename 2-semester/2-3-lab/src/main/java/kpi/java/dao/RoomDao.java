@@ -9,9 +9,6 @@ import java.sql.*;
 import java.util.*;
 
 public class RoomDao extends GeneralDao {
-    private final String findByNumber = "select * from rooms where number=?";
-    private final String updateStatus = "update rooms set status=? where id=?";
-
     public List<Room> selectRooms(SelectRoomOptions options) throws SQLException {
         StringBuilder queryBuilder = new StringBuilder("select * from rooms");
         Set<RoomType> types = options.getTypes();
@@ -66,6 +63,7 @@ public class RoomDao extends GeneralDao {
     }
 
     public Optional<Room> findByRoomNumber(String roomNumber) throws SQLException, IllegalArgumentException {
+        final String findByNumber = "select * from rooms where number=?";
         Connection connection = getConnection();
         PreparedStatement pstmt = connection.prepareStatement(findByNumber);
         pstmt.setString(1, roomNumber);
@@ -85,6 +83,7 @@ public class RoomDao extends GeneralDao {
     }
 
     public void updateStatus(UUID roomId, RoomStatus status) throws SQLException {
+        final String updateStatus = "update rooms set status=? where id=?";
         Connection connection = getConnection();
         PreparedStatement statement = connection.prepareStatement(updateStatus);
         statement.setString(1, status.name());

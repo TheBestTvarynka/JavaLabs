@@ -8,9 +8,13 @@ import kpi.java.enums.RoomStatus;
 import kpi.java.exception.AlreadyBookedException;
 import kpi.java.exception.BookNotFoundException;
 import kpi.java.utils.SimpleConnectionPool;
+import kpi.java.utils.schedule.DeleteOrderJob;
+import kpi.java.utils.schedule.Scheduler;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 public class OrderService {
     private static OrderService orderService;
@@ -36,8 +40,13 @@ public class OrderService {
         SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
         createDto.room = room.orElseThrow(BookNotFoundException::new);
         orderRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-        orderRepository.createOrder(createDto);
+        UUID id = orderRepository.createOrder(createDto);
         SimpleConnectionPool.getPool().releaseConnection(orderRepository.releaseConnection());
+
+        Date date = new Date();
+        // 2 * 24 * 60 * 60 * 1000 = 172_800_000
+        date.setTime(date.getTime() + 172_800_000L);
+        Scheduler.scheduleJob(new DeleteOrderJob(id), date);
         return "All success! You have two days to pay for the order.";
     }
 
