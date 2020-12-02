@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
+           version="4.0">
+
+<!--    <servlet>-->
+<!--        <servlet-name>LoginPage</servlet-name>-->
+<!--        <jsp-file>/jsp/login.jsp</jsp-file> &lt;!&ndash; Your JSP. Must begin with '/' &ndash;&gt;-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>LoginPage</servlet-name>-->
+<!--        <url-pattern>/login</url-pattern> &lt;!&ndash; Any URL you want here &ndash;&gt;-->
+<!--    </servlet-mapping>-->
+
+<!--    <servlet>-->
+<!--        <servlet-name>RegisterPage</servlet-name>-->
+<!--        <jsp-file>/jsp/register.jsp</jsp-file> &lt;!&ndash; Your JSP. Must begin with '/' &ndash;&gt;-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>RegisterPage</servlet-name>-->
+<!--        <url-pattern>/register</url-pattern> &lt;!&ndash; Any URL you want here &ndash;&gt;-->
+<!--    </servlet-mapping>-->
+</web-app>
