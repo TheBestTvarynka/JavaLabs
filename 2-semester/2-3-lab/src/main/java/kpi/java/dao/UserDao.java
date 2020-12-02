@@ -16,7 +16,7 @@ public class UserDao extends GeneralDao {
             PreparedStatement pstmt = connection.prepareStatement(findByUsername);
             pstmt.setString(1, username);
             ResultSet res = pstmt.executeQuery();
-            while (res.next()) {
+            if (res.next()) {
                 user = new User(
                         UUID.fromString(res.getString("id")),
                         res.getString("username"),

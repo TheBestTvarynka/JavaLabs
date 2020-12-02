@@ -22,10 +22,15 @@ public class UserService {
         repository = new UserDao();
     }
 
-    public String login(LoginDto credentials) throws BadCredentialsException, SQLException {
-        repository.setConnection(SimpleConnectionPool.getPool().getConnection());
-        Optional<User> user = repository.findByUsername(credentials.getUsername());
-        SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
+    public String login(LoginDto credentials) throws BadCredentialsException, UnavailableException {
+        Optional<User> user;
+        try {
+            repository.setConnection(SimpleConnectionPool.getPool().getConnection());
+            user = repository.findByUsername(credentials.getUsername());
+            SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
+        } catch (SQLException ignored) {
+            throw new UnavailableException();
+        }
 
         if (user.isPresent()) {
             User userData = user.get();

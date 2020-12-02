@@ -17,6 +17,7 @@ public class UserActions {
                 actions.put(ActionType.BROWSE, "browse all rooms in our hotel");
                 break;
             case MANAGER:
+                actions.put(ActionType.LOG_OUT, "log out from your account");
                 actions.put(ActionType.RESOLVE_REQUEST, "choose suitable rooms for requests");
                 break;
 //            case ADMIN:

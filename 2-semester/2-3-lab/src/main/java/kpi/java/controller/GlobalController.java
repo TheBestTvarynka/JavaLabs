@@ -1,6 +1,6 @@
 package kpi.java.controller;
 
-import kpi.java.controller.action.AbstractActionFactory;
+import kpi.java.controller.action.ActionFactory;
 import kpi.java.controller.action.Action;
 import kpi.java.controller.useractions.ActionType;
 import kpi.java.controller.useractions.UserActions;
@@ -31,8 +31,7 @@ public class GlobalController {
                 return;
             }
             try {
-                action = AbstractActionFactory.getActionByNumber(actionId.toUpperCase());
-                action.execute(view);
+                ActionFactory.getActionByName(actionId.toUpperCase()).execute(view);
             } catch (UnsupportedActionException e) {
                 view.error(e.getMessage());
                 view.print("Please, try again");

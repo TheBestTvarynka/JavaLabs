@@ -7,6 +7,7 @@ import kpi.java.entity.Room;
 import kpi.java.enums.RoomStatus;
 import kpi.java.exception.AlreadyBookedException;
 import kpi.java.exception.BookNotFoundException;
+import kpi.java.exception.UnavailableException;
 import kpi.java.utils.SimpleConnectionPool;
 import kpi.java.utils.schedule.DeleteOrderJob;
 import kpi.java.utils.schedule.Scheduler;
@@ -28,20 +29,25 @@ public class OrderService {
     }
 
     public String bookRoom(CreateOrderDto createDto)
-            throws SQLException, IllegalArgumentException, BookNotFoundException, AlreadyBookedException {
-        roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-        Optional<Room> room = roomRepository.findByRoomNumber(createDto.roomNumber);
-        if (room.isPresent()) {
-            if (!room.get().getStatus().equals(RoomStatus.AVAILABLE)) {
-                throw new AlreadyBookedException();
+            throws UnavailableException, BookNotFoundException, AlreadyBookedException {
+        UUID id;
+        try {
+            roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
+            Optional<Room> room = roomRepository.findByRoomNumber(createDto.roomNumber);
+            if (room.isPresent()) {
+                if (!room.get().getStatus().equals(RoomStatus.AVAILABLE)) {
+                    throw new AlreadyBookedException();
+                }
+                roomRepository.updateStatus(room.get().getId(), RoomStatus.BOOKED);
             }
-            roomRepository.updateStatus(room.get().getId(), RoomStatus.BOOKED);
+            SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
+            createDto.room = room.orElseThrow(BookNotFoundException::new);
+            orderRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
+            id = orderRepository.createOrder(createDto);
+            SimpleConnectionPool.getPool().releaseConnection(orderRepository.releaseConnection());
+        } catch (SQLException | IllegalArgumentException ignored) {
+            throw new UnavailableException();
         }
-        SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
-        createDto.room = room.orElseThrow(BookNotFoundException::new);
-        orderRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-        UUID id = orderRepository.createOrder(createDto);
-        SimpleConnectionPool.getPool().releaseConnection(orderRepository.releaseConnection());
 
         Date date = new Date();
         // 2 * 24 * 60 * 60 * 1000 = 172_800_000

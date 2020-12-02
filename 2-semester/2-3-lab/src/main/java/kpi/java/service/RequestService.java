@@ -30,11 +30,15 @@ public class RequestService {
         orderRepository = new OrderDao();
     }
 
-    public List<Room> selectRooms(SelectRoomOptions options) throws SQLException, IllegalArgumentException {
+    public List<Room> selectRooms(SelectRoomOptions options) throws UnavailableException, IllegalArgumentException {
         List<Room> rooms;
-        roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-        rooms = roomRepository.selectRooms(options);
-        SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
+        try {
+            roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
+            rooms = roomRepository.selectRooms(options);
+            SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
+        } catch (SQLException ignored) {
+            throw new UnavailableException();
+        }
         return rooms;
     }
 
@@ -43,7 +47,7 @@ public class RequestService {
             requestRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
             requestRepository.save(createDto);
             SimpleConnectionPool.getPool().releaseConnection(requestRepository.releaseConnection());
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             throw new UnavailableException();
         }
         return "All success. Our manager will choose the most suitable room for you.";

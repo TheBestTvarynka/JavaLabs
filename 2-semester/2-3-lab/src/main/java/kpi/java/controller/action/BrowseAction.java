@@ -1,6 +1,7 @@
 package kpi.java.controller.action;
 
 import kpi.java.entity.Room;
+import kpi.java.exception.UnavailableException;
 import kpi.java.service.RequestService;
 import kpi.java.utils.Formatter;
 import kpi.java.utils.SelectRoomOptions;
@@ -50,7 +51,7 @@ public class BrowseAction implements Action {
                 try {
                     List<Room> rooms = requestService.selectRooms(options);
                     view.print(Formatter.formatRooms(rooms));
-                } catch (SQLException | IllegalArgumentException e) {
+                } catch (UnavailableException | IllegalArgumentException e) {
                     view.error("Sorry, we are temporary unavailable. Please, try later.");
                 }
                 String ans = view.getAnswer("Continue browsing? [con/exit]");

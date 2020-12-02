@@ -3,8 +3,8 @@ package kpi.java.controller.action;
 import kpi.java.controller.useractions.ActionType;
 import kpi.java.exception.UnsupportedActionException;
 
-public class AbstractActionFactory {
-    public static Action getActionByNumber(String action) throws UnsupportedActionException {
+public class ActionFactory {
+    public static Action getActionByName(String action) throws UnsupportedActionException {
         ActionType actionType;
         try {
             actionType = ActionType.valueOf(action);
