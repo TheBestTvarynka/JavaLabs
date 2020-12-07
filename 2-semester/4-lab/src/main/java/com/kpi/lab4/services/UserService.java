@@ -20,25 +20,22 @@ public class UserService {
         repository = new UserDao();
     }
 
-    public String login(LoginDto credentials) throws BadCredentialsException, UnavailableException {
+    public User login(LoginDto credentials) throws BadCredentialsException, SQLException {
         Optional<User> user;
-        try {
-            repository.setConnection(SimpleConnectionPool.getPool().getConnection());
-            user = repository.findByUsername(credentials.getUsername());
-            SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
-        } catch (SQLException ignored) {
-            throw new UnavailableException();
-        }
+        repository.setConnection(SimpleConnectionPool.getPool().getConnection());
+        user = repository.findByUsername(credentials.getUsername());
+        SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
 
         if (user.isPresent()) {
             User userData = user.get();
             if (userData.getPassword().equals(credentials.getPassword())) {
-//                UserAuthData.setAuthData(userData.getId(), userData.getUsername(), userData.getUserType());
-                return "Login success!";
+                return userData;
             }
-            throw new BadCredentialsException();
+            return null;
+//            throw new BadCredentialsException();
         }
-        throw new BadCredentialsException();
+//        throw new BadCredentialsException();
+        return null;
     }
 
     public void register(RegisterDto registerData) throws SQLException {

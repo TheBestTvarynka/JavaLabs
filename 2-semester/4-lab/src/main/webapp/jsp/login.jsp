@@ -30,7 +30,7 @@
     }
 </style>
 <body>
-    <form method="post" action="/web_war_exploded/login">
+    <form method="post" action="/Gradle___com_kpi___4_lab_1_0_SNAPSHOT_war/login">
         <%
             ServletContext context = request.getServletContext();
             String message = (String) context.getAttribute("message");

@@ -25,7 +25,7 @@ public class MainServlet extends HttpServlet {
         actions = new HashMap<>();
         actions.put("/home", new HomeAction());
         actions.put("/register", new RegisterAction(new UserService()));
-        actions.put("/login", new LoginAction());
+        actions.put("/login", new LoginAction(new UserService()));
     }
 
     @Override
