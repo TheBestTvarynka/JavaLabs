@@ -5,28 +5,87 @@
 </head>
 <style>
     body {
-        width: 100%;
+        width: calc(100% - 2em);
+        height: calc(100vh - 2em);
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        background: #f6f6f6;
     }
     form {
-        width: 40%;
+        background: white;
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        margin-top: 3em;
-    }
-    span {
-        width: 100%;
-        text-align: center;
         font-size: 20px;
+        width: 35%;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1em;
+        box-shadow: 0 10px 12px -4px grey;
+        border-radius: 1em;
     }
-    label {
+    form label {
+        color: #36333a;
+        font-size: 15px;
         margin-top: 0.5em;
     }
-    button {
+    .title {
+        width: calc(100% - 2em);
+        text-align: center;
+        color: #36333a;
+    }
+    .input {
+        width: calc(100%);
+        font-size: 15px;
+        background: rgb(210, 210, 210);
+        border: none;
+        border-bottom: 3px solid rgb(210, 210, 210);
+        border-radius: 0.3em;
+        padding: 12px 20px;
+    }
+    .input:focus {
+        border-bottom: 3px solid black;
+    }
+    .button {
+        background: black;
+        color: white;
+        border: 1px solid black;
+        border-radius: 0.3em;
+        font-size: 15px;
         margin-top: 1em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        width: calc(100%);
+        transition: 0.2s;
+    }
+    .button:hover {
+        background: rgb(50, 50, 50);
+        cursor: pointer;
+    }
+    .button:active {
+        background: rgb(20, 20, 20);
+    }
+    .button:disabled {
+        background: rgb(50, 50, 50);
+        color: black;
+    }
+    .redirect {
+        background: transparent;
+        border: none;
+        color: black;
+        margin-top: 1em;
+        font-size: 15px;
+        text-decoration: underline;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .error_message {
+        color: red;
+        font-size: 15px;
+    }
+    .info_message {
+        color: cornflowerblue;
+        font-size: 15px;
     }
 </style>
 <body>
@@ -37,36 +96,36 @@
             String error = (String) context.getAttribute("error");
             if (message != null) {
         %>
-            <span><jsp:text>${message}</jsp:text></span>
+            <span class="info_message"><jsp:text>${message}</jsp:text></span>
         <%
             }
             if (error != null) {
         %>
-            <span><jsp:text>${error}</jsp:text></span>
+            <span class="error_message"><jsp:text>${error}</jsp:text></span>
         <%
             }
             context.removeAttribute("message");
             context.removeAttribute("error");
         %>
-        <span>Register</span>
+        <span class="title">Register</span>
 
         <label>Username</label>
-        <input type="text" name="username">
+        <input type="text" name="username" class="input" placeholder="e. g. cap_map">
 
         <label>Full Name</label>
-        <input type="text" name="fullName">
+        <input type="text" name="fullName" class="input" placeholder="Cap Makse">
 
         <label>Email</label>
-        <input type="email" name="email">
+        <input type="email" name="email" class="input" placeholder="cap_map@example.com">
 
         <label>Password</label>
-        <input type="password" name="password">
+        <input type="password" name="password" class="input">
 
         <label>Repeat Password</label>
-        <input type="password" name="password_repeat">
+        <input type="password" name="password_repeat" class="input">
 
-        <button type="submit">Next</button>
-        <a href="/Gradle___com_kpi___4_lab_1_0_SNAPSHOT_war/login">Login</a>
+        <button type="submit" class="button">Next</button>
+        <a href="/Gradle___com_kpi___4_lab_1_0_SNAPSHOT_war/login" class="redirect">Login</a>
     </form>
 </body>
 </html>
