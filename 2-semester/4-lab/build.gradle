@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.kpi'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    runtimeOnly 'org.postgresql:postgresql:42.2.0'
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+}
