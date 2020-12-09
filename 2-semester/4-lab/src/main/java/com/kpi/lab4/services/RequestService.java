@@ -6,6 +6,7 @@ import com.kpi.lab4.dao.RoomDao;
 import com.kpi.lab4.dao.SimpleConnectionPool;
 import com.kpi.lab4.dto.CreateOrderDto;
 import com.kpi.lab4.dto.CreateRequestDto;
+import com.kpi.lab4.dto.Page;
 import com.kpi.lab4.entities.Request;
 import com.kpi.lab4.exception.NotFoundException;
 import com.kpi.lab4.exception.UnavailableException;
@@ -28,16 +29,21 @@ public class RequestService {
         orderRepository = new OrderDao();
     }
 
-    public List<Room> selectRooms(SelectRoomOptions options) throws UnavailableException, IllegalArgumentException {
-        List<Room> rooms;
+    public Page<Room> selectRooms(SelectRoomOptions options) throws UnavailableException, IllegalArgumentException {
+        Page<Room> page;
         try {
             roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-            rooms = roomRepository.selectRooms(options);
+            List<Room> rooms = roomRepository.selectRooms(options);
+            List<Room> sublist = rooms.subList(
+                    (options.getPage() - 1) * options.getOffset(),
+                    options.getPage() * options.getOffset()
+            );
+            page = new Page<>(sublist, options.getPage(), options.getOffset(), rooms.size());
             SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
         } catch (SQLException ignored) {
             throw new UnavailableException();
         }
-        return rooms;
+        return page;
     }
 
     public String createRequest(CreateRequestDto createDto) throws UnavailableException {

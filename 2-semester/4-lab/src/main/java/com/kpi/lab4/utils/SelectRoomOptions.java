@@ -14,6 +14,8 @@ public class SelectRoomOptions {
     private Optional<String> seatOrder = Optional.empty();
     private Set<RoomType> types = new HashSet<>();
     private Set<RoomStatus> statuses = new HashSet<>();
+    private int page = 1;
+    private int offset = 5;
 
     public SelectRoomOptions() {
     }
@@ -30,9 +32,16 @@ public class SelectRoomOptions {
             case "statuses":
                 setStatus(value);
                 break;
+            case "page":
+                setPage(Integer.parseInt(value));
+                break;
             default:
                 break;
         }
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 
     public void setStatus(String s) throws IllegalArgumentException {

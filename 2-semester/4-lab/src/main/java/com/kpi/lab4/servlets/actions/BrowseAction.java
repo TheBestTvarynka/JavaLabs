@@ -1,5 +1,6 @@
 package com.kpi.lab4.servlets.actions;
 
+import com.kpi.lab4.dto.Page;
 import com.kpi.lab4.entities.Room;
 import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.RequestService;
@@ -34,8 +35,8 @@ public class BrowseAction implements Action {
             }
         }
         try {
-            List<Room> rooms = service.selectRooms(options);
-            context.setAttribute("rooms", rooms);
+            Page<Room> page = service.selectRooms(options);
+            context.setAttribute("page", page);
         } catch (IllegalArgumentException ignored) {
             context.setAttribute("error", "Some parameters are incorrect!");
         } catch (UnavailableException ignored) {
