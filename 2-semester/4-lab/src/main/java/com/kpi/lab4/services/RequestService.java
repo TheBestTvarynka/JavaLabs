@@ -34,10 +34,15 @@ public class RequestService {
         try {
             roomRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
             List<Room> rooms = roomRepository.selectRooms(options);
-            List<Room> sublist = rooms.subList(
-                    (options.getPage() - 1) * options.getOffset(),
-                    options.getPage() * options.getOffset()
-            );
+            int from = (options.getPage() - 1) * options.getOffset();
+            if (from >= rooms.size()) {
+                from = rooms.size() - 1;
+            }
+            int to = options.getPage() * options.getOffset();
+            if (to >= rooms.size()) {
+                to = rooms.size();
+            }
+            List<Room> sublist = rooms.subList(from, to);
             page = new Page<>(sublist, options.getPage(), options.getOffset(), rooms.size());
             SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
         } catch (SQLException ignored) {

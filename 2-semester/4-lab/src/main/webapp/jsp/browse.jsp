@@ -192,6 +192,7 @@
                 <%Page<Room> pageData = (Page<Room>)context.getAttribute("page");%>
                 <%List<Room> rooms = pageData.getData();%>
                 <%
+                    System.out.println("size: " + rooms.size());
                     if (rooms == null || rooms.size() < 1) {
                     %>
                         <span>No rooms found :(</span>
