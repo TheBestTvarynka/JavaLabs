@@ -18,6 +18,23 @@ public class SelectRoomOptions {
     public SelectRoomOptions() {
     }
 
+    public void set(String param, String value) {
+        switch (param) {
+            case "seat":
+            case "price":
+                setOrder(param, value);
+                break;
+            case "types":
+                setType(value);
+                break;
+            case "statuses":
+                setStatus(value);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void setStatus(String s) throws IllegalArgumentException {
         try {
             RoomStatus status = RoomStatus.valueOf(s.toUpperCase());

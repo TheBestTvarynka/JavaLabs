@@ -1,10 +1,8 @@
 package com.kpi.lab4.servlets;
 
+import com.kpi.lab4.services.RequestService;
 import com.kpi.lab4.services.UserService;
-import com.kpi.lab4.servlets.actions.Action;
-import com.kpi.lab4.servlets.actions.HomeAction;
-import com.kpi.lab4.servlets.actions.LoginAction;
-import com.kpi.lab4.servlets.actions.RegisterAction;
+import com.kpi.lab4.servlets.actions.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -26,6 +24,7 @@ public class MainServlet extends HttpServlet {
         actions.put("/home", new HomeAction());
         actions.put("/register", new RegisterAction(new UserService()));
         actions.put("/login", new LoginAction(new UserService()));
+        actions.put("/browse", new BrowseAction(new RequestService()));
     }
 
     @Override

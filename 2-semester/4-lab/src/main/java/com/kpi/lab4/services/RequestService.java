@@ -18,13 +18,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class RequestService {
-    private static RequestService requestService;
-
     private RequestDao requestRepository;
     private RoomDao roomRepository;
     private OrderDao orderRepository;
 
-    private RequestService() {
+    public RequestService() {
         requestRepository = new RequestDao();
         roomRepository = new RoomDao();
         orderRepository = new OrderDao();
@@ -84,12 +82,5 @@ public class RequestService {
         SimpleConnectionPool.getPool().releaseConnection(orderRepository.releaseConnection());
         SimpleConnectionPool.getPool().releaseConnection(roomRepository.releaseConnection());
         return "Request closed. Order created.";
-    }
-
-    public static RequestService getInstance() {
-        if (requestService == null) {
-            requestService = new RequestService();
-        }
-        return requestService;
     }
 }
