@@ -29,7 +29,7 @@
         background: #f6f6f6;
         color: #1b191d;
         border: 1px solid #f6f6f6;
-        border-radius: 0.5em;
+        border-radius: 0.1em;
         font-size: 15px;
         margin: 0.25em;
         padding: 0.25em;
@@ -39,6 +39,7 @@
         background: #b1b1b1;
         border: 1px solid #b1b1b1;
         cursor: pointer;
+        border-radius: 0.5em;
     }
     .block {
         display: inline-flex;
