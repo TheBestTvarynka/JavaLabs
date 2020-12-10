@@ -40,6 +40,25 @@
         border: 1px solid #b1b1b1;
         cursor: pointer;
     }
+    .block {
+        display: inline-flex;
+        height: 100%;
+        align-items: center;
+        color: #f6f6f6;
+    }
+    .block a {
+        margin: 0.25em;
+        padding: 0.25em;
+        transition: 0.2s;
+    }
+    .block a:hover {
+        background: #68666a;
+        border-radius: 0.5em;
+    }
+    .block img {
+        height: 50%;
+        width: auto;
+    }
     .page {
         width: 100%;
         display: inline-flex;
@@ -121,10 +140,11 @@
         <a href="${pageContext.request.contextPath}/request" class="header_button">Make request</a>
         <a href="${pageContext.request.contextPath}/order" class="header_button">Make order</a>
     </div>
-    <%String username = (String)request.getSession().getAttribute("username");%>
-    <div>
+    <div class="block">
         <span>${username}</span>
-        <span>LogOut</span>
+        <a href="${pageContext.request.contextPath}/logout">
+            <img src="https://img.icons8.com/android/24/ffffff/logout-rounded.png" alt="LogOut"/>
+        </a>
     </div>
 </div>
 <div class="page">

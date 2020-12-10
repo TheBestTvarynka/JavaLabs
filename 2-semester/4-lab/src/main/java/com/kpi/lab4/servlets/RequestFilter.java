@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/home", "/order", "/request", "/browse", "/"})
+@WebFilter(urlPatterns = {"/home", "/order", "/request", "/browse", "/logout"})
 public class RequestFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

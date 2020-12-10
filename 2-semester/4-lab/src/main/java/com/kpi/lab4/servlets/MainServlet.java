@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "MainServlet", urlPatterns = {"/home", "/browse", "/order", "/register", "/login", "/request"})
+@WebServlet(name = "MainServlet", urlPatterns = {"/home", "/browse", "/order", "/register", "/login", "/request","/logout"})
 public class MainServlet extends HttpServlet {
     private Map<String, Action> actions;
 
@@ -28,11 +28,12 @@ public class MainServlet extends HttpServlet {
         actions.put("/browse", new BrowseAction(new RequestService()));
         actions.put("/request", new RequestAction(new RequestService()));
         actions.put("/order", new OrderAction(new OrderService()));
+        actions.put("/logout", new LogOutAction());
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("In service!");
+        System.out.println("In service! " + req.getServletPath());
         String path = req.getServletPath();
         Action action = actions.get(path);
         if (action != null) {
