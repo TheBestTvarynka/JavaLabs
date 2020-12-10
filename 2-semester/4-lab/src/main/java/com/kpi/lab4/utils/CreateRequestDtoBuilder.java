@@ -36,17 +36,29 @@ public class CreateRequestDtoBuilder {
     }
 
     public CreateRequestDtoBuilder setType(String type) {
-        this.dto.setType(RoomType.valueOf(type));
+        try {
+            this.dto.setType(RoomType.valueOf(type));
+        } catch (IllegalArgumentException ignored) {
+            throw new IllegalArgumentException("Wrong room type name!");
+        }
         return this;
     }
 
     public CreateRequestDtoBuilder setSeatNumber(String number) {
-        this.dto.setSeatNumber(Integer.parseInt(number));
+        try {
+            this.dto.setSeatNumber(Integer.parseInt(number));
+        } catch (NumberFormatException ignored) {
+            throw new IllegalArgumentException("Wrong number of seats!");
+        }
         return this;
     }
 
     public CreateRequestDtoBuilder setPhone(String phone) {
-        this.dto.setPhone(phone);
+        if (phone.matches("^\\d{10}$")) {
+            this.dto.setPhone(phone);
+        } else {
+            throw new IllegalArgumentException("Wrong phone format!");
+        }
         return this;
     }
 

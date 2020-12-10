@@ -37,6 +37,7 @@ public class RequestService {
             int from = (options.getPage() - 1) * options.getOffset();
             if (from >= rooms.size()) {
                 from = rooms.size() - 1;
+                if (from == -1) from = 0;
             }
             int to = options.getPage() * options.getOffset();
             if (to >= rooms.size()) {

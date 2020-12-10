@@ -27,18 +27,18 @@ public class BrowseAction implements Action {
             throws ServletException, IOException {
         SelectRoomOptions options = new SelectRoomOptions();
         Iterator<String> it = request.getParameterNames().asIterator();
-        while (it.hasNext()) {
-            String name = it.next();
-            String[] values = request.getParameterValues(name);
-            for (String value : values) {
-                options.set(name, value);
-            }
-        }
         try {
+            while (it.hasNext()) {
+                String name = it.next();
+                String[] values = request.getParameterValues(name);
+                for (String value : values) {
+                    options.set(name, value);
+                }
+            }
             Page<Room> page = service.selectRooms(options);
             context.setAttribute("page", page);
-        } catch (IllegalArgumentException ignored) {
-            context.setAttribute("error", "Some parameters are incorrect!");
+        } catch (IllegalArgumentException e) {
+            context.setAttribute("error", e.getMessage());
         } catch (UnavailableException ignored) {
             context.setAttribute("error", "Sorry, now we are temporary unavailable.");
         }

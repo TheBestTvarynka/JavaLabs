@@ -175,7 +175,7 @@
         <label>Phone</label>
         <input type="text" name="phone" id="phone" placeholder="e. g. 0987654321" class="input" oninput="checkAll(order)" required>
 
-        <label>Enter room type</label>
+        <label>Enter room number</label>
         <input type="text" name="roomNumber" id="roomNumber" placeholder="e. g. 1-01" class="input" required>
 
         <label>Enter from date</label>

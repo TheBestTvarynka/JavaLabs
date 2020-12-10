@@ -27,19 +27,21 @@ public class RequestAction implements Action {
         } else if (method.equals("POST")) {
             CreateRequestDtoBuilder builder = new CreateRequestDtoBuilder();
             Iterator<String> it = request.getParameterNames().asIterator();
-            while (it.hasNext()) {
-                String name = it.next();
-                String[] values = request.getParameterValues(name);
-                builder.set(name, values[0]);
-            }
             try {
+                while (it.hasNext()) {
+                    String name = it.next();
+                    String[] values = request.getParameterValues(name);
+                    builder.set(name, values[0]);
+                }
                 service.createRequest(builder.build());
                 context.setAttribute(
                         "message",
                         "All success. Our manager will choose the most suitable room for you."
                 );
-            } catch (SQLException | IllegalArgumentException ignored) {
+            } catch (SQLException ignored) {
                 context.setAttribute("error", "Sorry, now we are temporary unavailable.");
+            } catch(IllegalArgumentException e) {
+                context.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("/jsp/request.jsp").forward(request, response);
         } else {

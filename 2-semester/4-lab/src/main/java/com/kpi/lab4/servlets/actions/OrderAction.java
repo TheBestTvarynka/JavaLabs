@@ -29,18 +29,17 @@ public class OrderAction implements Action {
         } else if (method.equals("POST")) {
             CreateOrderDtoBuilder builder = new CreateOrderDtoBuilder();
             Iterator<String> it = request.getParameterNames().asIterator();
-            while (it.hasNext()) {
-                String name = it.next();
-                String[] values = request.getParameterValues(name);
-                builder.set(name, values[0]);
-            }
-            System.out.println(builder.build());
             try {
+                while (it.hasNext()) {
+                    String name = it.next();
+                    String[] values = request.getParameterValues(name);
+                    builder.set(name, values[0]);
+                }
                 service.bookRoom(builder.build());
                 context.setAttribute("message", "All success! You have two days to pay for the order.");
-            } catch(SQLException | IllegalArgumentException e) {
+            } catch(SQLException ignored) {
                 context.setAttribute("error", "Sorry, now we are temporary unavailable.");
-            } catch (AlreadyBookedException | BookNotFoundException e) {
+            } catch (AlreadyBookedException | BookNotFoundException | IllegalArgumentException e) {
                 context.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);

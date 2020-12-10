@@ -83,14 +83,21 @@
     .search {
         width: 100%;
         margin-top: 1em;
-        display: inline-flex;
-        justify-content: space-around;
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
         flex-wrap: wrap;
         border: 2px solid #4f4b55;
         border-radius: 0.25em;
         padding: 0.5em;
         box-shadow: 0 10px 12px -4px grey;
+    }
+    .search_block {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
     }
     .options {
         display: flex;
@@ -163,6 +170,14 @@
         cursor: pointer;
         border: 2px solid #4f4b55;
     }
+    .error_message {
+        color: red;
+        font-size: 15px;
+    }
+    .info_message {
+        color: cornflowerblue;
+        font-size: 15px;
+    }
 </style>
 <body>
     <div class="header">
@@ -181,147 +196,153 @@
     <div class="page">
         <div class="content">
             <form class="search">
-                <div>
-                    <label for="priceOrder">Price order</label>
-                    <select name="price" id="priceOrder">
-                        <c:choose>
-                            <c:when test="${param.priceOrder=='asc'}">
-                                <option value="asc" selected>Asc</option>
-                                <option value="desc">Desc</option>
-                                <option value="none">None</option>
-                            </c:when>
-                            <c:when test="${param.priceOrder=='desc'}">
-                                <option value="asc">Asc</option>
-                                <option value="desc" selected>Desc</option>
-                                <option value="none">None</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="none">None</option>
-                                <option value="asc">Asc</option>
-                                <option value="desc">Desc</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </select>
-                </div>
-                <div>
-                    <label for="seats">Seat order</label>
-                    <select name="seats" id="seats">
-                        <c:choose>
-                            <c:when test="${param.seats=='asc'}">
-                                <option value="asc" selected>Asc</option>
-                                <option value="desc">Desc</option>
-                                <option value="none">None</option>
-                            </c:when>
-                            <c:when test="${param.seats=='desc'}">
-                                <option value="asc">Asc</option>
-                                <option value="desc" selected>Desc</option>
-                                <option value="none">None</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="none" selected>None</option>
-                                <option value="asc">Asc</option>
-                                <option value="desc">Desc</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </select>
-                </div>
-                <div class="options">
-                    <c:set var="types" value="${fn:join(paramValues.get('types'), '-')}"/>
-                    <label>
-                        <c:choose>
-                            <c:when test="${fn:contains(types, 'ROOM')}">
-                                <input type="checkbox" value="ROOM" checked name="types">
-                            </c:when>
-                            <c:otherwise>
-                                <input type="checkbox" value="ROOM" name="types">
-                            </c:otherwise>
-                        </c:choose>
-                        <span>Room</span>
-                    </label>
-                    <label>
-                        <c:choose>
-                            <c:when test="${fn:contains(types, 'VIP')}">
-                                <input type="checkbox" value="VIP" name="types" checked>
-                            </c:when>
-                            <c:otherwise>
-                                <input type="checkbox" value="VIP" name="types">
-                            </c:otherwise>
-                        </c:choose>
-                        <span>Vip</span>
-                    </label>
-                    <label>
-                        <c:choose>
-                            <c:when test="${fn:contains(types, 'LUX')}">
-                                <input type="checkbox" value="LUX" name="types" checked>
-                            </c:when>
-                            <c:otherwise>
-                                <input type="checkbox" value="LUX" name="types">
-                            </c:otherwise>
-                        </c:choose>
-                        <span>Lux</span>
-                    </label>
-                    <label>
-                        <c:choose>
-                            <c:when test="${fn:contains(types, 'PRESIDENT')}">
-                                <input type="checkbox" value="PRESIDENT" name="types" checked>
-                            </c:when>
-                            <c:otherwise>
-                                <input type="checkbox" value="PRESIDENT" name="types">
-                            </c:otherwise>
-                        </c:choose>
-                        <span>President</span>
-                    </label>
-                </div>
-                <div class="options">
-                    <c:set var="statuses" value="${fn:join(paramValues.get('statuses'), '-')}"/>
-                    <label>
-                        <c:choose>
-                            <c:when test="${fn:contains(statuses, 'AVAILABLE')}">
-                                <input type="checkbox" value="AVAILABLE" checked name="statuses">
-                            </c:when>
-                            <c:otherwise>
-                                <input type="checkbox" value="AVAILABLE" name="statuses">
-                            </c:otherwise>
-                        </c:choose>
-                        <span>Available</span>
-                    </label>
-                    <label>
-                        <c:choose>
-                            <c:when test="${fn:contains(statuses, 'REPAIR')}">
-                                <input type="checkbox" value="REPAIR" name="statuses" checked>
-                            </c:when>
-                            <c:otherwise>
-                                <input type="checkbox" value="REPAIR" name="statuses">
-                            </c:otherwise>
-                        </c:choose>
-                        <span>Repair</span>
-                    </label>
-                    <label>
-                        <c:choose>
-                            <c:when test="${fn:contains(statuses, 'BOOKED')}">
-                                <input type="checkbox" value="BOOKED" name="statuses" checked>
-                            </c:when>
-                            <c:otherwise>
-                                <input type="checkbox" value="BOOKED" name="statuses">
-                            </c:otherwise>
-                        </c:choose>
-                        <span>Booked</span>
-                    </label>
+                <c:set var="error" value="${applicationScope.get('error')}" scope="request"/>
+                <c:set var="error1" value="${requestScope.get('error')}" scope="request"/>
+                <span class="error_message">${error1}</span>
+                <c:set var="message" value="${applicationScope.get('message')}" scope="request"/>
+                <c:set var="message1" value="${requestScope.get('message')}" scope="request"/>
+                <span class="info_message">${message1}</span>
+                <c:remove var="error"/>
+                <c:remove var="message"/>
+                <div class="search_block">
+                    <div>
+                        <label for="priceOrder">Price order</label>
+                        <select name="price" id="priceOrder">
+                            <c:choose>
+                                <c:when test="${param.priceOrder=='asc'}">
+                                    <option value="asc" selected>Asc</option>
+                                    <option value="desc">Desc</option>
+                                    <option value="none">None</option>
+                                </c:when>
+                                <c:when test="${param.priceOrder=='desc'}">
+                                    <option value="asc">Asc</option>
+                                    <option value="desc" selected>Desc</option>
+                                    <option value="none">None</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="none">None</option>
+                                    <option value="asc">Asc</option>
+                                    <option value="desc">Desc</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="seats">Seat order</label>
+                        <select name="seats" id="seats">
+                            <c:choose>
+                                <c:when test="${param.seats=='asc'}">
+                                    <option value="asc" selected>Asc</option>
+                                    <option value="desc">Desc</option>
+                                    <option value="none">None</option>
+                                </c:when>
+                                <c:when test="${param.seats=='desc'}">
+                                    <option value="asc">Asc</option>
+                                    <option value="desc" selected>Desc</option>
+                                    <option value="none">None</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="none" selected>None</option>
+                                    <option value="asc">Asc</option>
+                                    <option value="desc">Desc</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </select>
+                    </div>
+                    <div class="options">
+                        <c:set var="types" value="${fn:join(paramValues.get('types'), '-')}"/>
+                        <label>
+                            <c:choose>
+                                <c:when test="${fn:contains(types, 'ROOM')}">
+                                    <input type="checkbox" value="ROOM" checked name="types">
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" value="ROOM" name="types">
+                                </c:otherwise>
+                            </c:choose>
+                            <span>Room</span>
+                        </label>
+                        <label>
+                            <c:choose>
+                                <c:when test="${fn:contains(types, 'VIP')}">
+                                    <input type="checkbox" value="VIP" name="types" checked>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" value="VIP" name="types">
+                                </c:otherwise>
+                            </c:choose>
+                            <span>Vip</span>
+                        </label>
+                        <label>
+                            <c:choose>
+                                <c:when test="${fn:contains(types, 'LUX')}">
+                                    <input type="checkbox" value="LUX" name="types" checked>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" value="LUX" name="types">
+                                </c:otherwise>
+                            </c:choose>
+                            <span>Lux</span>
+                        </label>
+                        <label>
+                            <c:choose>
+                                <c:when test="${fn:contains(types, 'PRESIDENT')}">
+                                    <input type="checkbox" value="PRESIDENT" name="types" checked>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" value="PRESIDENT" name="types">
+                                </c:otherwise>
+                            </c:choose>
+                            <span>President</span>
+                        </label>
+                    </div>
+                    <div class="options">
+                        <c:set var="statuses" value="${fn:join(paramValues.get('statuses'), '-')}"/>
+                        <label>
+                            <c:choose>
+                                <c:when test="${fn:contains(statuses, 'AVAILABLE')}">
+                                    <input type="checkbox" value="AVAILABLE" checked name="statuses">
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" value="AVAILABLE" name="statuses">
+                                </c:otherwise>
+                            </c:choose>
+                            <span>Available</span>
+                        </label>
+                        <label>
+                            <c:choose>
+                                <c:when test="${fn:contains(statuses, 'REPAIR')}">
+                                    <input type="checkbox" value="REPAIR" name="statuses" checked>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" value="REPAIR" name="statuses">
+                                </c:otherwise>
+                            </c:choose>
+                            <span>Repair</span>
+                        </label>
+                        <label>
+                            <c:choose>
+                                <c:when test="${fn:contains(statuses, 'BOOKED')}">
+                                    <input type="checkbox" value="BOOKED" name="statuses" checked>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" value="BOOKED" name="statuses">
+                                </c:otherwise>
+                            </c:choose>
+                            <span>Booked</span>
+                        </label>
+                    </div>
                 </div>
                 <button type="submit" class="button">Search</button>
             </form>
             <div class="result">
-                <%Page<Room> pageData = (Page<Room>)request.getServletContext().getAttribute("page");%>
-                <%List<Room> rooms = pageData.getData();%>
+                <%Page<Room> pageData = (Page<Room>)request.getServletContext().getAttribute("page");
+                if (pageData == null || pageData.getData().size() < 1) {%>
+                    <span>No rooms found :(</span>
                 <%
-                    System.out.println("size: " + rooms.size());
-                    if (rooms == null || rooms.size() < 1) {
-                    %>
-                        <span>No rooms found :(</span>
-                    <%
-                    } else {
-                    %>
-                    <%for (Room room: rooms) {%>
+                } else {
+                    List<Room> rooms = pageData.getData();
+                    for (Room room: rooms) {%>
                         <div class="room">
                             <span><%=room.getNumber()%></span>
                             <span><%=room.getType()%></span>
@@ -334,18 +355,24 @@
             </div>
             <div class="pagination">
                 <%
-                    int pages = (int) Math.ceil((pageData.getCount() + 0.0) / pageData.getOffset());
-                    int pageN = pageData.getPage();
-                    String query =request.getQueryString();
-                    if (query != null) {
-                        int pageIndex = query.indexOf("page=");
-                        if (pageIndex != -1) {
-                            query = query.substring(0, pageIndex + 5);
+                    System.out.println("pageData: " + pageData);
+                    int pages = 1;
+                    int pageN = 1;
+                    String query = "";
+                    if (pageData != null) {
+                        pages = (int) Math.ceil((pageData.getCount() + 0.0) / pageData.getOffset());
+                        pageN = pageData.getPage();
+                        query = request.getQueryString();
+                        if (query != null) {
+                            int pageIndex = query.indexOf("page=");
+                            if (pageIndex != -1) {
+                                query = query.substring(0, pageIndex + 5);
+                            } else {
+                                query += "&page=";
+                            }
                         } else {
-                            query += "&page=";
+                            query = "page=";
                         }
-                    } else {
-                        query = "page=";
                     }
                 %>
                 <%if (pageN != 1) {%>
@@ -360,7 +387,9 @@
                 <%}%>
                 <%if (pageN != pages) {%>
                 <a class="pag_item" href=<%="/Gradle___com_kpi___4_lab_1_0_SNAPSHOT_war/browse?" + query + (pageN + 1)%>>&gt;</a>
-                <%}%>
+                <%}
+                request.getServletContext().removeAttribute("page");
+                %>
             </div>
         </div>
     </div>

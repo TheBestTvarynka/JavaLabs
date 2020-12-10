@@ -32,7 +32,11 @@ public class CreateOrderDtoBuilder {
     }
 
     public CreateOrderDtoBuilder setPhone(String phone) {
-        this.dto.setPhone(phone);
+        if (phone.matches("^\\d{10}$")) {
+            this.dto.setPhone(phone);
+        } else {
+            throw new IllegalArgumentException("Wrong phone format!");
+        }
         return this;
     }
 
