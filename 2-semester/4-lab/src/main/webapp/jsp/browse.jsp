@@ -16,7 +16,6 @@
     body {
         color: #1b191d;
         width: 100%;
-        height: 100%;
         display: flex;
         flex-direction: column;
         padding: 0;
@@ -29,13 +28,28 @@
         z-index: 3;
         background: #4f4b55;
         display: inline-flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .header_button {
+        background: #f6f6f6;
+        color: #1b191d;
+        border: 1px solid #f6f6f6;
+        border-radius: 0.5em;
+        font-size: 15px;
+        margin: 0.25em;
+        padding: 0.25em;
+        transition: 0.2s;
+    }
+    .header_button:hover {
+        background: #b1b1b1;
+        border: 1px solid #b1b1b1;
+        cursor: pointer;
     }
     .header span {
         margin: 0.5em;
     }
     .page {
-        /*height: calc(100% - 3em);*/
         width: 100%;
         display: inline-flex;
         justify-content: center;
@@ -133,9 +147,16 @@
 <body>
     <%ServletContext context = request.getServletContext();%>
     <div class="header">
+        <div>
+            <a href="${pageContext.request.contextPath}/browse" class="header_button">Browse</a>
+            <a href="${pageContext.request.contextPath}/request" class="header_button">Make request</a>
+            <a href="${pageContext.request.contextPath}/order" class="header_button">Make order</a>
+        </div>
         <%String username = (String)request.getSession().getAttribute("username");%>
-        <span>${username}</span>
-        <span>LogOut</span>
+        <div>
+            <span>${username}</span>
+            <span>LogOut</span>
+        </div>
     </div>
     <div class="page">
         <div class="content">

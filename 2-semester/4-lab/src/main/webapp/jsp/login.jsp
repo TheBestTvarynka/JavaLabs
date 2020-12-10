@@ -89,7 +89,7 @@
     }
 </style>
 <body>
-    <form method="post" action="/Gradle___com_kpi___4_lab_1_0_SNAPSHOT_war/login">
+    <form method="post" action="${pageContext.request.contextPath}/login">
         <%
             ServletContext context = request.getServletContext();
             String message = (String) context.getAttribute("message");
@@ -113,7 +113,7 @@
         <label>Password</label>
         <input type="password" name="password" id="password" placeholder="Enter password" class="input">
         <button type="submit" class="button">Next</button>
-        <a href="/Gradle___com_kpi___4_lab_1_0_SNAPSHOT_war/register" class="redirect">Register</a>
+        <a href="${pageContext.request.contextPath}/register" class="redirect">Register</a>
     </form>
 </body>
 </html>

@@ -45,7 +45,7 @@ public class LoginAction implements Action {
                     session.setAttribute("role", user.getUserType());
                     // 7200 = 60 * 60 * 2 = 2 hours
                     session.setMaxInactiveInterval(7200);
-                    request.getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/request");
                 } else {
                     context.setAttribute("error", "Incorrect username or password.");
                     request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);

@@ -16,11 +16,11 @@ public class RequestDao extends GeneralDao {
         Connection connection = getConnection();
         PreparedStatement statement = connection.prepareStatement(addNewRequest);
         statement.setObject(1, UUID.randomUUID(), java.sql.Types.OTHER);
-        statement.setInt(2, createDto.seatNumber);
-        statement.setString(3, createDto.type.name());
-        statement.setDate(4, new Date(createDto.dateFrom.getTime()));
-        statement.setDate(5, new Date(createDto.dateTo.getTime()));
-        statement.setString(6, createDto.phone);
+        statement.setInt(2, createDto.getSeatNumber());
+        statement.setString(3, createDto.getType().name());
+        statement.setDate(4, new Date(createDto.getDateFrom().getTime()));
+        statement.setDate(5, new Date(createDto.getDateTo().getTime()));
+        statement.setString(6, createDto.getPhone());
         statement.execute();
     }
 

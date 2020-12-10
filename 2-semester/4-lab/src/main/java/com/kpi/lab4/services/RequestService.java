@@ -51,15 +51,10 @@ public class RequestService {
         return page;
     }
 
-    public String createRequest(CreateRequestDto createDto) throws UnavailableException {
-        try {
-            requestRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
-            requestRepository.save(createDto);
-            SimpleConnectionPool.getPool().releaseConnection(requestRepository.releaseConnection());
-        } catch (SQLException | IllegalArgumentException e) {
-            throw new UnavailableException();
-        }
-        return "All success. Our manager will choose the most suitable room for you.";
+    public void createRequest(CreateRequestDto createDto) throws SQLException, IllegalArgumentException {
+        requestRepository.setConnection(SimpleConnectionPool.getPool().getConnection());
+        requestRepository.save(createDto);
+        SimpleConnectionPool.getPool().releaseConnection(requestRepository.releaseConnection());
     }
 
     public List<Request> getAllRequests() throws SQLException, IllegalArgumentException {
