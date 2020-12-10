@@ -16,12 +16,12 @@ public class OrderDao extends GeneralDao {
         PreparedStatement pstmt = connection.prepareStatement(addNewOrder);
         pstmt.setObject(1, id, java.sql.Types.OTHER);
         pstmt.setDate(2, new Date(new java.util.Date().getTime()));
-        pstmt.setFloat(3, createDto.room.getPrice());
-        pstmt.setString(4, createDto.room.getNumber());
-        pstmt.setString(5, createDto.room.getType().name());
-        pstmt.setDate(6, new Date(createDto.dateFrom.getTime()));
-        pstmt.setDate(7, new Date(createDto.dateTo.getTime()));
-        pstmt.setString(8, createDto.phone);
+        pstmt.setFloat(3, createDto.getRoom().getPrice());
+        pstmt.setString(4, createDto.getRoom().getNumber());
+        pstmt.setString(5, createDto.getRoom().getType().name());
+        pstmt.setDate(6, new Date(createDto.getDateFrom().getTime()));
+        pstmt.setDate(7, new Date(createDto.getDateTo().getTime()));
+        pstmt.setString(8, createDto.getPhone());
         pstmt.setBoolean(9, false);
         pstmt.execute();
         return id;

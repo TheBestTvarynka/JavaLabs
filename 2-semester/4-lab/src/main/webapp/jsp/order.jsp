@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Request</title>
+    <title>Order</title>
 </head>
 <style>
     a {
@@ -128,7 +128,7 @@
     </div>
 </div>
 <div class="page">
-    <form method="post" action="${pageContext.request.contextPath}/request">
+    <form method="post" action="${pageContext.request.contextPath}/order">
         <%
             ServletContext context = request.getServletContext();
             String message = (String) context.getAttribute("message");
@@ -146,16 +146,13 @@
             context.removeAttribute("message");
             context.removeAttribute("error");
         %>
-        <span class="title">Create new request</span>
+        <span class="title">Create new order</span>
 
         <label>Phone</label>
         <input type="text" name="phone" id="phone" placeholder="e. g. 0987654321" class="input">
 
         <label>Enter room type</label>
-        <input type="text" name="type" id="type" placeholder="e. g. LUX" class="input">
-
-        <label>Enter seat number</label>
-        <input type="number" name="seatNumber" id="seatNumber" placeholder="seat number" class="input" min="1">
+        <input type="text" name="roomNumber" id="roomNumber" placeholder="e. g. 1-01" class="input">
 
         <label>Enter from date</label>
         <input type="date" name="dateFrom" id="dateFrom" class="input">

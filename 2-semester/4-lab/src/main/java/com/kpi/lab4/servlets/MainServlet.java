@@ -1,5 +1,6 @@
 package com.kpi.lab4.servlets;
 
+import com.kpi.lab4.services.OrderService;
 import com.kpi.lab4.services.RequestService;
 import com.kpi.lab4.services.UserService;
 import com.kpi.lab4.servlets.actions.*;
@@ -26,6 +27,7 @@ public class MainServlet extends HttpServlet {
         actions.put("/login", new LoginAction(new UserService()));
         actions.put("/browse", new BrowseAction(new RequestService()));
         actions.put("/request", new RequestAction(new RequestService()));
+        actions.put("/order", new OrderAction(new OrderService()));
     }
 
     @Override
