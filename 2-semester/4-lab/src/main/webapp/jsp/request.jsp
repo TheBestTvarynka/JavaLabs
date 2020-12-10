@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>Request</title>
+    <link href="<c:url value="/css/forms.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/header.css" />" rel="stylesheet">
 </head>
 <style>
     a {
@@ -15,51 +17,6 @@
         display: flex;
         flex-direction: column;
         background: #f6f6f6;
-    }
-    .header {
-        height: 3em;
-        width: 100%;
-        box-shadow: 0 4px 10px -6px grey;
-        z-index: 3;
-        background: #4f4b55;
-        display: inline-flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .header_button {
-        background: #f6f6f6;
-        color: #1b191d;
-        border: 1px solid #f6f6f6;
-        border-radius: 0.1em;
-        font-size: 15px;
-        margin: 0.25em;
-        padding: 0.25em;
-        transition: 0.2s;
-    }
-    .header_button:hover {
-        background: #b1b1b1;
-        border: 1px solid #b1b1b1;
-        cursor: pointer;
-        border-radius: 0.5em;
-    }
-    .block {
-        display: inline-flex;
-        height: 100%;
-        align-items: center;
-        color: #f6f6f6;
-    }
-    .block a {
-        margin: 0.25em;
-        padding: 0.25em;
-        transition: 0.2s;
-    }
-    .block a:hover {
-        background: #68666a;
-        border-radius: 0.5em;
-    }
-    .block img {
-        height: 50%;
-        width: auto;
     }
     .page {
         width: 100%;
@@ -90,60 +47,6 @@
         text-align: center;
         font-size: 20px;
         color: #1b191d;
-    }
-    .input {
-        width: calc(100%);
-        font-size: 15px;
-        background: rgb(210, 210, 210);
-        border: none;
-        border-bottom: 3px solid rgb(210, 210, 210);
-        border-radius: 0.3em;
-        padding: 12px 20px;
-    }
-    .input:focus {
-        border-bottom: 3px solid black;
-    }
-    .input_error {
-        font-size: 15px;
-        background: #eb624d;
-        border: none;
-        border-bottom: 3px solid #eb624d;
-        border-radius: 5px;
-        padding: 12px 20px;
-    }
-    .input_error:focus {
-        border-bottom: 3px solid #bd3635;
-    }
-    .button {
-        background: black;
-        color: white;
-        border: 1px solid black;
-        border-radius: 0.3em;
-        font-size: 15px;
-        margin-top: 1em;
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
-        width: calc(100%);
-        transition: 0.2s;
-    }
-    .button:hover {
-        background: rgb(50, 50, 50);
-        cursor: pointer;
-    }
-    .button:active {
-        background: rgb(20, 20, 20);
-    }
-    .button:disabled {
-        background: rgb(50, 50, 50);
-        color: black;
-    }
-    .error_message {
-        color: red;
-        font-size: 15px;
-    }
-    .info_message {
-        color: cornflowerblue;
-        font-size: 15px;
     }
 </style>
 <body>

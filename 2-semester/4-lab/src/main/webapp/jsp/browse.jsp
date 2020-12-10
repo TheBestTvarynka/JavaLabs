@@ -7,6 +7,10 @@
 <html>
 <head>
     <title>Browse</title>
+    <link href="<c:url value="/css/forms.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/pagination.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/header.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/browse_page_styles.css" />" rel="stylesheet">
 </head>
 <style>
     a {
@@ -20,163 +24,6 @@
         flex-direction: column;
         padding: 0;
         margin: 0;
-    }
-    .header {
-        height: 3em;
-        width: 100%;
-        box-shadow: 0 4px 10px -6px grey;
-        z-index: 3;
-        background: #4f4b55;
-        display: inline-flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .header_button {
-        background: #f6f6f6;
-        color: #1b191d;
-        border: 1px solid #f6f6f6;
-        border-radius: 0.1em;
-        font-size: 15px;
-        margin: 0.25em;
-        padding: 0.25em;
-        transition: 0.2s;
-    }
-    .header_button:hover {
-        background: #b1b1b1;
-        border: 1px solid #b1b1b1;
-        cursor: pointer;
-        border-radius: 0.5em;
-    }
-    .block {
-        display: inline-flex;
-        height: 100%;
-        align-items: center;
-        color: #f6f6f6;
-    }
-    .block a {
-        margin: 0.25em;
-        padding: 0.25em;
-        transition: 0.2s;
-    }
-    .block a:hover {
-        background: #68666a;
-        border-radius: 0.5em;
-    }
-    .block img {
-        height: 50%;
-        width: auto;
-    }
-    .header span {
-        margin: 0.5em;
-    }
-    .page {
-        width: 100%;
-        display: inline-flex;
-        justify-content: center;
-        align-content: center;
-    }
-    .content {
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-    }
-    .search {
-        width: 100%;
-        margin-top: 1em;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        border: 2px solid #4f4b55;
-        border-radius: 0.25em;
-        padding: 0.5em;
-        box-shadow: 0 10px 12px -4px grey;
-    }
-    .search_block {
-        width: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .options {
-        display: flex;
-        flex-direction: column;
-    }
-    .button {
-        background: black;
-        color: white;
-        border: 1px solid black;
-        border-radius: 0.3em;
-        font-size: 15px;
-        margin-top: 1em;
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
-        width: calc(100%);
-        transition: 0.2s;
-    }
-    .button:hover {
-        background: rgb(50, 50, 50);
-        cursor: pointer;
-    }
-    .result {
-        border: 2px solid #4f4b55;
-        box-shadow: 0 10px 12px -4px grey;
-        padding: 0.5em;
-        border-radius: 0.25em;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .room {
-        display: grid;
-        grid-gap: 0;
-        grid-template-columns: 40% 60%;
-        grid-template-rows: auto;
-        margin: 0.25em;
-        padding: 0.25em;
-        border-radius: 0.25em;
-        background: #d3d3d3;
-        border-bottom: 2px solid #d3d3d3;
-    }
-    .room:hover {
-        background: #b1b1b1;
-        border-bottom: 2px solid #4f4b55;
-        cursor: pointer;
-    }
-    .room span {
-        width: 100%;
-        text-align: left;
-    }
-    .pagination {
-        display: inline-flex;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        justify-content: center;
-    }
-    .pag_item {
-        margin: 0.25em;
-        background: #d3d3d3;
-        border-radius: 0.25em;
-        border: 2px solid #d3d3d3;
-        padding: 0.25em;
-        text-align: center;
-    }
-    .pag_item.selected {
-        background: #b1b1b1;
-        border: 2px solid #4f4b55;
-    }
-    .pag_item:hover {
-        cursor: pointer;
-        border: 2px solid #4f4b55;
-    }
-    .error_message {
-        color: red;
-        font-size: 15px;
-    }
-    .info_message {
-        color: cornflowerblue;
-        font-size: 15px;
     }
 </style>
 <body>

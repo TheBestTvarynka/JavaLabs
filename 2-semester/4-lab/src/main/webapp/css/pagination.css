@@ -1,0 +1,22 @@
+.pagination {
+    display: inline-flex;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    justify-content: center;
+}
+.pag_item {
+    margin: 0.25em;
+    background: #d3d3d3;
+    border-radius: 0.25em;
+    border: 2px solid #d3d3d3;
+    padding: 0.25em;
+    text-align: center;
+}
+.pag_item.selected {
+    background: #b1b1b1;
+    border: 2px solid #4f4b55;
+}
+.pag_item:hover {
+    cursor: pointer;
+    border: 2px solid #4f4b55;
+}
