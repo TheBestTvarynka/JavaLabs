@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class LoginAction implements Action {
@@ -44,7 +43,7 @@ public class LoginAction implements Action {
                     session.setAttribute("role", user.getUserType());
                     // 7200 = 60 * 60 * 2 = 2 hours
                     session.setMaxInactiveInterval(7200);
-                    response.sendRedirect(request.getContextPath() + "/browse");
+                    response.sendRedirect(request.getContextPath() + "/request");
                 } else {
                     context.setAttribute("error", "Incorrect username or password.");
                     request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);

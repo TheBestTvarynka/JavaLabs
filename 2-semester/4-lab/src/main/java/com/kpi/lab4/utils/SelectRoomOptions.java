@@ -21,7 +21,6 @@ public class SelectRoomOptions {
     }
 
     public void set(String param, String value) {
-//        System.out.println(param);
         switch (param) {
             case "seats":
             case "price":

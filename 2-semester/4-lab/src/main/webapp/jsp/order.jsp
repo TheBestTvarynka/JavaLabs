@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -102,6 +103,17 @@
     .input:focus {
         border-bottom: 3px solid black;
     }
+    .input_error {
+        font-size: 15px;
+        background: #eb624d;
+        border: none;
+        border-bottom: 3px solid #eb624d;
+        border-radius: 5px;
+        padding: 12px 20px;
+    }
+    .input_error:focus {
+        border-bottom: 3px solid #bd3635;
+    }
     .button {
         background: black;
         color: white;
@@ -141,49 +153,62 @@
         <a href="${pageContext.request.contextPath}/request" class="header_button">Make request</a>
         <a href="${pageContext.request.contextPath}/order" class="header_button">Make order</a>
     </div>
-    <%String username = (String)request.getSession().getAttribute("username");%>
     <div class="block">
-        <span>${username}</span>
+        <span>${sessionScope.get('username')}</span>
         <a href="${pageContext.request.contextPath}/logout">
             <img src="https://img.icons8.com/android/24/ffffff/logout-rounded.png" alt="LogOut"/>
         </a>
     </div>
 </div>
 <div class="page">
-    <form method="post" action="${pageContext.request.contextPath}/order">
-        <%
-            ServletContext context = request.getServletContext();
-            String message = (String) context.getAttribute("message");
-            String error = (String) context.getAttribute("error");
-            if (message != null) {
-        %>
-        <span class="info_message"><jsp:text>${message}</jsp:text></span>
-        <%
-            }
-            if (error != null) {
-        %>
-        <span class="error_message"><jsp:text>${error}</jsp:text></span>
-        <%
-            }
-            context.removeAttribute("message");
-            context.removeAttribute("error");
-        %>
+    <form method="post" action="${pageContext.request.contextPath}/order" name="order">
+        <c:set var="error" value="${applicationScope.get('error')}" scope="request"/>
+        <c:set var="error1" value="${requestScope.get('error')}" scope="request"/>
+        <span class="error_message">${error1}</span>
+        <c:set var="message" value="${applicationScope.get('message')}" scope="request"/>
+        <c:set var="message1" value="${requestScope.get('message')}" scope="request"/>
+        <span class="info_message">${message1}</span>
+        <c:remove var="error"/>
+        <c:remove var="message"/>
         <span class="title">Create new order</span>
 
         <label>Phone</label>
-        <input type="text" name="phone" id="phone" placeholder="e. g. 0987654321" class="input">
+        <input type="text" name="phone" id="phone" placeholder="e. g. 0987654321" class="input" oninput="checkAll(order)" required>
 
         <label>Enter room type</label>
-        <input type="text" name="roomNumber" id="roomNumber" placeholder="e. g. 1-01" class="input">
+        <input type="text" name="roomNumber" id="roomNumber" placeholder="e. g. 1-01" class="input" required>
 
         <label>Enter from date</label>
-        <input type="date" name="dateFrom" id="dateFrom" class="input">
+        <input type="date" name="dateFrom" id="dateFrom" class="input" required>
 
         <label>Enter to date</label>
-        <input type="date" name="dateTo" id="dateTo" class="input">
+        <input type="date" name="dateTo" id="dateTo" class="input" required>
 
-        <button type="submit" class="button">Submit</button>
+        <button type="submit" id="submit" class="button">Submit</button>
     </form>
 </div>
+<script>
+    const checkPhone = form => {
+        const re_phone = /^\d{10}$/;
+        const input = document.getElementById('phone');
+        if (re_phone.test(form.phone.value)) {
+            input.setAttribute('class', 'input');
+            return true;
+        } else {
+            input.setAttribute('class', 'input_error');
+            return false;
+        }
+    };
+    const checkAll = form => {
+        const submitButton = document.getElementById('submit');
+        if(checkPhone(form)) {
+            console.log('true');
+            submitButton.removeAttribute('disabled');
+        } else {
+            console.log('false');
+            submitButton.setAttribute('disabled', 'true');
+        }
+    };
+</script>
 </body>
 </html>

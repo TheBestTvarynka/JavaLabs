@@ -1,7 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.kpi.lab4.entities.Room" %>
 <%@ page import="com.kpi.lab4.dto.Page" %>
-<%@ page import="java.net.URL" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -166,16 +165,14 @@
     }
 </style>
 <body>
-    <%ServletContext context = request.getServletContext();%>
     <div class="header">
         <div>
             <a href="${pageContext.request.contextPath}/browse" class="header_button">Browse</a>
             <a href="${pageContext.request.contextPath}/request" class="header_button">Make request</a>
             <a href="${pageContext.request.contextPath}/order" class="header_button">Make order</a>
         </div>
-        <%String username = (String)request.getSession().getAttribute("username");%>
         <div class="block">
-            <span>${username}</span>
+            <span>${sessionScope.get('username')}</span>
             <a href="${pageContext.request.contextPath}/logout">
                 <img src="https://img.icons8.com/android/24/ffffff/logout-rounded.png" alt="LogOut"/>
             </a>
@@ -314,7 +311,7 @@
                 <button type="submit" class="button">Search</button>
             </form>
             <div class="result">
-                <%Page<Room> pageData = (Page<Room>)context.getAttribute("page");%>
+                <%Page<Room> pageData = (Page<Room>)request.getServletContext().getAttribute("page");%>
                 <%List<Room> rooms = pageData.getData();%>
                 <%
                     System.out.println("size: " + rooms.size());
@@ -352,7 +349,7 @@
                     }
                 %>
                 <%if (pageN != 1) {%>
-                <a class="pag_item" href=<%="/Gradle___com_kpi___4_lab_1_0_SNAPSHOT_war/browse?" + query + (pageN - 1)%>>&lt;</a>
+                <a class="pag_item" href=<%="${pageContext.request.contextPath}/browse?" + query + (pageN - 1)%>>&lt;</a>
                 <%}%>
                 <%for (int i = 1; i < pageN; i++) {%>
                 <a class="pag_item" href=<%="/Gradle___com_kpi___4_lab_1_0_SNAPSHOT_war/browse?" + query + i%>><%=i%></a>
