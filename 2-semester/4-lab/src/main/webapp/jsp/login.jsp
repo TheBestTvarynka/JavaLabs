@@ -17,14 +17,8 @@
 </style>
 <body>
     <form method="post" action="${pageContext.request.contextPath}/login" class="login_form">
-        <c:set var="error" value="${applicationScope.get('error')}" scope="request"/>
-        <c:set var="error1" value="${requestScope.get('error')}" scope="request"/>
-        <span class="error_message">${error1}</span>
-        <c:set var="message" value="${applicationScope.get('message')}" scope="request"/>
-        <c:set var="message1" value="${requestScope.get('message')}" scope="request"/>
-        <span class="info_message">${message1}</span>
-        <c:remove var="error"/>
-        <c:remove var="message"/>
+        <span class="error_message">${requestScope.get('error')}</span>
+        <span class="error_message">${requestScope.get('message')}</span>
         <span class="login_form_title">Login</span>
         <label>Username</label>
         <input type="text" name="username" id="username" placeholder="Enter username" class="input" required>

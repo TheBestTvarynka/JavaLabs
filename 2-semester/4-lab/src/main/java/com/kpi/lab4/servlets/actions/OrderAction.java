@@ -35,11 +35,11 @@ public class OrderAction implements Action {
                     builder.set(name, values[0]);
                 }
                 service.bookRoom(builder.build());
-                context.setAttribute("message", "All success! You have two days to pay for the order.");
+                request.setAttribute("message", "All success! You have two days to pay for the order.");
             } catch(SQLException ignored) {
-                context.setAttribute("error", "Sorry, now we are temporary unavailable.");
+                request.setAttribute("error", "Sorry, now we are temporary unavailable.");
             } catch (AlreadyBookedException | BookNotFoundException | IllegalArgumentException e) {
-                context.setAttribute("error", e.getMessage());
+                request.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);
         }

@@ -15,19 +15,22 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "MainServlet", urlPatterns = {"/home", "/browse", "/order", "/register", "/login", "/request","/logout"})
+@WebServlet(name = "MainServlet", urlPatterns = {"/home", "/browse", "/order", "/register", "/login", "/request", "/logout"})
 public class MainServlet extends HttpServlet {
     private Map<String, Action> actions;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        UserService userService = new UserService();
+        RequestService requestService = new RequestService();
+        OrderService orderService = new OrderService();
         actions = new HashMap<>();
         actions.put("/home", new HomeAction());
-        actions.put("/register", new RegisterAction(new UserService()));
-        actions.put("/login", new LoginAction(new UserService()));
-        actions.put("/browse", new BrowseAction(new RequestService()));
-        actions.put("/request", new RequestAction(new RequestService()));
-        actions.put("/order", new OrderAction(new OrderService()));
+        actions.put("/register", new RegisterAction(userService));
+        actions.put("/login", new LoginAction(userService));
+        actions.put("/browse", new BrowseAction(requestService));
+        actions.put("/request", new RequestAction(requestService));
+        actions.put("/order", new OrderAction(orderService));
         actions.put("/logout", new LogOutAction());
     }
 

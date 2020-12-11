@@ -45,11 +45,12 @@ public class LoginAction implements Action {
                     session.setMaxInactiveInterval(7200);
                     response.sendRedirect(request.getContextPath() + "/request");
                 } else {
-                    context.setAttribute("error", "Incorrect username or password.");
+                    request.setAttribute("just", "just some text");
+                    request.setAttribute("error", "Incorrect username or password.");
                     request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
                 }
             } catch (SQLException ignored) {
-                context.setAttribute("message", "Sorry, now we are temporary unavailable.");
+                request.setAttribute("message", "Sorry, now we are temporary unavailable.");
                 request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
             }
         } else {

@@ -34,14 +34,14 @@ public class RequestAction implements Action {
                     builder.set(name, values[0]);
                 }
                 service.createRequest(builder.build());
-                context.setAttribute(
+                request.setAttribute(
                         "message",
                         "All success. Our manager will choose the most suitable room for you."
                 );
             } catch (SQLException ignored) {
-                context.setAttribute("error", "Sorry, now we are temporary unavailable.");
+                request.setAttribute("error", "Sorry, now we are temporary unavailable.");
             } catch(IllegalArgumentException e) {
-                context.setAttribute("error", e.getMessage());
+                request.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("/jsp/request.jsp").forward(request, response);
         } else {

@@ -36,11 +36,11 @@ public class BrowseAction implements Action {
                 }
             }
             Page<Room> page = service.selectRooms(options);
-            context.setAttribute("page", page);
+            request.setAttribute("page", page);
         } catch (IllegalArgumentException e) {
-            context.setAttribute("error", e.getMessage());
+            request.setAttribute("error", e.getMessage());
         } catch (UnavailableException ignored) {
-            context.setAttribute("error", "Sorry, now we are temporary unavailable.");
+            request.setAttribute("error", "Sorry, now we are temporary unavailable.");
         }
         request.getRequestDispatcher("/jsp/browse.jsp").forward(request, response);
     }
