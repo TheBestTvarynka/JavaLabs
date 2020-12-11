@@ -42,7 +42,10 @@ public class OrderAction implements Action {
                 request.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Method " + method + " not allowed!");
+            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);
     }
 }

@@ -45,6 +45,7 @@ public class RequestAction implements Action {
             }
             request.getRequestDispatcher("/jsp/request.jsp").forward(request, response);
         } else {
+            request.setAttribute("error", "Method " + method + " not allowed!");
             request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
         }
     }

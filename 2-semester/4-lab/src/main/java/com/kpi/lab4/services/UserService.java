@@ -1,6 +1,5 @@
 package com.kpi.lab4.services;
 
-//import kpi.java.controller.UserAuthData;
 import com.kpi.lab4.dao.SimpleConnectionPool;
 import com.kpi.lab4.exception.BadCredentialsException;
 import com.kpi.lab4.exception.UnavailableException;
@@ -31,10 +30,7 @@ public class UserService {
             if (userData.getPassword().equals(credentials.getPassword())) {
                 return userData;
             }
-            return null;
-//            throw new BadCredentialsException();
         }
-//        throw new BadCredentialsException();
         return null;
     }
 

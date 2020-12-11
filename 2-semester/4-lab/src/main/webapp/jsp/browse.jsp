@@ -43,7 +43,7 @@
         <div class="content">
             <form class="search">
                 <span class="error_message">${requestScope.get('error')}</span>
-                <span class="error_message">${requestScope.get('message')}</span>
+                <span class="info_message">${requestScope.get('message')}</span>
                 <div class="search_block">
                     <div>
                         <label for="priceOrder">Price order</label>

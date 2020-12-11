@@ -18,7 +18,7 @@
 <body>
     <form method="post" action="${pageContext.request.contextPath}/login" class="login_form">
         <span class="error_message">${requestScope.get('error')}</span>
-        <span class="error_message">${requestScope.get('message')}</span>
+        <span class="info_message">${requestScope.get('message')}</span>
         <span class="login_form_title">Login</span>
         <label>Username</label>
         <input type="text" name="username" id="username" placeholder="Enter username" class="input" required>

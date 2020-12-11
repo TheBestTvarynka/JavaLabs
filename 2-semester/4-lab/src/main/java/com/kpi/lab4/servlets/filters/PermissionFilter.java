@@ -3,13 +3,11 @@ package com.kpi.lab4.servlets.filters;
 import com.kpi.lab4.enums.UserType;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
-//@WebFilter(urlPatterns = {"/home", "/order", "/request", "/browse", "/logout", "/resolve"})
 public class PermissionFilter implements Filter {
     private Map<UserType, List<String>> permissions;
     private List<String> allowList;
@@ -26,9 +24,12 @@ public class PermissionFilter implements Filter {
         userPermissions.add("/order");
         userPermissions.add("/request");
         userPermissions.add("/browse");
+        userPermissions.add("/home");
 
         List<String> managerPermissions = new ArrayList<>();
         managerPermissions.add("/resolve");
+        userPermissions.add("/browse");
+        userPermissions.add("/home");
 
         this.permissions = new HashMap<>();
         this.permissions.put(UserType.USER, userPermissions);
@@ -44,12 +45,14 @@ public class PermissionFilter implements Filter {
         } else if (path.startsWith("/css")) {
             chain.doFilter(request, response);
         } else {
-            System.out.println("path: " + path);
             HttpSession session = req.getSession(false);
             UserType type = (UserType) session.getAttribute("role");
             List<String> permissions = this.permissions.get(type);
             if (permissions.contains(path)) {
                 chain.doFilter(request, response);
+            } else {
+                request.setAttribute("error", "Permission denied");
+                request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
             }
         }
     }

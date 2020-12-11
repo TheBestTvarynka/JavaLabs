@@ -14,11 +14,22 @@
         align-items: center;
         background: #f6f6f6;
     }
+    .input_error {
+        font-size: 15px;
+        background: #eb624d;
+        border: none;
+        border-bottom: 3px solid #eb624d;
+        border-radius: 5px;
+        padding: 12px 20px;
+    }
+    .input_error:focus {
+        border-bottom: 3px solid red;
+    }
 </style>
 <body>
     <form method="post" action="${pageContext.request.contextPath}/register" name="registration" class="login_form">
         <span class="error_message">${requestScope.get('error')}</span>
-        <span class="error_message">${requestScope.get('message')}</span>
+        <span class="info_message">${requestScope.get('message')}</span>
         <span class="login_form_title">Register</span>
 
         <label>Username</label>

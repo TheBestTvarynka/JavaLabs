@@ -37,7 +37,6 @@ public class LoginAction implements Action {
             try {
                 User user = service.login(builder.build());
                 if (user != null) {
-                    request.setAttribute("user", "some user data");
                     HttpSession session = request.getSession(true);
                     session.setAttribute("username", user.getUsername());
                     session.setAttribute("role", user.getUserType());
@@ -45,7 +44,6 @@ public class LoginAction implements Action {
                     session.setMaxInactiveInterval(7200);
                     response.sendRedirect(request.getContextPath() + "/request");
                 } else {
-                    request.setAttribute("just", "just some text");
                     request.setAttribute("error", "Incorrect username or password.");
                     request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
                 }

@@ -42,7 +42,6 @@ public class RegisterAction implements Action {
                 request.setAttribute("message", "Register success. You can login now.");
                 request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
             } catch (SQLException ignored) {
-                System.out.println("SQL EXCEPTION");
                 request.setAttribute("error", "Sorry, now we are temporary unavailable.");
                 request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
             } catch (UserAlreadyExistException e) {
