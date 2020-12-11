@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "MainServlet", urlPatterns = {"/home", "/browse", "/order", "/register", "/login", "/request", "/logout"})
+@WebServlet(name = "MainServlet", urlPatterns = {
+        "/home", "/browse", "/order", "/register", "/login", "/request", "/logout", "/resolve"
+})
 public class MainServlet extends HttpServlet {
     private Map<String, Action> actions;
 
@@ -32,6 +34,7 @@ public class MainServlet extends HttpServlet {
         actions.put("/request", new RequestAction(requestService));
         actions.put("/order", new OrderAction(orderService));
         actions.put("/logout", new LogOutAction());
+        actions.put("/resolve", new ResolveRequestAction());
     }
 
     @Override

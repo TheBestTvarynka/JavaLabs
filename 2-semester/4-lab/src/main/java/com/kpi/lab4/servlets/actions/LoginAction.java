@@ -2,7 +2,7 @@ package com.kpi.lab4.servlets.actions;
 
 import com.kpi.lab4.entities.User;
 import com.kpi.lab4.services.UserService;
-import com.kpi.lab4.utils.LoginDtoBuilder;
+import com.kpi.lab4.utils.builders.LoginDtoBuilder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

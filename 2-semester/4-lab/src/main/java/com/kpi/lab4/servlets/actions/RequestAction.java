@@ -1,7 +1,7 @@
 package com.kpi.lab4.servlets.actions;
 
 import com.kpi.lab4.services.RequestService;
-import com.kpi.lab4.utils.CreateRequestDtoBuilder;
+import com.kpi.lab4.utils.builders.CreateRequestDtoBuilder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

@@ -2,7 +2,7 @@ package com.kpi.lab4.servlets.actions;
 
 import com.kpi.lab4.exception.UserAlreadyExistException;
 import com.kpi.lab4.services.UserService;
-import com.kpi.lab4.utils.RegisterDtoBuilder;
+import com.kpi.lab4.utils.builders.RegisterDtoBuilder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class RegisterAction implements Action {

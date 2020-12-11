@@ -3,7 +3,7 @@ package com.kpi.lab4.servlets.actions;
 import com.kpi.lab4.exception.AlreadyBookedException;
 import com.kpi.lab4.exception.BookNotFoundException;
 import com.kpi.lab4.services.OrderService;
-import com.kpi.lab4.utils.CreateOrderDtoBuilder;
+import com.kpi.lab4.utils.builders.CreateOrderDtoBuilder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

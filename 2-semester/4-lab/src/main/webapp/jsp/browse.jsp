@@ -1,4 +1,3 @@
-<%@ page import="java.util.List" %>
 <%@ page import="com.kpi.lab4.entities.Room" %>
 <%@ page import="com.kpi.lab4.dto.Page" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -61,7 +60,7 @@
                                     <option value="none">None</option>
                                 </c:when>
                                 <c:otherwise>
-                                    <option value="none">None</option>
+                                    <option value="none" selected>None</option>
                                     <option value="asc">Asc</option>
                                     <option value="desc">Desc</option>
                                 </c:otherwise>

@@ -1,4 +1,4 @@
-package com.kpi.lab4.servlets;
+package com.kpi.lab4.servlets.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/home", "/order", "/request", "/browse", "/logout"})
-public class RequestFilter implements Filter {
+//@WebFilter(urlPatterns = {"/home", "/order", "/request", "/browse", "/logout", "/resolve"})
+public class SessionFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
