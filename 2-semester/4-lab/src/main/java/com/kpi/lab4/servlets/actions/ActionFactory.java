@@ -1,5 +1,9 @@
 package com.kpi.lab4.servlets.actions;
 
+import com.kpi.lab4.dao.OrderDao;
+import com.kpi.lab4.dao.RequestDao;
+import com.kpi.lab4.dao.RoomDao;
+import com.kpi.lab4.dao.UserDao;
 import com.kpi.lab4.exception.NotFoundException;
 import com.kpi.lab4.services.OrderService;
 import com.kpi.lab4.services.RequestService;
@@ -11,15 +15,15 @@ public class ActionFactory {
             case "home":
                 return new HomeAction();
             case "/register":
-                return new RegisterAction(new UserService());
+                return new RegisterAction(new UserService(new UserDao()));
             case "/login":
-                return new LoginAction(new UserService());
+                return new LoginAction(new UserService(new UserDao()));
             case "/browse":
-                return new BrowseAction(new RequestService());
+                return new BrowseAction(new RequestService(new RequestDao(), new RoomDao(), new OrderDao()));
             case "/request":
-                return new RequestAction(new RequestService());
+                return new RequestAction(new RequestService(new RequestDao(), new RoomDao(), new OrderDao()));
             case "/order":
-                return new OrderAction(new OrderService());
+                return new OrderAction(new OrderService(new OrderDao(), new RoomDao()));
             case "/logout":
                 return new LogOutAction();
             case "/resolve":

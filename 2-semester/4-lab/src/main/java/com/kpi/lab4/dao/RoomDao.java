@@ -10,6 +10,7 @@ import java.util.*;
 
 public class RoomDao extends GeneralDao {
     public List<Room> selectRooms(SelectRoomOptions options) throws SQLException {
+        setConnection(SimpleConnectionPool.getPool().getConnection());
         StringBuilder queryBuilder = new StringBuilder("select * from rooms");
         Set<RoomType> types = options.getTypes();
         Set<RoomStatus> statuses = options.getStatuses();
@@ -59,10 +60,12 @@ public class RoomDao extends GeneralDao {
                     res.getFloat("price")
             ));
         }
+        SimpleConnectionPool.getPool().releaseConnection(getConnection());
         return rooms;
     }
 
     public Optional<Room> findByRoomNumber(String roomNumber) throws SQLException, IllegalArgumentException {
+        setConnection(SimpleConnectionPool.getPool().getConnection());
         final String findByNumber = "select * from rooms where number=?";
         Connection connection = getConnection();
         PreparedStatement pstmt = connection.prepareStatement(findByNumber);
@@ -79,15 +82,18 @@ public class RoomDao extends GeneralDao {
                     res.getFloat("price")
             );
         }
+        SimpleConnectionPool.getPool().releaseConnection(getConnection());
         return room == null ? Optional.empty() : Optional.of(room);
     }
 
     public void updateStatus(UUID roomId, RoomStatus status) throws SQLException {
+        setConnection(SimpleConnectionPool.getPool().getConnection());
         final String updateStatus = "update rooms set status=? where id=?";
         Connection connection = getConnection();
         PreparedStatement statement = connection.prepareStatement(updateStatus);
         statement.setString(1, status.name());
         statement.setObject(2, roomId, Types.OTHER);
         statement.executeUpdate();
+        SimpleConnectionPool.getPool().releaseConnection(getConnection());
     }
 }

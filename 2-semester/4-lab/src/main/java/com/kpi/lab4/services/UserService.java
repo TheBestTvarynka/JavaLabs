@@ -1,8 +1,6 @@
 package com.kpi.lab4.services;
 
-import com.kpi.lab4.dao.SimpleConnectionPool;
 import com.kpi.lab4.exception.BadCredentialsException;
-import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.dao.UserDao;
 import com.kpi.lab4.dto.LoginDto;
 import com.kpi.lab4.dto.RegisterDto;
@@ -15,15 +13,12 @@ import java.util.Optional;
 public class UserService {
     private final UserDao repository;
 
-    public UserService() {
-        repository = new UserDao();
+    public UserService(UserDao userDao) {
+        repository = userDao;
     }
 
     public User login(LoginDto credentials) throws BadCredentialsException, SQLException {
-        Optional<User> user;
-        repository.setConnection(SimpleConnectionPool.getPool().getConnection());
-        user = repository.findByUsername(credentials.getUsername());
-        SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
+        Optional<User> user = repository.findByUsername(credentials.getUsername());
 
         if (user.isPresent()) {
             User userData = user.get();
@@ -35,11 +30,9 @@ public class UserService {
     }
 
     public void register(RegisterDto registerData) throws SQLException {
-        repository.setConnection(SimpleConnectionPool.getPool().getConnection());
         if (repository.findByUsername(registerData.getUsername()).isPresent()) {
             throw new UserAlreadyExistException();
         }
         repository.save(User.fromRegisterData(registerData));
-        SimpleConnectionPool.getPool().releaseConnection(repository.releaseConnection());
     }
 }

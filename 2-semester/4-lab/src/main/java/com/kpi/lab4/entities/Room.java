@@ -13,6 +13,10 @@ public class Room {
     private RoomStatus status;
     private float price;
 
+    public Room() {
+
+    }
+
     public Room(UUID id, String number, int seatNumber, RoomType type, RoomStatus status, float price) {
         this.id = id;
         this.number = number;
