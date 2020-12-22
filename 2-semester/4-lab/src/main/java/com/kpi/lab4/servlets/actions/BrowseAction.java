@@ -11,9 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-//import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 public class BrowseAction implements Action {
     private RequestService service;
@@ -37,10 +35,8 @@ public class BrowseAction implements Action {
             }
             Page<Room> page = service.selectRooms(options);
             request.setAttribute("page", page);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | UnavailableException e) {
             request.setAttribute("error", e.getMessage());
-        } catch (UnavailableException ignored) {
-            request.setAttribute("error", "Sorry, now we are temporary unavailable.");
         }
         request.getRequestDispatcher("/jsp/browse.jsp").forward(request, response);
     }

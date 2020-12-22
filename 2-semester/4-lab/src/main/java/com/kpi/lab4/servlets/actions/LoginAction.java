@@ -1,6 +1,7 @@
 package com.kpi.lab4.servlets.actions;
 
 import com.kpi.lab4.entities.User;
+import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.UserService;
 import com.kpi.lab4.utils.builders.LoginDtoBuilder;
 
@@ -47,8 +48,8 @@ public class LoginAction implements Action {
                     request.setAttribute("error", "Incorrect username or password.");
                     request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
                 }
-            } catch (SQLException ignored) {
-                request.setAttribute("message", "Sorry, now we are temporary unavailable.");
+            } catch (UnavailableException e) {
+                request.setAttribute("error", e.getMessage());
                 request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
             }
         } else {

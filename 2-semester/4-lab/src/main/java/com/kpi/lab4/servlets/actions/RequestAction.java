@@ -1,5 +1,6 @@
 package com.kpi.lab4.servlets.actions;
 
+import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.RequestService;
 import com.kpi.lab4.utils.builders.CreateRequestDtoBuilder;
 
@@ -8,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Iterator;
 
 public class RequestAction implements Action {
@@ -38,9 +38,7 @@ public class RequestAction implements Action {
                         "message",
                         "All success. Our manager will choose the most suitable room for you."
                 );
-            } catch (SQLException ignored) {
-                request.setAttribute("error", "Sorry, now we are temporary unavailable.");
-            } catch(IllegalArgumentException e) {
+            } catch(IllegalArgumentException | UnavailableException e) {
                 request.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("/jsp/request.jsp").forward(request, response);

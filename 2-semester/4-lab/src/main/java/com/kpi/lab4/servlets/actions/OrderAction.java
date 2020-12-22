@@ -2,6 +2,7 @@ package com.kpi.lab4.servlets.actions;
 
 import com.kpi.lab4.exception.AlreadyBookedException;
 import com.kpi.lab4.exception.BookNotFoundException;
+import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.OrderService;
 import com.kpi.lab4.utils.builders.CreateOrderDtoBuilder;
 
@@ -36,9 +37,7 @@ public class OrderAction implements Action {
                 }
                 service.bookRoom(builder.build());
                 request.setAttribute("message", "All success! You have two days to pay for the order.");
-            } catch(SQLException ignored) {
-                request.setAttribute("error", "Sorry, now we are temporary unavailable.");
-            } catch (AlreadyBookedException | BookNotFoundException | IllegalArgumentException e) {
+            } catch (AlreadyBookedException | BookNotFoundException | IllegalArgumentException | UnavailableException e) {
                 request.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);

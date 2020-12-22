@@ -1,5 +1,6 @@
 package com.kpi.lab4.servlets.actions;
 
+import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.exception.UserAlreadyExistException;
 import com.kpi.lab4.services.UserService;
 import com.kpi.lab4.utils.builders.RegisterDtoBuilder;
@@ -9,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Iterator;
 
 public class RegisterAction implements Action {
@@ -41,10 +41,7 @@ public class RegisterAction implements Action {
                 userService.register(builder.build());
                 request.setAttribute("message", "Register success. You can login now.");
                 request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
-            } catch (SQLException ignored) {
-                request.setAttribute("error", "Sorry, now we are temporary unavailable.");
-                request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
-            } catch (UserAlreadyExistException e) {
+            } catch (UserAlreadyExistException | UnavailableException e) {
                 request.setAttribute("error", e.getMessage());
                 request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
             }

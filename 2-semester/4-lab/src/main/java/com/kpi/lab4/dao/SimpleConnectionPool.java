@@ -10,16 +10,6 @@ public class SimpleConnectionPool implements ConnectionPool {
     private static SimpleConnectionPool simpleConnectionPool;
     private static int INITIAL_POOL_SIZE = 10;
     static {
-//        try {
-//            Driver driver = new Driver();
-//            DriverManager.registerDriver(driver);
-//            System.out.println("Driver status: " + Driver.isRegistered());
-//            if (!Driver.isRegistered()) {
-//                Driver.register();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
