@@ -183,13 +183,13 @@
                             <span>No rooms found :(</span>
                         </c:if>
                         <c:forEach items="${rooms}" var="room">
-                            <div class="room">
-                                <span>${room.getNumber()}</span>
-                                <span>${room.getType()}</span>
-                                <span>${room.getSeatNumber()}</span>
-                                <span>${room.getStatus()}</span>
-                                <span>${room.getPrice()}</span>
-                            </div>
+                            <a class="room" href="${pageContext.request.contextPath}/order?room=${room.getNumber()}">
+                                <span>Number: ${room.getNumber()}</span>
+                                <span>Type: ${room.getType()}</span>
+                                <span>Seat number: ${room.getSeatNumber()}</span>
+                                <span>Status: ${room.getStatus()}</span>
+                                <span>Price: ${room.getPrice()}</span>
+                            </a>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>

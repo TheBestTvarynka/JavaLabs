@@ -40,9 +40,7 @@ public class PermissionFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest)request;
         String path = req.getServletPath();
-        if (this.allowList.contains(path)) {
-            chain.doFilter(request, response);
-        } else if (path.startsWith("/css")) {
+        if (this.allowList.contains(path) || path.startsWith("/css")) {
             chain.doFilter(request, response);
         } else {
             HttpSession session = req.getSession(false);

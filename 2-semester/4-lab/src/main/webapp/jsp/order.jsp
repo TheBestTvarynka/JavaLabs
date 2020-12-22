@@ -84,7 +84,7 @@
         <input type="text" name="phone" id="phone" placeholder="e. g. 0987654321" class="input" oninput="checkAll(order)" required>
 
         <label>Enter room number</label>
-        <input type="text" name="roomNumber" id="roomNumber" placeholder="e. g. 1-01" class="input" required>
+        <input type="text" name="roomNumber" id="roomNumber" placeholder="e. g. 1-01" class="input" required value="${param.room}">
 
         <label>Enter from date</label>
         <input type="date" name="dateFrom" id="dateFrom" class="input" required>
