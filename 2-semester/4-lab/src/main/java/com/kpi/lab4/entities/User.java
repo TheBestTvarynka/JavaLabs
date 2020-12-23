@@ -3,6 +3,7 @@ package com.kpi.lab4.entities;
 import com.kpi.lab4.dto.RegisterDto;
 import com.kpi.lab4.enums.UserType;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class User {
@@ -12,6 +13,10 @@ public class User {
     private String fullName;
     private String email;
     private UserType userType;
+
+    public User() {
+
+    }
 
     public User(UUID id, String username, String password, String fullName, String email, UserType userType) {
         this.id = id;
@@ -59,5 +64,23 @@ public class User {
 
     public UserType getUserType() {
         return userType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(fullName, user.fullName) &&
+                Objects.equals(email, user.email) &&
+                userType == user.userType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, fullName, email, userType);
     }
 }

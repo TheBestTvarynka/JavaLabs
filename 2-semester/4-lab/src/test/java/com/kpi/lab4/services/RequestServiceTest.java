@@ -3,21 +3,21 @@ package com.kpi.lab4.services;
 import com.kpi.lab4.dao.OrderDao;
 import com.kpi.lab4.dao.RequestDao;
 import com.kpi.lab4.dao.RoomDao;
+import com.kpi.lab4.dto.CreateRequestDto;
 import com.kpi.lab4.dto.Page;
 import com.kpi.lab4.entities.Request;
 import com.kpi.lab4.entities.Room;
 import com.kpi.lab4.enums.RoomType;
 import com.kpi.lab4.exception.NotFoundException;
+import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.utils.SelectRoomOptions;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.sql.SQLException;
 import java.util.*;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class RequestServiceTest {
     RequestDao requestDao;
@@ -42,6 +42,7 @@ public class RequestServiceTest {
         Page<Room> page = service.selectRooms(options);
         assertEquals(0, page.getData().size());
         assertEquals(0, page.getCount());
+        verify(roomDao).selectRooms(options);
     }
 
     @Test
@@ -58,6 +59,7 @@ public class RequestServiceTest {
         Page<Room> page = service.selectRooms(options);
         assertEquals(3, page.getData().size());
         assertEquals(3, page.getCount());
+        verify(roomDao).selectRooms(options);
     }
 
     @Test
@@ -77,6 +79,7 @@ public class RequestServiceTest {
         Page<Room> page = service.selectRooms(options);
         assertEquals(5, page.getData().size());
         assertEquals(6, page.getCount());
+        verify(roomDao).selectRooms(options);
     }
 
     @Test
@@ -94,6 +97,25 @@ public class RequestServiceTest {
         Page<Room> page = service.selectRooms(options);
         assertEquals(0, page.getData().size());
         assertEquals(3, page.getCount());
+        verify(roomDao).selectRooms(options);
+    }
+
+    @Test
+    public void whenCreate_thenCallSave() throws SQLException {
+        CreateRequestDto dto = new CreateRequestDto();
+        RequestService service = new RequestService(requestDao, roomDao, orderDao);
+        service.createRequest(dto);
+        verify(requestDao).save(dto);
+    }
+
+    @Test(expected = UnavailableException.class)
+    public void whenCreate_thenThrowSQLException() throws SQLException {
+        CreateRequestDto dto = new CreateRequestDto();
+        doThrow(new SQLException()).when(requestDao).save(dto);
+
+        RequestService service = new RequestService(requestDao, roomDao, orderDao);
+        service.createRequest(dto);
+        verify(requestDao).save(dto);
     }
 
     @Test
@@ -107,6 +129,15 @@ public class RequestServiceTest {
 
         RequestService service = new RequestService(requestDao, roomDao, orderDao);
         assertEquals(service.getAllRequests(), res);
+    }
+
+    @Test(expected = UnavailableException.class)
+    public void whenGetAll_thenThrowSQLException() throws SQLException {
+        doThrow(new SQLException()).when(requestDao).getAll();
+
+        RequestService service = new RequestService(requestDao, roomDao, orderDao);
+        service.getAllRequests();
+        verify(requestDao).getAll();
     }
 
     @Test(expected = NotFoundException.class)
