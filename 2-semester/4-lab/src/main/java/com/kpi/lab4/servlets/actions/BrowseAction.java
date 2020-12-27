@@ -6,7 +6,6 @@ import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.RequestService;
 import com.kpi.lab4.utils.builders.SelectRoomOptions;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,7 @@ public class BrowseAction implements Action {
     }
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response, ServletContext context)
+    public void get(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SelectRoomOptions options = new SelectRoomOptions();
         Iterator<String> it = request.getParameterNames().asIterator();

@@ -21,7 +21,19 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            ActionFactory.getAction(req.getServletPath()).execute(req, resp, req.getServletContext());
+            Action action = ActionFactory.getAction(req.getServletPath());
+            String method = req.getMethod();
+            switch (method) {
+                case "GET":
+                    action.get(req, resp);
+                    break;
+                case "POST":
+                    action.post(req, resp);
+                    break;
+                default:
+                    action.execute(req, resp);
+                    break;
+            }
         } catch(NotFoundException e) {
             logger.info("Action not found for path: " + req.getServletPath());
             req.setAttribute("error", e.getMessage());
