@@ -1,15 +1,18 @@
 package com.kpi.lab4.servlets.actions;
 
+import com.kpi.lab4.dto.CreateRequestDto;
+import com.kpi.lab4.enums.RoomType;
 import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.RequestService;
-import com.kpi.lab4.utils.builders.CreateRequestDtoBuilder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Iterator;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RequestAction implements Action {
     private RequestService service;
@@ -25,21 +28,23 @@ public class RequestAction implements Action {
         if (method.equals("GET")) {
             request.getRequestDispatcher("/jsp/request.jsp").forward(request, response);
         } else if (method.equals("POST")) {
-            CreateRequestDtoBuilder builder = new CreateRequestDtoBuilder();
-            Iterator<String> it = request.getParameterNames().asIterator();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
             try {
-                while (it.hasNext()) {
-                    String name = it.next();
-                    String[] values = request.getParameterValues(name);
-                    builder.set(name, values[0]);
-                }
-                service.createRequest(builder.build());
+                service.createRequest(new CreateRequestDto(
+                        Integer.parseInt(request.getParameter("seatNumber")),
+                        RoomType.valueOf(request.getParameter("type")),
+                        request.getParameter("phone"),
+                        dateFormat.parse(request.getParameter("dateFrom")),
+                        dateFormat.parse(request.getParameter("dateTo"))
+                ));
                 request.setAttribute(
                         "message",
                         "All success. Our manager will choose the most suitable room for you."
                 );
             } catch(IllegalArgumentException | UnavailableException e) {
                 request.setAttribute("error", e.getMessage());
+            } catch (ParseException | NullPointerException e) {
+                request.setAttribute("error", "Wrong request parameters!");
             }
             request.getRequestDispatcher("/jsp/request.jsp").forward(request, response);
         } else {

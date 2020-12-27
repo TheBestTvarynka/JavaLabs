@@ -1,9 +1,9 @@
 package com.kpi.lab4.servlets.actions;
 
+import com.kpi.lab4.dto.LoginDto;
 import com.kpi.lab4.entities.User;
 import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.UserService;
-import com.kpi.lab4.utils.builders.LoginDtoBuilder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Iterator;
 
 public class LoginAction implements Action {
     private UserService service;
@@ -28,15 +26,11 @@ public class LoginAction implements Action {
         if (method.equals("GET")) {
             request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
         } else if (method.equals("POST")) {
-            LoginDtoBuilder builder = new LoginDtoBuilder();
-            Iterator<String> it = request.getParameterNames().asIterator();
-            while (it.hasNext()) {
-                String name = it.next();
-                String[] values = request.getParameterValues(name);
-                builder.set(name, values[0]);
-            }
             try {
-                User user = service.login(builder.build());
+                User user = service.login(new LoginDto(
+                        request.getParameter("username"),
+                        request.getParameter("password")
+                ));
                 if (user != null) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("username", user.getUsername());
@@ -50,6 +44,9 @@ public class LoginAction implements Action {
                 }
             } catch (UnavailableException e) {
                 request.setAttribute("error", e.getMessage());
+                request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+            } catch (IndexOutOfBoundsException e) {
+                request.setAttribute("error", "Incorrect username or password.");
                 request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
             }
         } else {

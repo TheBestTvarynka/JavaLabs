@@ -4,7 +4,7 @@ import com.kpi.lab4.dto.Page;
 import com.kpi.lab4.entities.Room;
 import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.RequestService;
-import com.kpi.lab4.utils.SelectRoomOptions;
+import com.kpi.lab4.utils.builders.SelectRoomOptions;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

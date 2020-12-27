@@ -10,7 +10,7 @@ import com.kpi.lab4.entities.Room;
 import com.kpi.lab4.enums.RoomType;
 import com.kpi.lab4.exception.NotFoundException;
 import com.kpi.lab4.exception.UnavailableException;
-import com.kpi.lab4.utils.SelectRoomOptions;
+import com.kpi.lab4.utils.builders.SelectRoomOptions;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

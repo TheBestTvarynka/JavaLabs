@@ -10,7 +10,7 @@ import com.kpi.lab4.entities.Request;
 import com.kpi.lab4.exception.NotFoundException;
 import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.entities.Room;
-import com.kpi.lab4.utils.SelectRoomOptions;
+import com.kpi.lab4.utils.builders.SelectRoomOptions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

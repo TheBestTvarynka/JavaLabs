@@ -1,4 +1,4 @@
-package com.kpi.lab4.utils;
+package com.kpi.lab4.utils.builders;
 
 import com.kpi.lab4.enums.RoomStatus;
 import com.kpi.lab4.enums.RoomType;

@@ -1,6 +1,8 @@
 package com.kpi.lab4.servlets.filters;
 
 import com.kpi.lab4.enums.UserType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class PermissionFilter implements Filter {
+    private static Logger logger = LogManager.getLogger(PermissionFilter.class);
+
     private Map<UserType, List<String>> permissions;
     private List<String> allowList;
 
@@ -47,8 +51,10 @@ public class PermissionFilter implements Filter {
             UserType type = (UserType) session.getAttribute("role");
             List<String> permissions = this.permissions.get(type);
             if (permissions.contains(path)) {
+                logger.info("Allowed: " + session.getAttribute("username") + " with role " + type + " to access " + path);
                 chain.doFilter(request, response);
             } else {
+                logger.error("User " + session.getAttribute("username") + " with role " + type + "don't have access to " + path);
                 request.setAttribute("error", "Permission denied");
                 request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
             }

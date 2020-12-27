@@ -3,7 +3,7 @@ package com.kpi.lab4.dao;
 import com.kpi.lab4.entities.Room;
 import com.kpi.lab4.enums.RoomStatus;
 import com.kpi.lab4.enums.RoomType;
-import com.kpi.lab4.utils.SelectRoomOptions;
+import com.kpi.lab4.utils.builders.SelectRoomOptions;
 
 import java.sql.*;
 import java.util.*;

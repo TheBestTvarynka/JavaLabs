@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class OrderServiceTest {

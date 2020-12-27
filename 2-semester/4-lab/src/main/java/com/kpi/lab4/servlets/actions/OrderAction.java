@@ -1,18 +1,19 @@
 package com.kpi.lab4.servlets.actions;
 
+import com.kpi.lab4.dto.CreateOrderDto;
 import com.kpi.lab4.exception.AlreadyBookedException;
 import com.kpi.lab4.exception.BookNotFoundException;
 import com.kpi.lab4.exception.UnavailableException;
 import com.kpi.lab4.services.OrderService;
-import com.kpi.lab4.utils.builders.CreateOrderDtoBuilder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Iterator;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OrderAction implements Action {
     private OrderService service;
@@ -27,18 +28,19 @@ public class OrderAction implements Action {
         if (method.equals("GET")) {
             request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);
         } else if (method.equals("POST")) {
-            CreateOrderDtoBuilder builder = new CreateOrderDtoBuilder();
-            Iterator<String> it = request.getParameterNames().asIterator();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
             try {
-                while (it.hasNext()) {
-                    String name = it.next();
-                    String[] values = request.getParameterValues(name);
-                    builder.set(name, values[0]);
-                }
-                service.bookRoom(builder.build());
+                service.bookRoom(new CreateOrderDto(
+                        dateFormat.parse(request.getParameter("dateFrom")),
+                        dateFormat.parse(request.getParameter("dateTo")),
+                        request.getParameter("roomNumber"),
+                        request.getParameter("phone")
+                ));
                 request.setAttribute("message", "All success! You have two days to pay for the order.");
             } catch (AlreadyBookedException | BookNotFoundException | IllegalArgumentException | UnavailableException e) {
                 request.setAttribute("error", e.getMessage());
+            } catch (ParseException e) {
+                request.setAttribute("error", "Wrong parameters for order!");
             }
             request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);
             request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);
